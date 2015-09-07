@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 public class TelaInicial extends JFrame {
 	private Login login = new Login();
 	
-
 	public TelaInicial() {
 		setTitle("Ordem de Servico");
 		setLayout(null);

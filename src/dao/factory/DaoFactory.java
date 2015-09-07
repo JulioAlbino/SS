@@ -20,11 +20,8 @@ public class DaoFactory {
 	public static DaoFactory get(){
 		if(factory == null){
 			factory = new DaoFactory();
-		}
-		//Decide se é banco ou TXT
-		//Aqui podemos definir via parametro de um arquivo se é uma ou outra impl
-		
 			daoFactory = new DaoFactoryJDBC();
+		}
 		return factory;
 	}
 

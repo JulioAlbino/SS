@@ -1,5 +1,8 @@
 package telas;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -8,7 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Login extends JFrame{
+import daoo.UsuarioDAO;
+
+public class Login extends JFrame implements ActionListener{
 	private JTextField usuario;
 	private JPasswordField senha;
 	private JButton submit;
@@ -39,11 +44,35 @@ public class Login extends JFrame{
 		
 		submit = new JButton("Entrar");
 		submit.setBounds(200,80,200,25);;
+		submit.addActionListener(this);
 		painelLogin.add(submit);
 	}
 	
 	public JPanel getPainelLogin() {
 		return painelLogin;
 	}
+
+	public JTextField getUsuario() {
+		return usuario;
+	}
+
+	public JPasswordField getSenha() {
+		return senha;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String user = usuario.getText();
+		String pw = senha.getPassword().toString();
+		UsuarioDAO userDAO= new UsuarioDAO();
+		
+		if (userDAO.verificaID_Senha(user, pw)){
+			System.out.println("Existe");
+		}
+		
+	}
+	
+	
+	
 	
 }

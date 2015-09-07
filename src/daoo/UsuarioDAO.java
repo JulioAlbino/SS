@@ -10,7 +10,6 @@ import java.util.List;
 import conexao.ConexaoUtil;
 import model.Usuario;
 
-
 public class UsuarioDAO {
 private Connection con;
 	
@@ -98,6 +97,33 @@ private Connection con;
 		}
 		return usuarios;
 	}
+	
+public Boolean verificaID_Senha(String login, String senha){
+	String sql = "select * from usuario where login=? and senha=?";
+	Boolean verificador = false;
+	try{
+		Usuario usuario = null;
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, login);
+		pstmt.setString(2, senha);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+			usuario = new Usuario(rs.getInt("idusuario"));
+		}
+		if (usuario == null){
+			verificador = false;
+		}else {
+			verificador = true;
+		}
+		
+		
+	}
+	catch(SQLException e){
+		e.printStackTrace();
+		verificador = false;
+	}
+	return verificador;
+}
 	
 	
 	
