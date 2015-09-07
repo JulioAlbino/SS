@@ -15,10 +15,7 @@ public class Login extends JFrame{
 	private JPanel painelLogin = new JPanel();
 	private JLabel ds,ds1;
 	public Login(){
-		painelLogin.removeAll();
 		painelLogin.setLayout(null);
-		painelLogin.setVisible(false);
-		painelLogin.setVisible(true);
 		painelLogin.setBounds(10, 10, 600, 200);
 		painelLogin.setBorder(BorderFactory
 				.createTitledBorder("Entrar no Sistema"));	
