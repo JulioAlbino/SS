@@ -12,6 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import daoo.UsuarioDAO;
+import model.Usuario;
 
 public class Login extends JFrame implements ActionListener{
 	private JTextField usuario;
@@ -63,12 +64,20 @@ public class Login extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String user = usuario.getText();
-		String pw = senha.getPassword().toString();
-		UsuarioDAO userDAO= new UsuarioDAO();
+		UsuarioDAO userDAO = new UsuarioDAO();
+		String pw = new String(senha.getPassword());
 		
-		if (userDAO.verificaID_Senha(user, pw)){
-			System.out.println("Existe");
+		Usuario userx = userDAO.verificaExistencia(user, pw);
+		
+		if (userx != null){
+			System.out.println("VAI");
 		}
+		else {
+			System.out.println("Não Vai");
+		}
+		
+		
+		System.out.println(pw);
 		
 	}
 	

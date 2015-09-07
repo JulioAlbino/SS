@@ -98,32 +98,29 @@ private Connection con;
 		return usuarios;
 	}
 	
-public Boolean verificaID_Senha(String login, String senha){
-	String sql = "select * from usuario where login=? and senha=?";
-	Boolean verificador = false;
-	try{
+	public Usuario verificaExistencia(String login, String senha) {
 		Usuario usuario = null;
-		PreparedStatement pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, login);
-		pstmt.setString(2, senha);
-		ResultSet rs = pstmt.executeQuery();
-		while(rs.next()){
-			usuario = new Usuario(rs.getInt("idusuario"));
+		String sql = "select * from usuario where login=? and senha=?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, login);
+			pstmt.setString(2, senha);
+			ResultSet rs = pstmt.executeQuery();
+			//Transforma o resultSet em um objeto proprio
+			while(rs.next()){
+				usuario = new Usuario();
+				usuario.setIdusuario(rs.getInt("idusuario"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setLogin(rs.getString("login"));
+				usuario.setCargo_idcargo(rs.getInt("cargo_idcargo"));
+				usuario.setCargo_setor_idsetor(rs.getInt("cargo_setor_idsetor"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		if (usuario == null){
-			verificador = false;
-		}else {
-			verificador = true;
-		}
-		
-		
+		return usuario;
 	}
-	catch(SQLException e){
-		e.printStackTrace();
-		verificador = false;
-	}
-	return verificador;
-}
 	
 	
 	
