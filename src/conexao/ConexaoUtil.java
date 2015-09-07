@@ -9,9 +9,9 @@ public class ConexaoUtil {
 	private static Connection connection;
 	
 	static {
-		String endereco = "jdbc:mysql://localhost:3306/pedido_jdbc";
+		String endereco = "jdbc:mysql://localhost:3306/ss";
 		String usuario = "root";
-		String senha = "";
+		String senha = "ra3523";
 		try {
 			connection = DriverManager.getConnection(endereco, usuario, senha);
 		} catch (SQLException e) {
