@@ -4,6 +4,7 @@ package telas;
 import javax.swing.JFrame;
 
 public class Encarregado extends JFrame {
+	//askakskasa
 	
 	private EncarregadoSS encarregadoss = new EncarregadoSS();
 	public Encarregado() {

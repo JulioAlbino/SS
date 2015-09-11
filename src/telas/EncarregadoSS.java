@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 public class EncarregadoSS extends JFrame{
 	private String datasis;
 	private String horasis;
+	//kaskaksa
 	private JLabel NumeSS;
 	private JLabel descri;
 	private JLabel preventiva;
