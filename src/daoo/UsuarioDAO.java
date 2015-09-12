@@ -98,7 +98,7 @@ private Connection con;
 		return usuarios;
 	}
 	
-	public Usuario verificaExistencia(String login, String senha) {
+	public Usuario logarUsuario(String login, String senha) {
 		Usuario usuario = null;
 		String sql = "select * from usuario where login=? and senha=?";
 		try {

@@ -26,8 +26,8 @@ public class Login extends JFrame implements ActionListener{
 		painelLogin.setBorder(BorderFactory
 				.createTitledBorder("Entrar no Sistema"));	
 		
-		ds = new JLabel("Usuário:");
-		ds.setBounds(150, 30, 50, 25);
+		ds = new JLabel("Usuario:");
+		ds.setBounds(150, 30, 70, 25);
 		painelLogin.add(ds);
 		
 		ds1 = new JLabel("Senha:");
@@ -35,11 +35,11 @@ public class Login extends JFrame implements ActionListener{
 		painelLogin.add(ds1);
 		
 		usuario = new JTextField();
-		usuario.setBounds(200, 30, 200, 25);
+		usuario.setBounds(220, 30, 200, 25);
 		painelLogin.add(usuario);
 		
 		senha = new JPasswordField();
-		senha.setBounds(200, 55, 200, 25);
+		senha.setBounds(220, 55, 200, 25);
 		senha.setVisible(true);
 		painelLogin.add(senha);
 		
@@ -63,17 +63,16 @@ public class Login extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String user = usuario.getText();
 		UsuarioDAO userDAO = new UsuarioDAO();
 		String pw = new String(senha.getPassword());
 		
-		Usuario userx = userDAO.verificaExistencia(user, pw);
+		Usuario userx = userDAO.logarUsuario(usuario.getText(), pw);
 		
 		if (userx != null){
 			System.out.println("VAI");
 		}
 		else {
-			System.out.println("Não Vai");
+			System.out.println("Nï¿½o Vai");
 		}
 		
 		
