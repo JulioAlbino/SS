@@ -3,10 +3,13 @@ package telas;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import model.Usuario;
+
 public class TelaInicial extends JFrame {
 	
 	
 	private static TelaInicial telainicial;
+	private static Usuario usuario;
 	
 	public static TelaInicial get(){
 		if(telainicial == null){
@@ -17,13 +20,15 @@ public class TelaInicial extends JFrame {
 	
 	public void mostraPainel(JPanel painel){
 		getContentPane().removeAll();
+		getContentPane().setVisible(false);
+		getContentPane().setVisible(true);
 		getContentPane().add(painel);
 	}
 	
 	public TelaInicial() {
 		setTitle("Ordem de Servico");
 		setLayout(null);
-		setSize(800, 600);
+		setSize(1024, 768);
 		setVisible(true);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -35,8 +40,16 @@ public static void main(String[] args) {
 		JPanel loginP = login.getPainelLogin();
 		TelaInicial.get().mostraPainel(loginP);
 		}
-public void teste(){
-	System.out.println("Teste");
+
+public void logar(Usuario usuarioLogado){
+	
+	TelaInicial.usuario = usuarioLogado;
+	if (usuario.getCargo_idcargo() == 1){
+		ToolBar toolbar = new ToolBar();
+		setJMenuBar(toolbar.getBarra());
+		EncarregadoSS encarregado = new EncarregadoSS(); 
+		mostraPainel(encarregado.getPainelEncarregadoSS());
+	}
 }
 
 

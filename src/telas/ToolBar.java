@@ -10,7 +10,7 @@ public class ToolBar{
 	public ToolBar() {
 		barra = new JMenuBar();
 		
-		JMenu iconeInicio = new JMenu("Ínicio");
+		JMenu iconeInicio = new JMenu("Inicio");
 		botaoInicio = new JMenuItem("Inicio");
 		iconeInicio.add(botaoInicio);
 		barra.add(iconeInicio);
@@ -20,8 +20,8 @@ public class ToolBar{
 		iconeReceitas.add(botaoReceitas);
 		barra.add(iconeReceitas);
 		
-		JMenu iconeSaidas = new JMenu("Saídas");
-		botaoSaidas = new JMenuItem("Saídas");
+		JMenu iconeSaidas = new JMenu("Saidas");
+		botaoSaidas = new JMenuItem("Saidas");
 		iconeSaidas.add(botaoSaidas);
 		barra.add(iconeSaidas);
 		

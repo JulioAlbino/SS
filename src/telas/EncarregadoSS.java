@@ -15,9 +15,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class EncarregadoSS extends JFrame{
-	private String datasis;
-	private String horasis;
-	//kaskaksa
 	private JLabel NumeSS;
 	private JLabel descri;
 	private JLabel preventiva;
@@ -40,10 +37,10 @@ public class EncarregadoSS extends JFrame{
 	
 	public EncarregadoSS() {
 	painelEncarregadoSS.setLayout(null);
-	painelEncarregadoSS.setBounds(10, 10, 990, 660);
+	painelEncarregadoSS.setBounds(10, 10, 1024, 768);
 	painelEncarregadoSS.setBorder(BorderFactory.createTitledBorder("Painel Encarregado"));	
 	
-	setor= new JLabel("Setor:");
+	setor = new JLabel("Setor:");
 	setor.setBounds(15, 50, 100, 50);
 	painelEncarregadoSS.add(setor);
 	
@@ -76,7 +73,7 @@ public class EncarregadoSS extends JFrame{
 	boxpreventiva.setBounds(220, 300, 30, 50);
 	painelEncarregadoSS.add(boxpreventiva);
 	
-	Afetaprod= new JLabel("Afetou a produção:");
+	Afetaprod= new JLabel("Afetou a produï¿½ï¿½o:");
 	Afetaprod.setBounds(300, 300, 200, 50);
 	painelEncarregadoSS.add(Afetaprod);
 	
@@ -133,10 +130,3 @@ defitdata= new JLabel(datasis);
 
 		
 	}
-
-
-
-
-
-
-

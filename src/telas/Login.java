@@ -22,7 +22,7 @@ public class Login extends JFrame implements ActionListener{
 	private JLabel ds,ds1,erro;
 	public Login(){
 		painelLogin.setLayout(null);
-		painelLogin.setBounds(10, 10, 600, 200);
+		painelLogin.setBounds(200, 200, 600, 200);
 		painelLogin.setBorder(BorderFactory
 				.createTitledBorder("Entrar no Sistema"));	
 		
@@ -73,16 +73,14 @@ public class Login extends JFrame implements ActionListener{
 		Usuario userx = userDAO.logarUsuario(usuario.getText(), pw);
 		
 		if (userx != null){
-			System.out.println("VAI");
-			erro.setText("");
+			painelLogin.setVisible(false);
+			TelaInicial.get().logar(userx);
 		}
 		else {
 			erro.setText("Usuario e ou senha nao conferem..");
 			senha.setText("");
 		}
 		
-		
-		System.out.println(pw);
 		
 	}
 	
