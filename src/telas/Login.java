@@ -19,32 +19,36 @@ public class Login extends JFrame implements ActionListener{
 	private JPasswordField senha;
 	private JButton submit;
 	private JPanel painelLogin = new JPanel();
-	private JLabel ds,ds1;
+	private JLabel ds,ds1,erro;
 	public Login(){
 		painelLogin.setLayout(null);
 		painelLogin.setBounds(10, 10, 600, 200);
 		painelLogin.setBorder(BorderFactory
 				.createTitledBorder("Entrar no Sistema"));	
 		
+		erro = new JLabel();
+		erro.setBounds(150, 30, 400, 25);
+		painelLogin.add(erro);
+		
 		ds = new JLabel("Usuario:");
-		ds.setBounds(150, 30, 70, 25);
+		ds.setBounds(150, 55, 70, 25);
 		painelLogin.add(ds);
 		
 		ds1 = new JLabel("Senha:");
-		ds1.setBounds(150, 55, 50, 25);
+		ds1.setBounds(150, 80, 50, 25);
 		painelLogin.add(ds1);
 		
 		usuario = new JTextField();
-		usuario.setBounds(220, 30, 200, 25);
+		usuario.setBounds(220, 55, 200, 25);
 		painelLogin.add(usuario);
 		
 		senha = new JPasswordField();
-		senha.setBounds(220, 55, 200, 25);
+		senha.setBounds(220, 80, 200, 25);
 		senha.setVisible(true);
 		painelLogin.add(senha);
 		
 		submit = new JButton("Entrar");
-		submit.setBounds(200,80,200,25);;
+		submit.setBounds(200,110,200,25);;
 		submit.addActionListener(this);
 		painelLogin.add(submit);
 	}
@@ -70,9 +74,11 @@ public class Login extends JFrame implements ActionListener{
 		
 		if (userx != null){
 			System.out.println("VAI");
+			erro.setText("");
 		}
 		else {
-			System.out.println("N�o Vai");
+			erro.setText("Usuario e ou senha nao conferem..");
+			senha.setText("");
 		}
 		
 		

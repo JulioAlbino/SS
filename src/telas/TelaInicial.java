@@ -35,7 +35,6 @@ public static void main(String[] args) {
 		JPanel loginP = login.getPainelLogin();
 		TelaInicial.get().mostraPainel(loginP);
 		}
-	
 public void teste(){
 	System.out.println("Teste");
 }
