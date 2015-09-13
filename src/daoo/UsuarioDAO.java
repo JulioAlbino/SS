@@ -10,7 +10,7 @@ import java.util.List;
 import conexao.ConexaoUtil;
 import model.Usuario;
 
-public class UsuarioDAO {
+public class UsuarioDAO implements GenericDAO<Usuario>{
 private Connection con;
 	
 	public UsuarioDAO(){

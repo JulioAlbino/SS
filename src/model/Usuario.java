@@ -3,7 +3,7 @@ package model;
 import dao.factory.DaoFactory;
 import daoo.UsuarioDAO;
 
-public class Usuario {
+public class Usuario{
 	private String nome, senha, login;
 	private Integer idusuario;
 	private Integer cargo_idcargo;

@@ -1,5 +1,6 @@
 package dao.factory;
 
+import daoo.LocalDao;
 import daoo.UsuarioDAO;
 
 public interface AbstractDaoFactory {
@@ -9,4 +10,5 @@ public interface AbstractDaoFactory {
 	 * @return ProdutoDAO
 	 */
 	UsuarioDAO getUsuarioDAO();
+	LocalDao getLocalDAO();
 }
