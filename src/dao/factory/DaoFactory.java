@@ -1,5 +1,6 @@
 package dao.factory;
 
+import daoo.SetorDAO;
 import daoo.UsuarioDAO;
 
 public class DaoFactory {
@@ -22,4 +23,9 @@ public class DaoFactory {
 public UsuarioDAO getUsuarioDAO(){
 	return daoFactory.getUsuarioDAO();
 }
+
+public SetorDAO getSetorDAO(){
+	return daoFactory.getSetorDAO();
+}
+
 }

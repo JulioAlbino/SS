@@ -1,6 +1,7 @@
 package dao.factory;
 
 import daoo.LocalDao;
+import daoo.SetorDAO;
 import daoo.UsuarioDAO;
 
 /**
@@ -18,6 +19,10 @@ public class DaoFactoryJDBC implements AbstractDaoFactory{
 	@Override
 	public LocalDao getLocalDAO() {
 		return new LocalDao();
+	}
+	
+	public SetorDAO getSetorDAO(){
+		return new SetorDAO();
 	}
 	
 }
