@@ -1,5 +1,6 @@
 package dao.factory;
 
+import daoo.LocalDao;
 import daoo.SetorDAO;
 import daoo.UsuarioDAO;
 
@@ -26,6 +27,10 @@ public UsuarioDAO getUsuarioDAO(){
 
 public SetorDAO getSetorDAO(){
 	return daoFactory.getSetorDAO();
+}
+
+public LocalDao getLocalDAO(){
+	return daoFactory.getLocalDAO();
 }
 
 }
