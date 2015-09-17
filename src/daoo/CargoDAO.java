@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import conexao.ConexaoUtil;
@@ -88,14 +89,29 @@ public class CargoDAO implements GenericDAO<Cargo>{
 			e.printStackTrace();
 		}
 		return cargo;
-	
 	}
 
 
 	@Override
 	public List<Cargo> todos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Cargo> cargos = new ArrayList<>();
+		String sql = "select * from cargo";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			//Transforma o resultSet em um objeto proprio
+			while(rs.next()){
+				Cargo cargo = new Cargo();
+				cargo.setIdcargo(rs.getInt("idlocal"));
+				cargo.setNome(rs.getString("nome"));
+				Setor setor = DaoFactory.get().getSetorDAO().buscar(rs.getInt("setor_idsetor"));
+				cargo.setSetor(setor);
+				cargos.add(cargo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cargos;
 	}
 
 	
