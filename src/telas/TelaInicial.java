@@ -1,5 +1,8 @@
 package telas;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -28,10 +31,12 @@ public class TelaInicial extends JFrame {
 	public TelaInicial() {
 		setTitle("Ordem de Servico");
 		setLayout(null);
-		setSize(1024, 768);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		setSize(screenSize.width, screenSize.height);
 		setVisible(true);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setExtendedState(MAXIMIZED_BOTH);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);	
 	}
 	
 public static void main(String[] args) {
