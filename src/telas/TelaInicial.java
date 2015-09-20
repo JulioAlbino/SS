@@ -51,7 +51,7 @@ public void logar(Usuario usuarioLogado){
 	TelaInicial.usuario = usuarioLogado;
 	if (usuario.getCargo_idcargo() == 1){
 		ToolBar toolbar = new ToolBar();
-		setJMenuBar(toolbar.getBarra());
+		TelaInicial.get().setJMenuBar(toolbar.getBarra());
 		EncarregadoSS encarregado = new EncarregadoSS(); 
 		mostraPainel(encarregado.getPainelEncarregadoSS());
 	}
