@@ -47,14 +47,11 @@ public static void main(String[] args) {
 		}
 
 public void logar(Usuario usuarioLogado){
-	
+	ToolBar toolbar = new ToolBar();
+	TelaInicial.get().setJMenuBar(toolbar.getBarra());
 	TelaInicial.usuario = usuarioLogado;
-	if (usuario.getCargo_idcargo() == 1){
-		ToolBar toolbar = new ToolBar();
-		TelaInicial.get().setJMenuBar(toolbar.getBarra());
-		EncarregadoSS encarregado = new EncarregadoSS(); 
-		mostraPainel(encarregado.getPainelEncarregadoSS());
-	}
+	TelaInicio telaInicio = new TelaInicio();
+	mostraPainel(telaInicio.getPainel());
 }
 
 

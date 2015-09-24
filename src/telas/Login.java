@@ -73,10 +73,10 @@ public class Login extends JFrame implements ActionListener{
 		Usuario userx = userDAO.logarUsuario(usuario.getText(), pw);
 		
 		
-		EncarregadoSS encarregado = new EncarregadoSS();
-		TelaInicial.get().mostraPainel(encarregado.getPainelEncarregadoSS());
+		//EncarregadoSS encarregado = new EncarregadoSS();
+		//TelaInicial.get().mostraPainel(encarregado.getPainelEncarregadoSS());
 		
-		/*if (userx != null){
+		if (userx != null){
 			painelLogin.setVisible(false);
 			TelaInicial.get().logar(userx);
 		}
@@ -84,7 +84,7 @@ public class Login extends JFrame implements ActionListener{
 			erro.setText("Usuario e ou senha nao conferem..");
 			senha.setText("");
 		}
-		*/
+		
 		
 		
 	}

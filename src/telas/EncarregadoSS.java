@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class EncarregadoSS extends JFrame{
+public class EncarregadoSS extends TelaGenerica{
 	private JLabel NumeSS;
 	private JLabel descri;
 	private JLabel preventiva;
@@ -25,7 +25,6 @@ public class EncarregadoSS extends JFrame{
 	private JLabel data;
 	private JLabel areaexecutante;
 	private JLabel setor;
-	private JPanel painelEncarregadoSS = new JPanel();
 	private JCheckBox boxpreventiva;
 	private JCheckBox boxcoretiva;	
 	private JCheckBox boxAfetaprod;	
@@ -36,70 +35,70 @@ public class EncarregadoSS extends JFrame{
 	private JLabel defihoraini;
 	
 	public EncarregadoSS() {
-	painelEncarregadoSS.setLayout(null);
-	painelEncarregadoSS.setBounds(10, 10, 1024, 768);
-	painelEncarregadoSS.setBorder(BorderFactory.createTitledBorder("Painel Encarregado"));	
+	painel.setLayout(null);
+	painel.setBounds(10, 10, 1024, 768);
+	painel.setBorder(BorderFactory.createTitledBorder("Painel Encarregado"));	
 	
 	setor = new JLabel("Setor:");
 	setor.setBounds(15, 50, 100, 50);
-	painelEncarregadoSS.add(setor);
+	painel.add(setor);
 	
 	textsetor = new JTextField();
 	textsetor.setBounds(55, 67, 150, 20);
-	painelEncarregadoSS.add(textsetor);
+	painel.add(textsetor);
 	
 	descri= new JLabel("Defeito apresentado:");
 	descri.setBounds(15, 100, 200, 50);
-	painelEncarregadoSS.add(descri);
+	painel.add(descri);
 	
 	textdescri = new JTextArea();
 	textdescri.setBounds(15, 140, 650, 170);
-	painelEncarregadoSS.add(textdescri);
+	painel.add(textdescri);
 	
 	coretiva= new JLabel("Coretiva:");
 	coretiva.setBounds(15, 300, 200, 50);
-	painelEncarregadoSS.add(coretiva);
+	painel.add(coretiva);
 	
 	boxcoretiva= new JCheckBox();
 	boxcoretiva.setBounds(70, 300, 30, 50);
-	painelEncarregadoSS.add(boxcoretiva);
+	painel.add(boxcoretiva);
 	
 	
 	preventiva= new JLabel("Preventiva:");
 	preventiva.setBounds(150, 300, 200, 50);
-	painelEncarregadoSS.add(preventiva);
+	painel.add(preventiva);
 	
 	boxpreventiva= new JCheckBox();
 	boxpreventiva.setBounds(220, 300, 30, 50);
-	painelEncarregadoSS.add(boxpreventiva);
+	painel.add(boxpreventiva);
 	
 	Afetaprod= new JLabel("Afetou a produ��o:");
 	Afetaprod.setBounds(300, 300, 200, 50);
-	painelEncarregadoSS.add(Afetaprod);
+	painel.add(Afetaprod);
 	
 	boxAfetaprod= new JCheckBox();
 	boxAfetaprod.setBounds(410, 300, 30, 50);
-	painelEncarregadoSS.add(boxAfetaprod);
+	painel.add(boxAfetaprod);
 	
 	areaexecutante= new JLabel("Area executante:");
 	areaexecutante.setBounds(250, 50, 100, 50);
-	painelEncarregadoSS.add(areaexecutante);
+	painel.add(areaexecutante);
 	
 	textareaexecutante = new JTextField();
 	textareaexecutante.setBounds(355, 67, 150, 20);
-	painelEncarregadoSS.add(textareaexecutante);
+	painel.add(textareaexecutante);
 	
 	NumeSS= new JLabel("Numero SS:");
 	NumeSS.setBounds(15, 10, 100, 50);
-	painelEncarregadoSS.add(NumeSS);
+	painel.add(NumeSS);
 	
 	horafinal= new JLabel("Hora Final:");
 	horafinal.setBounds(450, 10, 100, 50);
-	painelEncarregadoSS.add(horafinal);
+	painel.add(horafinal);
 	
 	horainicial= new JLabel("Hora Inicial:");
 	horainicial.setBounds(280, 10, 100, 50);
-	painelEncarregadoSS.add(horainicial);
+	painel.add(horainicial);
 	
 	Date horaHoje = new Date();
 	SimpleDateFormat formatahora = new SimpleDateFormat("HH:mm");
@@ -107,11 +106,11 @@ public class EncarregadoSS extends JFrame{
 	
 	defihoraini= new JLabel(horasis);
 	defihoraini.setBounds(350, 10, 100, 50);
-	painelEncarregadoSS.add(defihoraini);
+	painel.add(defihoraini);
 	
 	data= new JLabel("Data:");
 	data.setBounds(150, 10, 100, 50);
-	painelEncarregadoSS.add(data);
+	painel.add(data);
 	
 //coloca data de abertura ss
 Date dataHoje = new Date();
@@ -120,13 +119,10 @@ String datasis = formataData.format(dataHoje);
 
 defitdata= new JLabel(datasis);
 	defitdata.setBounds(183, 10, 100, 50);
-	painelEncarregadoSS.add(defitdata);
+	painel.add(defitdata);
 
 }
 
-	public JPanel getPainelEncarregadoSS() {
-		return painelEncarregadoSS;
-	}
 
 		
 	}
