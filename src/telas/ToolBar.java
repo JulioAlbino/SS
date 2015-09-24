@@ -16,6 +16,8 @@ public class ToolBar implements ActionListener{
 	private ListaOSFinalizadas finalizadas = new ListaOSFinalizadas();
 	private OSAguardandoFinalizar aguardando = new OSAguardandoFinalizar();
 	private AdicionarNovoSetor novoSetor = new AdicionarNovoSetor();
+	private AdicionarNovoCargo novoCargo = new AdicionarNovoCargo();
+	private AdicionarNovoLocal novoLocal = new AdicionarNovoLocal();
 	
 	private AlterarUsuario telaAlterarUsuario = new AlterarUsuario();
 	private NovoUsuario telaNovoUsuario = new NovoUsuario();
@@ -112,16 +114,20 @@ public class ToolBar implements ActionListener{
 		else if (botao == botaoADM[0]){
 			TelaInicial.get().mostraPainel(novoSetor.getPainel());
 		}
-		
-		if (botao == botaoADM[3]){
-			
+		else if (botao == botaoADM[1]){
+			TelaInicial.get().mostraPainel(novoLocal.getPainel());
+		}
+		else if (botao == botaoADM[2]){
+			TelaInicial.get().mostraPainel(novoCargo.getPainel());
+		}
+		else if (botao == botaoADM[3]){
 			TelaInicial.get().mostraPainel(telaNovoUsuario.getPainel());
 		}else if (botao == botaoADM[4]){
 			TelaInicial.get().mostraPainel(telaAlterarUsuario.getPainel());
 		}
-
-		
-		
+		else if (botao == botaoSair){
+			
+		}
 	}
 	
 }
