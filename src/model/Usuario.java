@@ -18,7 +18,6 @@ public class Usuario{
 		this.senha = retornado.getSenha();
 		this.login = retornado.getLogin();
 		this.cargo_idcargo = retornado.getCargo_idcargo();
-		this.cargo_setor_idsetor = retornado.getCargo_setor_idsetor();
 	}
 	
 	public Usuario() {

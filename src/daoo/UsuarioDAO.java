@@ -32,14 +32,13 @@ private Connection con;
 	}
 
 	public void alterar(Usuario usuario) {
-		String sql = "update usuario set nome=?, senha=?, login=?, cargo_idcargo=?, cargo_setor_idsetor=? where idusuario = ?";
+		String sql = "update usuario set nome=?, senha=?, login=?, cargo_idcargo=? where idusuario = ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, usuario.getNome());
 			pstmt.setString(2, usuario.getSenha());
 			pstmt.setString(3, usuario.getLogin());
 			pstmt.setInt(4, usuario.getCargo_idcargo());
-			pstmt.setInt(5, usuario.getCargo_setor_idsetor());
 			pstmt.setInt(5, usuario.getIdusuario());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -73,7 +72,6 @@ private Connection con;
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setCargo_idcargo(rs.getInt("cargo_idcargo"));
-				usuario.setCargo_setor_idsetor(rs.getInt("cargo_setor_idsetor"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -114,7 +112,6 @@ private Connection con;
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setCargo_idcargo(rs.getInt("cargo_idcargo"));
-				usuario.setCargo_setor_idsetor(rs.getInt("cargo_setor_idsetor"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
