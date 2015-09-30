@@ -11,7 +11,7 @@ public class ConexaoUtil {
 	static {
 		String endereco = "jdbc:mysql://localhost:3306/ss";
 		String usuario = "root";
-		String senha = "ra3523";
+		String senha = "root";
 		try {
 			connection = DriverManager.getConnection(endereco, usuario, senha);
 		} catch (SQLException e) {

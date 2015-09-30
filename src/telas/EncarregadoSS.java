@@ -4,8 +4,6 @@ package telas;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
-
-
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
