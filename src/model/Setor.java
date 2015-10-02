@@ -25,4 +25,8 @@ public class Setor {
 		
 	}
 	
+	public String toString() {  
+	    return getNome();  
+	}  
+	
 }

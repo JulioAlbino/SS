@@ -1,5 +1,6 @@
 package dao.factory;
 
+import daoo.CargoDAO;
 import daoo.LocalDao;
 import daoo.SetorDAO;
 import daoo.UsuarioDAO;
@@ -31,6 +32,10 @@ public SetorDAO getSetorDAO(){
 
 public LocalDao getLocalDAO(){
 	return daoFactory.getLocalDAO();
+}
+
+public CargoDAO getCargoDAO(){
+	return daoFactory.ge
 }
 
 }

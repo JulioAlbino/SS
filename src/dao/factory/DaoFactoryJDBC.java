@@ -1,5 +1,6 @@
 package dao.factory;
 
+import daoo.CargoDAO;
 import daoo.LocalDao;
 import daoo.SetorDAO;
 import daoo.UsuarioDAO;
@@ -23,6 +24,10 @@ public class DaoFactoryJDBC implements AbstractDaoFactory{
 	
 	public SetorDAO getSetorDAO(){
 		return new SetorDAO();
+	}
+	
+	public CargoDAO getCargoDAO(){
+		return new CargoDAO();
 	}
 	
 }
