@@ -59,9 +59,7 @@ if (e.getSource() == add){
 	cargo.setNome(Cargo.getText());
 	Setor novoSetor = setores.get(combobox.getSelectedIndex());
 	cargo.setSetor(novoSetor);
-	DaoFactory.get().
-	
-	System.out.println(combobox.getSelectedIndex() );
+	DaoFactory.get().getCargoDAO().inserir(cargo);
 	
 }
 		

@@ -21,11 +21,11 @@ public class DaoFactoryJDBC implements AbstractDaoFactory{
 	public LocalDao getLocalDAO() {
 		return new LocalDao();
 	}
-	
+	@Override
 	public SetorDAO getSetorDAO(){
 		return new SetorDAO();
 	}
-	
+	@Override
 	public CargoDAO getCargoDAO(){
 		return new CargoDAO();
 	}

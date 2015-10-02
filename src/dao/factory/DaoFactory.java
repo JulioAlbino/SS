@@ -35,7 +35,8 @@ public LocalDao getLocalDAO(){
 }
 
 public CargoDAO getCargoDAO(){
-	return daoFactory.ge
+	return daoFactory.getCargoDAO();
+	
 }
 
 }

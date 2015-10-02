@@ -1,5 +1,6 @@
 package dao.factory;
 
+import daoo.CargoDAO;
 import daoo.LocalDao;
 import daoo.SetorDAO;
 import daoo.UsuarioDAO;
@@ -13,4 +14,5 @@ public interface AbstractDaoFactory {
 	UsuarioDAO getUsuarioDAO();
 	LocalDao getLocalDAO();
 	SetorDAO getSetorDAO();
+	CargoDAO getCargoDAO();
 }
