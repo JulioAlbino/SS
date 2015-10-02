@@ -19,27 +19,31 @@ public class SetorDAO implements GenericDAO<Setor>{
 	}
 
 	@Override
-	public void inserir(Setor entidade) {
+	public Boolean inserir(Setor entidade) {
 		String sql = "insert into setor (nome) values(?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 
 	@Override
-	public void alterar(Setor entidade) {
+	public Boolean alterar(Setor entidade) {
 		String sql = "update setor set nome=? where idsetor = ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
 			pstmt.setInt(1, entidade.getIdsetor());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}	
 		
 
@@ -47,14 +51,16 @@ public class SetorDAO implements GenericDAO<Setor>{
 	}
 
 	@Override
-	public void excluir(Setor entidade) {
+	public Boolean excluir(Setor entidade) {
 		String sql = "delete from setor where idsetor = ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, entidade.getIdsetor());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 		

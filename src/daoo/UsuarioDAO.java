@@ -17,7 +17,7 @@ private Connection con;
 		con = ConexaoUtil.getCon();
 	}
 	
-	public void inserir(Usuario usuario) {
+	public Boolean inserir(Usuario usuario) {
 		String sql = "insert into usuario (nome, senha, login)"
 				+ "values(?,?,?)";
 		try {
@@ -26,12 +26,14 @@ private Connection con;
 			pstmt.setString(2, usuario.getSenha());
 			pstmt.setString(3, usuario.getLogin());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 
-	public void alterar(Usuario usuario) {
+	public Boolean alterar(Usuario usuario) {
 		String sql = "update usuario set nome=?, senha=?, login=?, cargo_idcargo=? where idusuario = ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -41,19 +43,23 @@ private Connection con;
 			pstmt.setInt(4, usuario.getCargo_idcargo());
 			pstmt.setInt(5, usuario.getIdusuario());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}	
 	}
 
-	public void excluir(Usuario usuario) {
+	public Boolean excluir(Usuario usuario) {
 		String sql = "delete from usuario where idusuario = ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, usuario.getIdusuario());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 

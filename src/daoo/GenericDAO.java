@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface GenericDAO<T> {
 
-	void inserir(T entidade);
+	Boolean inserir(T entidade);
 	
-	void alterar(T entidade);
+	Boolean alterar(T entidade);
 	
-	void excluir(T entidade);
+	Boolean excluir(T entidade);
 	
 	T buscar(Integer id);
 	

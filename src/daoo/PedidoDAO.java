@@ -25,7 +25,7 @@ private Connection con;
 	}
 	
 	@Override
-	public void inserir(Pedido entidade) {
+	public Boolean inserir(Pedido entidade) {
 		String sql = "insert into pedido (datahora, descricao, situacao, usuario_idusuario, local_idlocal, setor_idsetor) values(?, ?, ?, ? ,? ,?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -36,14 +36,16 @@ private Connection con;
 			pstmt.setInt(5, entidade.getLocal().getId());
 			pstmt.setInt(6, entidade.getSetor().getIdsetor());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 	}
 
 	@Override
-	public void alterar(Pedido entidade) {
+	public Boolean alterar(Pedido entidade) {
 		String sql = "update pedido set datahora=?,descricao=?, situacao=?, usuario_idusuario=?, local_idlocal=? ,setor_idsetor=? where idpedido=?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -55,20 +57,24 @@ private Connection con;
 			pstmt.setInt(6, entidade.getSetor().getIdsetor());
 			pstmt.setInt(7, entidade.getIdpedido());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}	
 	}
 
 	@Override
-	public void excluir(Pedido entidade) {
+	public Boolean excluir(Pedido entidade) {
 		String sql = "delete from pedido where idpedido=?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, entidade.getIdpedido());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 	}

@@ -1,16 +1,21 @@
 package telas;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class AdicionarNovoSetor extends TelaGenerica {
+import dao.factory.DaoFactory;
+import model.Setor;
+
+public class AdicionarNovoSetor extends TelaGenerica  implements ActionListener{
 	
 	private JTextField LocalSetor;
-	private JLabel textsetor;
+	private JLabel textsetor, textResultado;
 	private JButton add;
-	private JButton del;
+
 	public AdicionarNovoSetor() {
 		painel.setLayout(null);
 		painel.setBounds(10, 10, 1024, 768);
@@ -25,15 +30,27 @@ public class AdicionarNovoSetor extends TelaGenerica {
 		painel.add(LocalSetor);
 		
 		add = new JButton("Adicionar");
+		add.addActionListener(this);
 		add.setBounds(15,110,200,25);
 		painel.add(add);
 		
-		del = new JButton("Excluir");
-		del.setBounds(220,110,200,25);
-		painel.add(del);
-		
-
+		textResultado = new JLabel("");
+		textResultado.setBounds(15, 140, 200, 20);
+		painel.add(textResultado);
 }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == add){
+			Setor novoSetor = new Setor();
+			novoSetor.setNome(LocalSetor.getText());
+			if (DaoFactory.get().getSetorDAO().inserir(novoSetor)){
+				textResultado.setText("Setor "+LocalSetor.getText()+ " Cadastrado com Sucesso.");
+				LocalSetor.setText(" ");
+			}
+		}
+		
+		
+	}
 	
 	
 }

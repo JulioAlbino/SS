@@ -24,22 +24,24 @@ public class CargoDAO implements GenericDAO<Cargo>{
 
 
 	@Override
-	public void inserir(Cargo entidade) {
+	public Boolean inserir(Cargo entidade) {
 		String sql = "insert into cargo (nome, setor_idsetor) values(?,?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
 			pstmt.setInt(2, entidade.getSetor().getIdsetor());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 	}
 
 
 	@Override
-	public void alterar(Cargo entidade) {
+	public Boolean alterar(Cargo entidade) {
 		String sql = "update cargo set nome=?,setor_idsetor=?  where idcargo=?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -47,8 +49,10 @@ public class CargoDAO implements GenericDAO<Cargo>{
 			pstmt.setInt(2, entidade.getSetor().getIdsetor());
 			pstmt.setInt(3, entidade.getIdcargo());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}	
 
 		
@@ -56,14 +60,16 @@ public class CargoDAO implements GenericDAO<Cargo>{
 
 
 	@Override
-	public void excluir(Cargo entidade) {
+	public Boolean excluir(Cargo entidade) {
 		String sql = "delete from cargo where idcargo=?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, entidade.getIdcargo());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 	}

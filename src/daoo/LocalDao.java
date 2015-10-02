@@ -19,41 +19,47 @@ public class LocalDao implements GenericDAO<Local>{
 	}
 	
 	@Override
-	public void inserir(Local entidade) {
+	public Boolean inserir(Local entidade) {
 		String sql = "insert into local (nome) values(?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 	}
 
 	@Override
-	public void alterar(Local entidade) {
+	public Boolean alterar(Local entidade) {
 		String sql = "update local set nome=? where idlocal = ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
 			pstmt.setInt(1, entidade.getId());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}	
 		
 	}
 
 	@Override
-	public void excluir(Local entidade) {
+	public Boolean excluir(Local entidade) {
 		String sql = "delete from local where idlocal = ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, entidade.getId());
 			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 	}
