@@ -29,6 +29,9 @@ public class Cargo {
 		this.setor = setor;
 	}
 
+	public String toString() {  
+	    return getNome();  
+	}  
 
 
 }

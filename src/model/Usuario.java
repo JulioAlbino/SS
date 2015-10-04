@@ -6,18 +6,26 @@ import daoo.UsuarioDAO;
 public class Usuario{
 	private String nome, senha, login;
 	private Integer idusuario;
-	private Integer cargo_idcargo;
-	private Integer cargo_setor_idsetor;
+	private Cargo cargo;
 	
+	
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
 	public Usuario(Integer idusuario) {
 		super();
-		UsuarioDAO usuarioDao = DaoFactory.get().getUsuarioDAO();
-		Usuario retornado = usuarioDao.buscar(idusuario);
+		
+		Usuario retornado = DaoFactory.get().getUsuarioDAO().buscar(idusuario);
 		this.idusuario = idusuario;
 		this.nome = retornado.getNome();
 		this.senha = retornado.getSenha();
 		this.login = retornado.getLogin();
-		this.cargo_idcargo = retornado.getCargo_idcargo();
+		this.cargo = retornado.getCargo();
 	}
 	
 	public Usuario() {
@@ -29,22 +37,6 @@ public class Usuario{
 
 	public void setIdusuario(Integer idusuario) {
 		this.idusuario = idusuario;
-	}
-
-	public Integer getCargo_idcargo() {
-		return cargo_idcargo;
-	}
-
-	public void setCargo_idcargo(Integer cargo_idcargo) {
-		this.cargo_idcargo = cargo_idcargo;
-	}
-
-	public Integer getCargo_setor_idsetor() {
-		return cargo_setor_idsetor;
-	}
-
-	public void setCargo_setor_idsetor(Integer cargo_setor_idsetor) {
-		this.cargo_setor_idsetor = cargo_setor_idsetor;
 	}
 
 	public String getNome() {
@@ -70,5 +62,4 @@ public class Usuario{
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	
 }

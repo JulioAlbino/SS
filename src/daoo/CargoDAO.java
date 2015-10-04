@@ -10,7 +10,6 @@ import java.util.List;
 import conexao.ConexaoUtil;
 import dao.factory.DaoFactory;
 import model.Cargo;
-import model.Local;
 import model.Setor;
 
 public class CargoDAO implements GenericDAO<Cargo>{
@@ -86,7 +85,7 @@ public class CargoDAO implements GenericDAO<Cargo>{
 			//Transforma o resultSet em um objeto proprio
 			while(rs.next()){
 				cargo = new Cargo();
-				cargo.setIdcargo(rs.getInt("idlocal"));
+				cargo.setIdcargo(rs.getInt("idcargo"));
 				cargo.setNome(rs.getString("nome"));
 				Setor setor = DaoFactory.get().getSetorDAO().buscar(rs.getInt("setor_idsetor"));
 				cargo.setSetor(setor);
@@ -108,7 +107,7 @@ public class CargoDAO implements GenericDAO<Cargo>{
 			//Transforma o resultSet em um objeto proprio
 			while(rs.next()){
 				Cargo cargo = new Cargo();
-				cargo.setIdcargo(rs.getInt("idlocal"));
+				cargo.setIdcargo(rs.getInt("idcargo"));
 				cargo.setNome(rs.getString("nome"));
 				Setor setor = DaoFactory.get().getSetorDAO().buscar(rs.getInt("setor_idsetor"));
 				cargo.setSetor(setor);

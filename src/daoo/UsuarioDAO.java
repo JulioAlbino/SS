@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexao.ConexaoUtil;
+import dao.factory.DaoFactory;
+import model.Cargo;
 import model.Usuario;
 
 public class UsuarioDAO implements GenericDAO<Usuario>{
@@ -18,13 +20,14 @@ private Connection con;
 	}
 	
 	public Boolean inserir(Usuario usuario) {
-		String sql = "insert into usuario (nome, senha, login)"
-				+ "values(?,?,?)";
+		String sql = "insert into usuario (nome, senha, login, cargo_idcargo)"
+				+ "values(?,?,?,?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, usuario.getNome());
 			pstmt.setString(2, usuario.getSenha());
 			pstmt.setString(3, usuario.getLogin());
+			pstmt.setInt(4, usuario.getCargo().getIdcargo());
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -40,7 +43,7 @@ private Connection con;
 			pstmt.setString(1, usuario.getNome());
 			pstmt.setString(2, usuario.getSenha());
 			pstmt.setString(3, usuario.getLogin());
-			pstmt.setInt(4, usuario.getCargo_idcargo());
+			pstmt.setInt(4, usuario.getCargo().getIdcargo());
 			pstmt.setInt(5, usuario.getIdusuario());
 			pstmt.executeUpdate();
 			return true;
@@ -77,7 +80,8 @@ private Connection con;
 				usuario.setNome(rs.getString("nome"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setLogin(rs.getString("login"));
-				usuario.setCargo_idcargo(rs.getInt("cargo_idcargo"));
+				Cargo cargo = DaoFactory.get().getCargoDAO().buscar(rs.getInt("cargo_idcargo"));
+				usuario.setCargo(cargo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -111,13 +115,9 @@ private Connection con;
 			pstmt.setString(2, senha);
 			ResultSet rs = pstmt.executeQuery();
 			//Transforma o resultSet em um objeto proprio
+			
 			while(rs.next()){
-				usuario = new Usuario();
-				usuario.setIdusuario(rs.getInt("idusuario"));
-				usuario.setNome(rs.getString("nome"));
-				usuario.setSenha(rs.getString("senha"));
-				usuario.setLogin(rs.getString("login"));
-				usuario.setCargo_idcargo(rs.getInt("cargo_idcargo"));
+				usuario = new Usuario(rs.getInt("idusuario"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
