@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import conexao.ConexaoUtil;
 import dao.factory.DaoFactory;
 import model.Cargo;
@@ -16,11 +15,9 @@ public class CargoDAO implements GenericDAO<Cargo>{
 	
 	private Connection con;
 	
-	
 	public CargoDAO(){
 		con = ConexaoUtil.getCon();
 	}
-
 
 	@Override
 	public Boolean inserir(Cargo entidade) {
@@ -38,7 +35,6 @@ public class CargoDAO implements GenericDAO<Cargo>{
 		
 	}
 
-
 	@Override
 	public Boolean alterar(Cargo entidade) {
 		String sql = "update cargo set nome=?,setor_idsetor=?  where idcargo=?";
@@ -52,11 +48,8 @@ public class CargoDAO implements GenericDAO<Cargo>{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
-		}	
-
-		
+		}		
 	}
-
 
 	@Override
 	public Boolean excluir(Cargo entidade) {
@@ -72,7 +65,6 @@ public class CargoDAO implements GenericDAO<Cargo>{
 		}
 		
 	}
-
 
 	@Override
 	public Cargo buscar(Integer id) {
@@ -96,7 +88,6 @@ public class CargoDAO implements GenericDAO<Cargo>{
 		return cargo;
 	}
 
-
 	@Override
 	public List<Cargo> todos() {
 		List<Cargo> cargos = new ArrayList<>();
@@ -118,8 +109,4 @@ public class CargoDAO implements GenericDAO<Cargo>{
 		}
 		return cargos;
 	}
-
-	
-	
-
 }

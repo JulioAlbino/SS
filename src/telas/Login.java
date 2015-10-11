@@ -15,6 +15,10 @@ import daoo.UsuarioDAO;
 import model.Usuario;
 
 public class Login extends JFrame implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField usuario;
 	private JPasswordField senha;
 	private JButton submit;

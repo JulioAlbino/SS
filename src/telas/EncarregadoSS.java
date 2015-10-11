@@ -6,13 +6,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class EncarregadoSS extends TelaGenerica{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel NumeSS;
 	private JLabel descri;
 	private JLabel preventiva;

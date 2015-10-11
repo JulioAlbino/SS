@@ -9,7 +9,6 @@ import java.util.List;
 
 import conexao.ConexaoUtil;
 import model.Local;
-import model.Usuario;
 
 public class LocalDao implements GenericDAO<Local>{
 	private Connection con;

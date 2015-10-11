@@ -15,6 +15,10 @@ import model.Setor;
 import model.Cargo;
 public class AdicionarNovoCargo extends TelaGenerica implements ActionListener {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField Cargo;
 	private JLabel textCargo;
 	private JButton add;

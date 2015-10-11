@@ -10,7 +10,6 @@ import java.util.List;
 
 import conexao.ConexaoUtil;
 import dao.factory.DaoFactory;
-import model.Cargo;
 import model.Local;
 import model.Pedido;
 import model.Setor;

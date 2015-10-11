@@ -11,6 +11,10 @@ import model.Usuario;
 public class TelaInicial extends JFrame {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static TelaInicial telainicial;
 	private static Usuario usuario;
 	

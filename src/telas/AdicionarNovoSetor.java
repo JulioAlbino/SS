@@ -12,6 +12,10 @@ import model.Setor;
 
 public class AdicionarNovoSetor extends TelaGenerica  implements ActionListener{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField LocalSetor;
 	private JLabel textsetor, textResultado;
 	private JButton add;

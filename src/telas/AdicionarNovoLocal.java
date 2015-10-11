@@ -12,6 +12,10 @@ import dao.factory.DaoFactory;
 import model.Local;
 
 public class AdicionarNovoLocal extends TelaGenerica implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField Local;
 	private JLabel textlocal, textResultado;
 	private JButton add;

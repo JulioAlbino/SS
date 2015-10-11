@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import conexao.ConexaoUtil;
-import model.Local;
 import model.Setor;
 
 public class SetorDAO implements GenericDAO<Setor>{

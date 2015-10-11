@@ -10,6 +10,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class NovaOS extends TelaGenerica{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel NumeSS;
 	private JLabel descri;
 	private JLabel preventiva;
@@ -66,7 +70,7 @@ public class NovaOS extends TelaGenerica{
 		boxpreventiva.setBounds(220, 301, 30, 50);
 		painel.add(boxpreventiva);
 
-		Afetaprod = new JLabel("Afetou a produção:");
+		Afetaprod = new JLabel("Afetou a produï¿½ï¿½o:");
 		Afetaprod.setBounds(300, 300, 200, 50);
 		painel.add(Afetaprod);
 

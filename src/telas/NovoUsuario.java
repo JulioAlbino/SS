@@ -13,18 +13,20 @@ import javax.swing.JTextField;
 
 import dao.factory.DaoFactory;
 import model.Cargo;
-import model.Setor;
 import model.Usuario;
 
 
 public class NovoUsuario extends TelaGenerica implements ActionListener{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField Ussuario, nome;
 	private JLabel textUssuario;
 	private JTextField senha;
 	private JLabel textsenha, textcombo, textnome;
 	private JButton add;
-	private JButton del;
 	private JComboBox<Cargo> combobox = new JComboBox<Cargo>();
 	private List<Cargo> cargos = DaoFactory.get().getCargoDAO().todos();
 

@@ -7,6 +7,11 @@ import javax.swing.BorderFactory;
 public class TelaInicio extends TelaGenerica {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public TelaInicio() {
 
 		painel.setLayout(null);

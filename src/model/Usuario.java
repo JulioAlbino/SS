@@ -1,7 +1,7 @@
 package model;
 
 import dao.factory.DaoFactory;
-import daoo.UsuarioDAO;
+
 
 public class Usuario{
 	private String nome, senha, login;
