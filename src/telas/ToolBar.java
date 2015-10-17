@@ -8,6 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class ToolBar implements ActionListener{
+
 	//instancia as TELAS pra mostralas depois
 	private TelaInicio telaInicio = new TelaInicio();
 	private NovaOS telaNovaOS = new NovaOS();

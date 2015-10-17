@@ -59,9 +59,6 @@ public class NovoUsuario extends TelaGenerica implements ActionListener{
 	nome.setBounds(75, 110, 150, 28);
 	painel.add(nome);
 	
-	
-	
-	
 	cargos.forEach((Cargo cargo) -> {
 		combobox.addItem(cargo);
 	});

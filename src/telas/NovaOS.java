@@ -22,7 +22,6 @@ public class NovaOS extends TelaGenerica{
 	private JLabel horafinal;
 	private JLabel horainicial;
 	private JLabel data;
-	private JLabel datafinal;
 	private JLabel areaexecutante;
 	private JLabel setor;
 	private JCheckBox boxpreventiva;

@@ -2,10 +2,11 @@ package dao.factory;
 
 import daoo.CargoDAO;
 import daoo.LocalDao;
+import daoo.PedidoDAO;
 import daoo.SetorDAO;
 import daoo.UsuarioDAO;
 
-public class DaoFactory {
+public class DaoFactory implements AbstractDaoFactory{
 	
 	private static DaoFactory factory;
 	private static AbstractDaoFactory daoFactory;
@@ -38,5 +39,13 @@ public CargoDAO getCargoDAO(){
 	return daoFactory.getCargoDAO();
 	
 }
+
+@Override
+public PedidoDAO getPedidoDAO() {
+	return daoFactory.getPedidoDAO();
+	
+}
+
+
 
 }

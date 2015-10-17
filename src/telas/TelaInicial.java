@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import telas.ToolBar;
 import model.Usuario;
 
 public class TelaInicial extends JFrame {
@@ -42,9 +42,8 @@ public class TelaInicial extends JFrame {
 		this.setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);	
 	}
-	
+
 public static void main(String[] args) {
-		
 		Login login = new Login();
 		JPanel loginP = login.getPainelLogin();
 		TelaInicial.get().mostraPainel(loginP);
@@ -55,8 +54,7 @@ public void logar(Usuario usuarioLogado){
 	TelaInicial.get().setJMenuBar(toolbar.getBarra());
 	TelaInicial.usuario = usuarioLogado;
 	TelaInicio telaInicio = new TelaInicio();
+	Lista listax = new Lista();
 	mostraPainel(telaInicio.getPainel());
 }
-
-
 }

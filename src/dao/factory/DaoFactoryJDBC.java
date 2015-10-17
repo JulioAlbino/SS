@@ -2,14 +2,10 @@ package dao.factory;
 
 import daoo.CargoDAO;
 import daoo.LocalDao;
+import daoo.PedidoDAO;
 import daoo.SetorDAO;
 import daoo.UsuarioDAO;
 
-/**
- * Fabrica concreta de Dao do tipo JDBC
- * @author forchesatto
- *
- */
 public class DaoFactoryJDBC implements AbstractDaoFactory{
 
 	@Override
@@ -29,5 +25,12 @@ public class DaoFactoryJDBC implements AbstractDaoFactory{
 	public CargoDAO getCargoDAO(){
 		return new CargoDAO();
 	}
+
+	@Override
+	public PedidoDAO getPedidoDAO() {
+		
+		return new PedidoDAO();
+	}
+	
 	
 }

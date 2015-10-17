@@ -12,6 +12,10 @@ public class Pedido {
 	private Local local;
 	private Setor setor;
 	
+	public Pedido(){
+		
+	}
+	
 	public Integer getIdpedido() {
 		return idpedido;
 	}
