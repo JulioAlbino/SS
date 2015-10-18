@@ -21,8 +21,7 @@ public class AdicionarNovoSetor extends TelaGenerica  implements ActionListener{
 	private JButton add;
 
 	public AdicionarNovoSetor() {
-		painel.setLayout(null);
-		painel.setBounds(10, 10, 1024, 768);
+
 		painel.setBorder(BorderFactory.createTitledBorder("Adicionar Novo Setor"));	
 		
 		textsetor = new JLabel("Setor:");

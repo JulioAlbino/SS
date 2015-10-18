@@ -2,21 +2,17 @@ package telas;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import telas.ToolBar;
 import model.Usuario;
 
 public class TelaInicial extends JFrame {
-	
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 4L;
+	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private static TelaInicial telainicial;
-	private static Usuario usuario;
+	private Usuario usuario;
 	
 	public static TelaInicial get(){
 		if(telainicial == null){
@@ -35,7 +31,6 @@ public class TelaInicial extends JFrame {
 	public TelaInicial() {
 		setTitle("Ordem de Servico");
 		setLayout(null);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setSize(screenSize.width, screenSize.height);
 		setVisible(true);
 		setLocationRelativeTo(null);
@@ -45,15 +40,19 @@ public class TelaInicial extends JFrame {
 
 public static void main(String[] args) {
 		Login login = new Login();
-		JPanel loginP = login.getPainelLogin();
-		TelaInicial.get().mostraPainel(loginP);
+		TelaInicial.get().mostraPainel(login.getPainelLogin());
 		}
 
 public void logar(Usuario usuarioLogado){
 	ToolBar toolbar = new ToolBar();
+	this.usuario = usuarioLogado;
 	TelaInicial.get().setJMenuBar(toolbar.getBarra());
-	TelaInicial.usuario = usuarioLogado;
-	TelaInicio telaInicio = new TelaInicio();
-	mostraPainel(telaInicio.getPainel());
+	mostraPainel(toolbar.getTelaInicio().getPainel());
+}//final do metodo logar
+
+public Usuario getUsuario() {
+	return usuario;
 }
-}
+
+
+}//final da classe

@@ -2,7 +2,6 @@ package telas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -19,10 +18,9 @@ public class ToolBar implements ActionListener{
 	private AdicionarNovoSetor novoSetor = new AdicionarNovoSetor();
 	private AdicionarNovoCargo novoCargo = new AdicionarNovoCargo();
 	private AdicionarNovoLocal novoLocal = new AdicionarNovoLocal();
-	
 	private AlterarUsuario telaAlterarUsuario = new AlterarUsuario();
 	private NovoUsuario telaNovoUsuario = new NovoUsuario();
-
+	//itens da toolbar
 	private JMenuItem botaoLOSA[] = new JMenuItem[5],
 			botaoADM[] = new JMenuItem[5], 
 			botaoInicio, botaoSair;
@@ -32,8 +30,8 @@ public class ToolBar implements ActionListener{
 	private JMenu iconeADM = new JMenu("ADM");
 	private JMenu iconeSair = new JMenu("Sair");
 	public ToolBar() {
-		
 		botaoInicio = new JMenuItem("Inicio");
+		botaoInicio.addActionListener(this);
 		iconeInicio.add(botaoInicio);
 		
 		botaoLOSA[0] = new JMenuItem("Abrir nova OS");
@@ -129,6 +127,10 @@ public class ToolBar implements ActionListener{
 		else if (botao == botaoSair){
 			
 		}
+	}
+	
+	public TelaInicio getTelaInicio(){
+		return telaInicio;
 	}
 	
 }

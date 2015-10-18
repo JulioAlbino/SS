@@ -1,32 +1,18 @@
 package telas;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-
 import dao.factory.DaoFactory;
-
 
 public class TelaInicio extends TelaGenerica {
 	
-
 	private JLabel TituloLista, TituloLista1, TituloLista2;
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 5L;
 
 	public TelaInicio() {
-		
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-		painel.setLayout(null);
-		painel.setBounds(10, 10, screenSize.width - 15,screenSize.height - 80);
 		painel.setBorder(BorderFactory.createTitledBorder("TelaInicio"));
-	
+		
 		TituloLista = new JLabel("Em aberto");
 		TituloLista.setBounds(50, 60, 400, 30);
 		

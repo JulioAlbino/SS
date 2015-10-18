@@ -22,8 +22,7 @@ public class AdicionarNovoLocal extends TelaGenerica implements ActionListener{
 	
 
 	public AdicionarNovoLocal() {
-		painel.setLayout(null);
-		painel.setBounds(10, 10, 1024, 768);
+
 		painel.setBorder(BorderFactory.createTitledBorder("Adicionar Novo Local"));	
 		
 		textlocal = new JLabel("Local:");

@@ -10,10 +10,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class NovaOS extends TelaGenerica{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 3L;
 	private JLabel NumeSS;
 	private JLabel descri;
 	private JLabel preventiva;
@@ -34,8 +32,7 @@ public class NovaOS extends TelaGenerica{
 	private JLabel defihoraini;
 	
 	public NovaOS() {
-		painel.setLayout(null);
-		painel.setBounds(10, 10, 1024, 768);
+
 		painel.setBorder(BorderFactory.createTitledBorder("Nova OS"));	
 		setor = new JLabel("Setor:");
 		setor.setBounds(15, 50, 100, 50);

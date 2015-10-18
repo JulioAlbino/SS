@@ -2,7 +2,6 @@ package telas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,15 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import daoo.UsuarioDAO;
+import dao.factory.DaoFactory;
 import model.Usuario;
 
 public class Login extends JFrame implements ActionListener{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 6L;
 	private JTextField usuario;
 	private JPasswordField senha;
 	private JButton submit;
@@ -27,6 +23,7 @@ public class Login extends JFrame implements ActionListener{
 	public Login(){
 		painelLogin.setLayout(null);
 		painelLogin.setBounds(200, 200, 600, 200);
+
 		painelLogin.setBorder(BorderFactory
 				.createTitledBorder("Entrar no Sistema"));	
 		
@@ -48,7 +45,6 @@ public class Login extends JFrame implements ActionListener{
 		
 		senha = new JPasswordField();
 		senha.setBounds(220, 80, 200, 25);
-		senha.setVisible(true);
 		painelLogin.add(senha);
 		
 		submit = new JButton("Entrar");
@@ -71,29 +67,15 @@ public class Login extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		UsuarioDAO userDAO = new UsuarioDAO();
-		String pw = new String(senha.getPassword());
 		
-		Usuario userx = userDAO.logarUsuario(usuario.getText(), pw);
-		
-		
-		//EncarregadoSS encarregado = new EncarregadoSS();
-		//TelaInicial.get().mostraPainel(encarregado.getPainelEncarregadoSS());
+		Usuario userx = DaoFactory.get().getUsuarioDAO().logarUsuario(usuario.getText(), String.valueOf(senha.getPassword()));
 		
 		if (userx != null){
-			painelLogin.setVisible(false);
 			TelaInicial.get().logar(userx);
 		}
 		else {
 			erro.setText("Usuario e ou senha nao conferem..");
 			senha.setText("");
-		}
-		
-		
-		
-	}
-	
-	
-	
-	
-}
+		}		
+	}//final do actionPerformed	
+}//final da classe

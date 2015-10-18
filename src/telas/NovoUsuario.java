@@ -18,10 +18,7 @@ import model.Usuario;
 
 public class NovoUsuario extends TelaGenerica implements ActionListener{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7L;
 	private JTextField Ussuario, nome;
 	private JLabel textUssuario;
 	private JTextField senha;
@@ -31,10 +28,8 @@ public class NovoUsuario extends TelaGenerica implements ActionListener{
 	private List<Cargo> cargos = DaoFactory.get().getCargoDAO().todos();
 
 	public NovoUsuario() {
-	painel.setLayout(null);
-	painel.setBounds(10, 10, 1024, 768);
 	painel.setBorder(BorderFactory.createTitledBorder("Adicionar Novo Usuário"));	
-	
+
 	textUssuario = new JLabel("Usuario:");
 	textUssuario.setBounds(15, 50, 150, 20);
 	painel.add(textUssuario);
@@ -97,13 +92,6 @@ public class NovoUsuario extends TelaGenerica implements ActionListener{
 			else {
 				System.out.println("Nao foi");
 			}
-			
-			
-			
 		}
-		
-	}
-
-
-		
-	}
+	}//final do actionPerformed	
+	}//final da classe

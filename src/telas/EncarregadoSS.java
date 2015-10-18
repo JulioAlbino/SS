@@ -35,8 +35,7 @@ public class EncarregadoSS extends TelaGenerica{
 	private JLabel defihoraini;
 	
 	public EncarregadoSS() {
-	painel.setLayout(null);
-	painel.setBounds(10, 10, 1024, 768);
+
 	painel.setBorder(BorderFactory.createTitledBorder("Painel Encarregado"));	
 	
 	setor = new JLabel("Setor:");

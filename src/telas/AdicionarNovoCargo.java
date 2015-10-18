@@ -27,8 +27,6 @@ public class AdicionarNovoCargo extends TelaGenerica implements ActionListener {
 	private List<Setor> setores = DaoFactory.get().getSetorDAO().todos();
 
 	public AdicionarNovoCargo() {
-		painel.setLayout(null);
-		painel.setBounds(10, 10, 1024, 768);
 		painel.setBorder(BorderFactory.createTitledBorder("Adicionar Novo Cargo"));	
 		
 		textCargo = new JLabel("Nome do Cargo:");
