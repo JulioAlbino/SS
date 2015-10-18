@@ -54,7 +54,6 @@ public void logar(Usuario usuarioLogado){
 	TelaInicial.get().setJMenuBar(toolbar.getBarra());
 	TelaInicial.usuario = usuarioLogado;
 	TelaInicio telaInicio = new TelaInicio();
-	Lista listax = new Lista();
 	mostraPainel(telaInicio.getPainel());
 }
 }

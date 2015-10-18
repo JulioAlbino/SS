@@ -1,19 +1,17 @@
 package telas;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
+
+import dao.factory.DaoFactory;
+
 
 public class TelaInicio extends TelaGenerica {
 	
-	private JList<String> jltDados, jltDados1, jltDados2;
-	private JScrollPane jspRolagem, jspRolagem1, jspRolagem2;
+
 	private JLabel TituloLista, TituloLista1, TituloLista2;
 	
 	/**
@@ -42,26 +40,14 @@ public class TelaInicio extends TelaGenerica {
 		painel.add(TituloLista1);
 		painel.add(TituloLista);
 		
-		Vector<String> dados = new Vector<String>();
-		dados.add("Teste");
-		jltDados = new JList<>(dados);
-		jltDados.setBackground(Color.red);
-		jspRolagem = new JScrollPane(jltDados);
+		ListaTela aberto = new ListaTela(DaoFactory.get().getPedidoDAO().todos(), 10, 90, 441,200, "aberto");
+		painel.add(aberto.getLista());
 		
-		jspRolagem.setBounds(10, 90, 440, 200);
-		painel.add(jspRolagem);
+		ListaTela aberto2 = new ListaTela(DaoFactory.get().getPedidoDAO().todos(), 455, 90, 441,200, "andamento");
+		painel.add(aberto2.getLista());
 		
-		jltDados1 = new JList<>(dados);
-		jltDados1.setBackground(Color.yellow);
-		jspRolagem1 = new JScrollPane(jltDados1);
-		jspRolagem1.setBounds(455, 90, 440, 200);
-		painel.add(jspRolagem1);
-
-		jltDados2 = new JList<>(dados);
-		jltDados2.setBackground(Color.green);
-		jspRolagem2 = new JScrollPane(jltDados2);
-		jspRolagem2.setBounds(900, 90, 440, 200);
-		painel.add(jspRolagem2);
+		ListaTela aberto3 = new ListaTela(DaoFactory.get().getPedidoDAO().todos(), 900, 90, 441,200, "fechado");
+		painel.add(aberto3.getLista());
 		
 	}
 

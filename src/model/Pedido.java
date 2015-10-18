@@ -15,6 +15,9 @@ public class Pedido {
 	public Pedido(){
 		
 	}
+	public String toString(){
+		return descricao;
+	}
 	
 	public Integer getIdpedido() {
 		return idpedido;
