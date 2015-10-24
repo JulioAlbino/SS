@@ -5,15 +5,22 @@ import java.time.LocalDate;
 public class Pedido {
 	
 	private Integer idpedido;
-	private LocalDate datahora;
+	private LocalDate data;
 	private String descricao;
 	private Integer situacao;
 	private Usuario usuario;
 	private Local local;
 	private Setor setor;
-	
 	public Pedido(){
-		
+		this.situacao = 0;
+	}
+	public Pedido(LocalDate data, String descricao, Integer situacao, Usuario usuario, Local local, Setor setor){
+	this.data = data;
+	this.descricao = descricao;
+	this.situacao = situacao;
+	this.usuario = usuario;
+	this.local = local;
+	this.setor = setor;
 	}
 	public String toString(){
 		return descricao;
@@ -26,10 +33,10 @@ public class Pedido {
 		this.idpedido = idpedido;
 	}
 	public LocalDate getDatahora() {
-		return datahora;
+		return data;
 	}
-	public void setDatahora(LocalDate datahora) {
-		this.datahora = datahora;
+	public void setDatahora(LocalDate data) {
+		this.data = data;
 	}
 	public String getDescricao() {
 		return descricao;
@@ -61,6 +68,4 @@ public class Pedido {
 	public void setSetor(Setor setor) {
 		this.setor = setor;
 	}
-
-
 }

@@ -2,7 +2,6 @@ package telas;
 
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -16,7 +15,7 @@ import model.Cargo;
 import model.Usuario;
 
 
-public class NovoUsuario extends TelaGenerica implements ActionListener{
+public class NovoUsuario extends TelaGenerica {
 	
 	private static final long serialVersionUID = 7L;
 	private JTextField Ussuario, nome;

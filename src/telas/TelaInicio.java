@@ -1,7 +1,10 @@
 package telas;
 
+import java.awt.event.ActionEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+
 import dao.factory.DaoFactory;
 
 public class TelaInicio extends TelaGenerica {
@@ -25,7 +28,11 @@ public class TelaInicio extends TelaGenerica {
 		painel.add(TituloLista2);
 		painel.add(TituloLista1);
 		painel.add(TituloLista);
+		mostraListas();
 		
+	}
+	
+	public void mostraListas(){
 		ListaTela aberto = new ListaTela(DaoFactory.get().getPedidoDAO().todos(), 10, 90, 441,200, "aberto");
 		painel.add(aberto.getLista());
 		
@@ -34,6 +41,11 @@ public class TelaInicio extends TelaGenerica {
 		
 		ListaTela aberto3 = new ListaTela(DaoFactory.get().getPedidoDAO().todos(), 900, 90, 441,200, "fechado");
 		painel.add(aberto3.getLista());
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 

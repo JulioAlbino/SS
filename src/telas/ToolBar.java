@@ -2,6 +2,7 @@ package telas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -10,16 +11,16 @@ public class ToolBar implements ActionListener{
 
 	//instancia as TELAS pra mostralas depois
 	private TelaInicio telaInicio = new TelaInicio();
-	private NovaOS telaNovaOS = new NovaOS();
-	private ListaOSAbertas abertas = new ListaOSAbertas();
-	private ListaOSExecucao exec = new ListaOSExecucao();
-	private ListaOSFinalizadas finalizadas = new ListaOSFinalizadas();
-	private OSAguardandoFinalizar aguardando = new OSAguardandoFinalizar();
-	private AdicionarNovoSetor novoSetor = new AdicionarNovoSetor();
-	private AdicionarNovoCargo novoCargo = new AdicionarNovoCargo();
-	private AdicionarNovoLocal novoLocal = new AdicionarNovoLocal();
-	private AlterarUsuario telaAlterarUsuario = new AlterarUsuario();
-	private NovoUsuario telaNovoUsuario = new NovoUsuario();
+	private NovaOS telaNovaOS;
+	private ListaOSAbertas abertas;
+	private ListaOSExecucao exec;
+	private ListaOSFinalizadas finalizadas;
+	private OSAguardandoFinalizar aguardando;
+	private AdicionarNovoSetor novoSetor;
+	private AdicionarNovoCargo novoCargo;
+	private AdicionarNovoLocal novoLocal;
+	private AlterarUsuario telaAlterarUsuario;
+	private NovoUsuario telaNovoUsuario;
 	//itens da toolbar
 	private JMenuItem botaoLOSA[] = new JMenuItem[5],
 			botaoADM[] = new JMenuItem[5], 
@@ -31,6 +32,8 @@ public class ToolBar implements ActionListener{
 	private JMenu iconeSair = new JMenu("Sair");
 	public ToolBar() {
 		botaoInicio = new JMenuItem("Inicio");
+		botaoInicio.setActionCommand("telaInicio");
+
 		botaoInicio.addActionListener(this);
 		iconeInicio.add(botaoInicio);
 		
@@ -91,41 +94,80 @@ public class ToolBar implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		
 		Object botao = e.getSource();
 		
 		if (botao == botaoInicio){
+			if (telaInicio != null){
+			telaInicio.dispose();
+			}
+			telaInicio = new TelaInicio();
 			TelaInicial.get().mostraPainel(telaInicio.getPainel());
-		}else if (botao == botaoLOSA[0]){
+		}
+		else if (botao == botaoLOSA[0]){
+			if (telaNovaOS == null){
+				telaNovaOS = new NovaOS();
+			}
 			TelaInicial.get().mostraPainel(telaNovaOS.getPainel());
+			
 		}
 		else if (botao == botaoLOSA[1]){
+			if (abertas == null){
+				abertas = new ListaOSAbertas();
+			}
 			TelaInicial.get().mostraPainel(abertas.getPainel());
+			
 		}
 		else if (botao == botaoLOSA[2]){
+			if (exec == null){
+				exec = new ListaOSExecucao();
+			}
 			TelaInicial.get().mostraPainel(exec.getPainel());
 		}
 		else if (botao == botaoLOSA[3]){
+			if (finalizadas == null){
+				finalizadas = new ListaOSFinalizadas();
+			}
 			TelaInicial.get().mostraPainel(finalizadas.getPainel());
 		}
 		else if (botao == botaoLOSA[4]){
+			if (aguardando == null){
+				aguardando = new OSAguardandoFinalizar();
+			}
 			TelaInicial.get().mostraPainel(aguardando.getPainel());
 		}
 		else if (botao == botaoADM[0]){
+			if (novoSetor == null){
+				novoSetor = new AdicionarNovoSetor();
+			}
 			TelaInicial.get().mostraPainel(novoSetor.getPainel());
 		}
 		else if (botao == botaoADM[1]){
+			if (novoLocal == null){
+				novoLocal = new AdicionarNovoLocal();
+			}
 			TelaInicial.get().mostraPainel(novoLocal.getPainel());
 		}
 		else if (botao == botaoADM[2]){
+			if (novoCargo == null){
+				novoCargo = new AdicionarNovoCargo();
+			}
 			TelaInicial.get().mostraPainel(novoCargo.getPainel());
 		}
 		else if (botao == botaoADM[3]){
+			if (telaNovoUsuario == null){
+				telaNovoUsuario = new NovoUsuario();
+			}
 			TelaInicial.get().mostraPainel(telaNovoUsuario.getPainel());
 		}else if (botao == botaoADM[4]){
+			if (telaAlterarUsuario == null){
+				telaAlterarUsuario = new AlterarUsuario();
+			}
 			TelaInicial.get().mostraPainel(telaAlterarUsuario.getPainel());
 		}
 		else if (botao == botaoSair){
-			
+			TelaInicial.get().dispose();
 		}
 	}
 	

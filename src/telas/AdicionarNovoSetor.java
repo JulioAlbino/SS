@@ -1,7 +1,6 @@
 package telas;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -10,11 +9,8 @@ import javax.swing.JTextField;
 import dao.factory.DaoFactory;
 import model.Setor;
 
-public class AdicionarNovoSetor extends TelaGenerica  implements ActionListener{
-	
-	/**
-	 * 
-	 */
+public class AdicionarNovoSetor extends TelaGenerica{
+
 	private static final long serialVersionUID = 1L;
 	private JTextField LocalSetor;
 	private JLabel textsetor, textResultado;

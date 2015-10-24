@@ -1,5 +1,7 @@
 package telas;
 
+import java.awt.event.ActionEvent;
+
 import javax.swing.BorderFactory;
 
 import dao.factory.DaoFactory;
@@ -17,5 +19,11 @@ public class ListaOSExecucao extends TelaGenericaListas{
 		painel.add(aberto.getLista());
 
 }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

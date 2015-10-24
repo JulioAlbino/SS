@@ -1,7 +1,6 @@
 package telas;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -13,11 +12,8 @@ import javax.swing.JTextField;
 import dao.factory.DaoFactory;
 import model.Setor;
 import model.Cargo;
-public class AdicionarNovoCargo extends TelaGenerica implements ActionListener {
-	
-	/**
-	 * 
-	 */
+public class AdicionarNovoCargo extends TelaGenerica {
+
 	private static final long serialVersionUID = 1L;
 	private JTextField Cargo;
 	private JLabel textCargo;

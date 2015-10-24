@@ -1,7 +1,6 @@
 package telas;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -11,7 +10,7 @@ import javax.swing.JTextField;
 import dao.factory.DaoFactory;
 import model.Local;
 
-public class AdicionarNovoLocal extends TelaGenerica implements ActionListener{
+public class AdicionarNovoLocal extends TelaGenerica{
 	/**
 	 * 
 	 */

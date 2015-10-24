@@ -2,11 +2,12 @@ package telas;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public abstract class TelaGenerica extends JFrame{
+public abstract class TelaGenerica extends JFrame implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	protected JPanel painel = new JPanel();

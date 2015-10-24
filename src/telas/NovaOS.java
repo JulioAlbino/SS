@@ -1,122 +1,102 @@
 package telas;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.time.LocalDate;
+import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JCheckBox;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
+
+import dao.factory.DaoFactory;
+import model.Local;
+import model.Pedido;
+import model.Setor;
 
 public class NovaOS extends TelaGenerica{
 
 	private static final long serialVersionUID = 3L;
-	private JLabel NumeSS;
-	private JLabel descri;
-	private JLabel preventiva;
-	private JLabel coretiva;
-	private JLabel Afetaprod;
-	private JLabel horafinal;
-	private JLabel horainicial;
-	private JLabel data;
-	private JLabel areaexecutante;
-	private JLabel setor;
-	private JCheckBox boxpreventiva;
-	private JCheckBox boxcoretiva;
-	private JCheckBox boxAfetaprod;
-	private JTextArea textdescri;
-	private JTextField textsetor;
-	private JTextField textareaexecutante;
-	private JLabel defitdata;
-	private JLabel defihoraini;
+	private JLabel jlbDescricao = new JLabel("Defeito apresentado:");
+	
+	private JLabel jlbSetor = new JLabel("Setor: ");
+	private List<Setor> setores = DaoFactory.get().getSetorDAO().todos();
+	private JComboBox<Setor> comboboxSetor = new JComboBox<Setor>();
+	
+	private JLabel jlbLocal = new JLabel("Local:");
+	private JComboBox<Local> comboboxLocal = new JComboBox<Local>();
+	private List<Local> locais = DaoFactory.get().getLocalDAO().todos();
+	
+	private JTextArea jtxaDescricao = new JTextArea();
+	private JLabel jlbDataValor;
+	private JLabel jlbData = new JLabel("Data:");
+	
+	private JButton jbtCriar = new JButton("Abrir OS");
+	
+	private JLabel resultado = new JLabel();
 	
 	public NovaOS() {
+		
+		painel.setBorder(BorderFactory.createTitledBorder("Nova OS"));
 
-		painel.setBorder(BorderFactory.createTitledBorder("Nova OS"));	
-		setor = new JLabel("Setor:");
-		setor.setBounds(15, 50, 100, 50);
-		painel.add(setor);
+		resultado.setBounds(15, 330, 300,25);
+		painel.add(resultado);
+		
+		jlbSetor.setBounds(15, 50, 110, 25);
+		painel.add(jlbSetor);
+		setores.forEach((Setor setor) -> {
+			comboboxSetor.addItem(setor);
+		});
+		comboboxSetor.setBounds(70, 50, 150, 25);
+		painel.add(comboboxSetor);
+		
+		jlbDescricao.setBounds(15, 100, 200, 25);
+		painel.add(jlbDescricao);
+		
+		jtxaDescricao.setBounds(15, 140, 650, 170);
+		jtxaDescricao.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		painel.add(jtxaDescricao);
 
-		textsetor = new JTextField();
-		textsetor.setBounds(55, 67, 150, 20);
-		painel.add(textsetor);
+		jlbLocal.setBounds(330, 50, 200, 25);
+		painel.add(jlbLocal);
+		locais.forEach((Local l) -> {
+			comboboxLocal.addItem(l);
+		});
+		comboboxLocal.setBounds(380,50,200,25);
+		painel.add(comboboxLocal);
 
-		descri = new JLabel("Defeito apresentado:");
-		descri.setBounds(15, 100, 200, 50);
-		painel.add(descri);
-
-		textdescri = new JTextArea();
-		textdescri.setBounds(15, 140, 650, 170);
-		painel.add(textdescri);
-
-		coretiva = new JLabel("Coretiva:");
-		coretiva.setBounds(15, 300, 200, 50);
-		painel.add(coretiva);
-
-		boxcoretiva = new JCheckBox();
-		boxcoretiva.setBounds(70, 300, 30, 50);
-		painel.add(boxcoretiva);
-
-		preventiva = new JLabel("Preventiva:");
-		preventiva.setBounds(150, 300, 210, 50);
-		painel.add(preventiva);
-
-		boxpreventiva = new JCheckBox();
-		boxpreventiva.setBounds(220, 301, 30, 50);
-		painel.add(boxpreventiva);
-
-		Afetaprod = new JLabel("Afetou a produ��o:");
-		Afetaprod.setBounds(300, 300, 200, 50);
-		painel.add(Afetaprod);
-
-		boxAfetaprod = new JCheckBox();
-		boxAfetaprod.setBounds(405, 300, 30, 50);
-		painel.add(boxAfetaprod);
-
-		areaexecutante = new JLabel("Area executante:");
-		areaexecutante.setBounds(250, 50, 100, 50);
-		painel.add(areaexecutante);
-
-		textareaexecutante = new JTextField();
-		textareaexecutante.setBounds(355, 67, 150, 20);
-		painel.add(textareaexecutante);
-
-		NumeSS = new JLabel("Numero SS:");
-		NumeSS.setBounds(15, 10, 100, 50);
-		painel.add(NumeSS);
-
-		horafinal = new JLabel("Hora Final:");
-		horafinal.setBounds(450, 10, 100, 50);
-		painel.add(horafinal);
-
-		horainicial = new JLabel("Hora Inicial:");
-		horainicial.setBounds(280, 10, 100, 50);
-		painel.add(horainicial);
-
-		Date horaHoje = new Date();
-		SimpleDateFormat formatahora = new SimpleDateFormat("HH:mm");
-		String horasis = formatahora.format(horaHoje);
-
-		defihoraini = new JLabel(horasis);
-		defihoraini.setBounds(350, 10, 100, 50);
-		painel.add(defihoraini);
-
-		data = new JLabel("Data:");
-		data.setBounds(150, 10, 100, 50);
-		painel.add(data);
-
-		data = new JLabel("Data Final:");
-		data.setBounds(600, 10, 100, 50);
-		painel.add(data);
-		// coloca data de abertura ss
-		Date dataHoje = new Date();
-		SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
-		String datasis = formataData.format(dataHoje);
-
-		defitdata = new JLabel(datasis);
-		defitdata.setBounds(183, 10, 100, 50);
-		painel.add(defitdata);
-
+		jlbData.setBounds(20,10,200,25);
+		painel.add(jlbData);
+		
+		jlbDataValor = new JLabel(LocalDate.now().toString());
+		jlbDataValor.setBounds(80, 10, 200, 25);
+		painel.add(jlbDataValor);
+		
+		jbtCriar.setBounds(15, 350, 200, 25);
+		jbtCriar.addActionListener(this);
+		painel.add(jbtCriar);
+		
 }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == jbtCriar){
+			Setor novoSetor = setores.get(comboboxSetor.getSelectedIndex());
+			Local local = locais.get(comboboxLocal.getSelectedIndex());
+			LocalDate date = LocalDate.parse(jlbDataValor.getText());
+			
+			Pedido novaOS = new Pedido(date, jtxaDescricao.getText(), 0,  TelaInicial.get().getUsuario(), local, novoSetor);
+			
+			if(DaoFactory.get().getPedidoDAO().inserir(novaOS)){
+				resultado.setText("Nova ordem de servico criada com Sucesso!");
+				jtxaDescricao.setText("");
+				
+				
+			}
+			
+		}
+		
+	}
 }
