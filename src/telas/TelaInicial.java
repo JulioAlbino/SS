@@ -53,6 +53,4 @@ public void logar(Usuario usuarioLogado){
 public Usuario getUsuario() {
 	return usuario;
 }
-
-
 }//final da classe

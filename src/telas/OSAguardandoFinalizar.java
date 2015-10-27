@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
 
+import recursosParaTelas.ListaPedidos;
+import telasGenericas.TelaGenericaListas;
 import dao.factory.DaoFactory;
 
 public class OSAguardandoFinalizar extends TelaGenericaListas {
@@ -13,7 +15,7 @@ public class OSAguardandoFinalizar extends TelaGenericaListas {
 	public OSAguardandoFinalizar() {
 
 		painel.setBorder(BorderFactory.createTitledBorder("OS's aguardando finalizar"));
-		ListaTela aberto = new ListaTela(DaoFactory.get().getPedidoDAO().todos(), 20, 90, 1300,500, "aberto");
+		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todos(), 20, 90, 1300,500, "aberto");
 		painel.add(aberto.getLista());
 
 }

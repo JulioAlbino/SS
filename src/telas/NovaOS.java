@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
+import telasGenericas.TelaGenerica;
 import dao.factory.DaoFactory;
 import model.Local;
 import model.Pedido;

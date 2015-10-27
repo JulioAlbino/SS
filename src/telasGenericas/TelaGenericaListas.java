@@ -1,4 +1,4 @@
-package telas;
+package telasGenericas;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;

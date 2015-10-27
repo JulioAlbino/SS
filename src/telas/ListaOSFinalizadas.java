@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
 
+import recursosParaTelas.ListaPedidos;
+import telasGenericas.TelaGenericaListas;
 import dao.factory.DaoFactory;
 
 public class ListaOSFinalizadas extends TelaGenericaListas {
@@ -13,7 +15,7 @@ public class ListaOSFinalizadas extends TelaGenericaListas {
 	public ListaOSFinalizadas() {
 
 		painel.setBorder(BorderFactory.createTitledBorder("Lista de OS Finalizadas"));
-		ListaTela aberto = new ListaTela(DaoFactory.get().getPedidoDAO().todos(), 20, 90, 1300,500, "aberto");
+		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todos(), 20, 90, 1300,500, "fechado");
 		painel.add(aberto.getLista());
 }
 

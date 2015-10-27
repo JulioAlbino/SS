@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
+import recursosParaTelas.ListaPedidos;
+import telasGenericas.TelaGenerica;
 import dao.factory.DaoFactory;
 
 public class TelaInicio extends TelaGenerica {
@@ -33,13 +35,13 @@ public class TelaInicio extends TelaGenerica {
 	}
 	
 	public void mostraListas(){
-		ListaTela aberto = new ListaTela(DaoFactory.get().getPedidoDAO().todos(), 10, 90, 441,200, "aberto");
+		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todos(), 10, 90, 441,200, "aberto");
 		painel.add(aberto.getLista());
 		
-		ListaTela aberto2 = new ListaTela(DaoFactory.get().getPedidoDAO().todos(), 455, 90, 441,200, "andamento");
+		ListaPedidos aberto2 = new ListaPedidos(DaoFactory.get().getPedidoDAO().todos(), 455, 90, 441,200, "andamento");
 		painel.add(aberto2.getLista());
 		
-		ListaTela aberto3 = new ListaTela(DaoFactory.get().getPedidoDAO().todos(), 900, 90, 441,200, "fechado");
+		ListaPedidos aberto3 = new ListaPedidos(DaoFactory.get().getPedidoDAO().todos(), 900, 90, 441,200, "fechado");
 		painel.add(aberto3.getLista());
 	}
 

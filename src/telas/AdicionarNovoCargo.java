@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import telasGenericas.TelaGenerica;
 import dao.factory.DaoFactory;
 import model.Setor;
 import model.Cargo;
