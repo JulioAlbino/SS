@@ -62,4 +62,9 @@ public class Usuario{
 	public void setLogin(String login) {
 		this.login = login;
 	}
+	
+	public String toString(){
+		return "Id: "+ this.idusuario + " | Nome: " + this.nome;
+	}
+	
 }

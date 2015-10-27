@@ -10,10 +10,11 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import recursosParaTelas.ListaPedidos;
+import recursosParaTelas.ListaUsuarios;
 import telasGenericas.TelaGenerica;
 import dao.factory.DaoFactory;
 import model.Cargo;
+import model.Usuario;
 
 
 public class AlterarUsuario extends TelaGenerica{
@@ -38,14 +39,15 @@ public class AlterarUsuario extends TelaGenerica{
 	
 	private JComboBox<Cargo> combobox = new JComboBox<Cargo>();
 	private JLabel jlbCombobox = new JLabel("Cargo");
-	
-	ListaPedidos listaBusca;
+	private ListaUsuarios listaUser;
+
 	//---------
 	
 	
 	public AlterarUsuario() {
 
 
+		
 		int posJTX = 160;
 		int posJLB = 15;
 	painel.setBorder(BorderFactory.createTitledBorder("Painel Alterar Usuário"));	
@@ -91,12 +93,8 @@ public class AlterarUsuario extends TelaGenerica{
 	jlbCombobox.setBounds(posJLB, 230, 200,25);
 	painel.add(jlbCombobox);
 	
-	listaBusca = new ListaPedidos(DaoFactory.get().getPedidoDAO().todos(), 500, 90, 600,200, "aberto");
-	painel.add(listaBusca.getLista());
-	
-	
-	
-	
+	listaUser = new ListaUsuarios(DaoFactory.get().getUsuarioDAO().todos(), 500, 90, 600, 200);
+	painel.add(listaUser.getLista());
 	
 }
 
@@ -105,9 +103,13 @@ public class AlterarUsuario extends TelaGenerica{
 		Object botao = e.getSource();
 		
 		if (botao == jbtBusca){
-			
+			List<Usuario> listaUsuarios = DaoFactory.get().getUsuarioDAO().buscarUsuario(jtxBusca.getText());
+			painel.remove(listaUser.getLista());
+			listaUser.setLista(listaUsuarios);
+			painel.add(listaUser.getLista());
+			System.out.println(jtxBusca.getText());
+			painel.updateUI();
 		}
-		
 	}
 	
 	public void resultadoBusca(){

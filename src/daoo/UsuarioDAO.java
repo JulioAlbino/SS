@@ -125,6 +125,30 @@ private Connection con;
 		return usuario;
 	}
 	
+	public List<Usuario> buscarUsuario(String campo){
+		List<Usuario> usuarios = new ArrayList<>();
+		String sql = "select * from usuario where login like ? or nome like ? or idusuario like ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+campo+"%");
+			pstmt.setString(2, "%"+campo+"%");
+			pstmt.setString(3, "%"+campo+"%");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()){
+				Usuario usuario = new Usuario(rs.getInt("idusuario"));
+				usuarios.add(usuario);
+			}
+			
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		
+		return usuarios;
+		
+	}
+	
 	
 	
 }
