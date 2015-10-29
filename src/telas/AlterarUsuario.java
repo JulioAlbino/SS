@@ -1,13 +1,15 @@
 package telas;
 
-
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import recursosParaTelas.ListaUsuarios;
@@ -16,11 +18,11 @@ import dao.factory.DaoFactory;
 import model.Cargo;
 import model.Usuario;
 
-
-public class AlterarUsuario extends TelaGenerica{
+public class AlterarUsuario extends TelaGenerica implements KeyListener{
 
 	private static final long serialVersionUID = 13L;
 
+	private Usuario usuarioSelecionado;
 	
 	private JTextField jtxUsuario = new JTextField();
 	private JLabel jlbUsuario = new JLabel("Usuário:");
@@ -40,14 +42,14 @@ public class AlterarUsuario extends TelaGenerica{
 	private JComboBox<Cargo> combobox = new JComboBox<Cargo>();
 	private JLabel jlbCombobox = new JLabel("Cargo");
 	private ListaUsuarios listaUser;
-
+	
+	private JButton jbtAlterar = new JButton("Efetuar Alterarações");
+	private List<Cargo> cargos = DaoFactory.get().getCargoDAO().todos();
+	
 	//---------
-	
-	
+		
 	public AlterarUsuario() {
 
-
-		
 		int posJTX = 160;
 		int posJLB = 15;
 	painel.setBorder(BorderFactory.createTitledBorder("Painel Alterar Usuário"));	
@@ -55,7 +57,9 @@ public class AlterarUsuario extends TelaGenerica{
 	jlbBusca.setBounds(posJLB,25,200,25);
 	painel.add(jlbBusca);
 	
-	jtxBusca.setBounds(posJTX,25,200,25);
+jtxBusca.setBounds(posJTX,25,200,25);
+jtxBusca.addKeyListener(this);
+
 	painel.add(jtxBusca);
 	
 	jbtBusca.setBounds(360,25,200,25);
@@ -83,7 +87,7 @@ public class AlterarUsuario extends TelaGenerica{
 	jtxSenha.setBounds(posJTX, 200,200, 25);
 	painel.add(jtxSenha);
 	
-	List<Cargo> cargos = DaoFactory.get().getCargoDAO().todos();
+	
 	cargos.forEach((Cargo cargo) -> {
 		combobox.addItem(cargo);
 	});
@@ -96,25 +100,68 @@ public class AlterarUsuario extends TelaGenerica{
 	listaUser = new ListaUsuarios(DaoFactory.get().getUsuarioDAO().todos(), 500, 90, 600, 200);
 	painel.add(listaUser.getLista());
 	
+	jbtAlterar.setBounds(100, 270, 200, 25);
+	jbtAlterar.addActionListener(this);
+	painel.add(jbtAlterar);
+	
+	
 }
-
+	
+	public void efetuaBusca(){
+		List<Usuario> listaUsuarios = DaoFactory.get().getUsuarioDAO().buscarUsuario(jtxBusca.getText());
+		painel.remove(listaUser.getLista());
+		listaUser.setLista(listaUsuarios);
+		painel.add(listaUser.getLista());
+		painel.updateUI();
+	}
+	
+	public void setaUsuarioSelecionado(Usuario user){
+		this.usuarioSelecionado = user;
+		jlbCodigo2.setText(user.getIdusuario().toString());
+		jtxUsuario.setText(user.getLogin());
+		jtxNome.setText(user.getNome());
+		jtxSenha.setText(user.getSenha());
+		combobox.setSelectedIndex(user.getCargo().getIdcargo()-1);
+		
+	}
+	
+	
+	public Boolean salvaAlteracaoNoBanco(){
+		usuarioSelecionado.setNome(jtxNome.getText());
+		usuarioSelecionado.setSenha(jtxSenha.getText());
+		usuarioSelecionado.setLogin(jtxUsuario.getText());
+		usuarioSelecionado.setCargo(cargos.get(combobox.getSelectedIndex()));
+		
+		return (DaoFactory.get().getUsuarioDAO().alterar(usuarioSelecionado));
+		
+	}
+	
+	
+	@Override
+	public void keyPressed(KeyEvent e){}
+	@Override
+	public void keyReleased(KeyEvent e){efetuaBusca();}
+	@Override
+	public void keyTyped(KeyEvent e){}		  
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object botao = e.getSource();
-		
 		if (botao == jbtBusca){
-			List<Usuario> listaUsuarios = DaoFactory.get().getUsuarioDAO().buscarUsuario(jtxBusca.getText());
-			painel.remove(listaUser.getLista());
-			listaUser.setLista(listaUsuarios);
-			painel.add(listaUser.getLista());
-			System.out.println(jtxBusca.getText());
-			painel.updateUI();
+			efetuaBusca();
+		}
+		else if (botao == jbtAlterar){
+			if (salvaAlteracaoNoBanco()){
+				JOptionPane.showMessageDialog(this, "Usuario Alterado com Sucesso");
+				efetuaBusca();
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "Problemas na hora de alterar o Usuario");
+			}
+			
 		}
 	}
 	
-	public void resultadoBusca(){
-		
-	}
-
-		
-	}
+	
+	
+}

@@ -42,10 +42,7 @@ public class SetorDAO implements GenericDAO<Setor>{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
-		}	
-		
-
-		
+		}
 	}
 
 	@Override

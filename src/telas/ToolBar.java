@@ -175,4 +175,11 @@ public class ToolBar implements ActionListener{
 		return telaInicio;
 	}
 	
+	public AlterarUsuario getAlterarUsuario(){
+		if (telaAlterarUsuario == null){
+			telaAlterarUsuario = new AlterarUsuario();
+		}
+		return telaAlterarUsuario;
+	}
+	
 }

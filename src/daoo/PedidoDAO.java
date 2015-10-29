@@ -113,7 +113,7 @@ private Connection con;
 		String sql = "select * from pedido";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery(); 
 			//Transforma o resultSet em um objeto proprio
 			while(rs.next()){
 				Pedido pedido = new Pedido();

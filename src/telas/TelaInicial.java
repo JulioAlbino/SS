@@ -13,6 +13,7 @@ public class TelaInicial extends JFrame {
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private static TelaInicial telainicial;
 	private Usuario usuario;
+	private static ToolBar toolbar = new ToolBar();
 	
 	public static TelaInicial get(){
 		if(telainicial == null){
@@ -27,6 +28,10 @@ public class TelaInicial extends JFrame {
 		getContentPane().setVisible(true);
 		getContentPane().add(painel);
 	}
+	
+public ToolBar getToolbar(){
+	return toolbar;
+}
 	
 	public TelaInicial() {
 		setTitle("Ordem de Servico");
@@ -44,7 +49,6 @@ public static void main(String[] args) {
 		}
 
 public void logar(Usuario usuarioLogado){
-	ToolBar toolbar = new ToolBar();
 	this.usuario = usuarioLogado;
 	TelaInicial.get().setJMenuBar(toolbar.getBarra());
 	mostraPainel(toolbar.getTelaInicio().getPainel());
