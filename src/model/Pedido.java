@@ -15,7 +15,26 @@ public class Pedido {
 	
 	private LocalDate dataModificacao;
 	private Usuario responsavel;
+	private String dsSituacao;
 	
+	
+	
+	
+	public String getDsSituacao() {
+		if (this.situacao == 1){
+			this.dsSituacao = "Aberta";
+		}
+		else if (this.situacao == 2){
+			this.dsSituacao = "Em Andamento";
+		}
+		else if (this.situacao == 3){
+			this.dsSituacao = "Aguardando Finalizar";
+		}
+		else if (this.situacao == 4) {
+			this.dsSituacao = "Finalizada";
+		}
+		return this.dsSituacao;
+	}
 	public LocalDate getData() {
 		return data;
 	}
@@ -44,6 +63,7 @@ public class Pedido {
 	this.usuario = usuario;
 	this.local = local;
 	this.setor = setor;
+	this.getDsSituacao();
 	}
 	public String toString(){
 		return descricao;

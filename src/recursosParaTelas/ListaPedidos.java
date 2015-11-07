@@ -8,23 +8,30 @@ import model.Pedido;
 
 public class ListaPedidos extends ListaGenerica{
 
-	public ListaPedidos(List<Pedido> lista, int x, int y, int width, int height, String tipo) {
+	public ListaPedidos(List<Pedido> lista, int x, int y, int width, int height) {
 		super(lista, x, y, width, height);
 		
 			
 					
-					if (tipo == "aberto"){
-					jltDados.setBackground(Color.RED);
+		
+					switch(lista.get(0).getSituacao()){
+					case 1:
+						jltDados.setBackground(Color.RED);
+						break;
+					case 2:
+						jltDados.setBackground(Color.YELLOW);
+						break;
+					case 3:
+						jltDados.setBackground(Color.GRAY);
+						break;
+					case 4:
+						jltDados.setBackground(Color.GREEN);
+						break;
+					default:
+						jltDados.setBackground(Color.GRAY);
+						break;
 					}
-					else if (tipo == "andamento"){
-					jltDados.setBackground(Color.YELLOW);
-					}
-					else if (tipo == "fechado") {
-					jltDados.setBackground(Color.GRAY);
-					}
-					
-
-					
+				
 			}
 
 	

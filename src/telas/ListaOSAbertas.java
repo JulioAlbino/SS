@@ -13,7 +13,7 @@ public class ListaOSAbertas extends TelaGenericaListas{
 	
 	public ListaOSAbertas() {
 		painel.setBorder(BorderFactory.createTitledBorder("Lista OS Abertas"));	
-		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAbertos(), 20, 90, 1300,500, "aberto");
+		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAbertos(), 20, 90, 1300,500);
 		painel.add(aberto.getLista());
 }
 

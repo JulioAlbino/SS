@@ -1,6 +1,7 @@
 package telas;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.util.List;
@@ -56,6 +57,9 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 	
 	private JLabel jlbUsuarioResponsavelValor = new JLabel();
 	
+	private JLabel jlbSituacao = new JLabel("Situação da OS: ");
+	private JLabel jlbSituacaoValor = new JLabel();
+	
 	public ViewOS(Pedido pedido){
 		this.pedidoAberto = pedido;
 		painel.setBorder(BorderFactory.createTitledBorder("Ordem de Serviço codigo: " + pedido.getIdpedido()));
@@ -77,7 +81,7 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 		painel.add(comboboxSetor);
 		
 		//Descricao
-		jlbDescricao.setBounds(15, 100, 200, 25);
+		jlbDescricao.setBounds(15, 115, 200, 25);
 		painel.add(jlbDescricao);
 		
 		jtxaDescricao.setBounds(15, 140, 1000, 170);
@@ -112,6 +116,16 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 		painel.add(jlbDataValor);
 		
 		//--------------------------------------------------------
+		
+		//situacao
+		jlbSituacao.setBounds(450, 100, 200, 25);
+		painel.add(jlbSituacao);
+		
+		jlbSituacaoValor.setBounds(580, 100, 500, 25);
+		jlbSituacaoValor.setText(pedido.getDsSituacao());
+	    Font FONTE_NORMAL = new Font( "Verdana", Font.BOLD, 18 );  
+		jlbSituacaoValor.setFont(FONTE_NORMAL);
+		painel.add(jlbSituacaoValor);
 		
 		//botoes
 		jbtIniciar.setBounds(15, 335, 200, 25);
@@ -172,9 +186,6 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 			pedidoAberto.setResponsavel(TelaInicial.get().getUsuario());
 			if(DaoFactory.get().getPedidoDAO().efetuarTrabalho(pedidoAberto)){
 				JOptionPane.showMessageDialog(this, "Alterações Salvas com Sucesso");
-				
-				
-				
 			}
 			else {
 				JOptionPane.showMessageDialog(this, "Ocorreu algum problema com o salvamento no Banco de Dados");
@@ -201,9 +212,6 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 				JOptionPane.showMessageDialog(this, "OS Finalizada com Sucesso");
 				TelaInicial.get().mostraPainel(TelaInicial.get().getToolbar().getListaOSFinalizadas().getPainel());
 			}
-			
 		}
-		
 	}
-
 }

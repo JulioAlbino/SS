@@ -11,7 +11,8 @@ public class TelaInicio extends TelaGenerica {
 	
 	private JLabel TituloLista = new JLabel("Em aberto"),
 	TituloLista1 = new JLabel("Em andamento"), 
-	TituloLista2 = new JLabel("Ja Finalizadas");
+	TituloLista2 = new JLabel("Ja Finalizadas"),
+			TituloLista3 = new JLabel("Aguardando Confirmação de Finalizacao");
 
 	private static final long serialVersionUID = 5L;
 
@@ -29,19 +30,26 @@ public class TelaInicio extends TelaGenerica {
 		painel.add(TituloLista1);
 		TituloLista2.setBounds(950, 60, 400,30);
 		painel.add(TituloLista2);
+		
+		TituloLista3.setBounds(450, 285, 500, 30);
+		painel.add(TituloLista3);
 		mostraListas();
 		
 	}
 	
 	public void mostraListas(){
-		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAbertos(), 10, 90, 441,200, "aberto");
+		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAbertos(), 10, 90, 441,200);
 		painel.add(aberto.getLista());
 		
-		ListaPedidos aberto2 = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAndamento(), 455, 90, 441,200, "andamento");
+		ListaPedidos aberto2 = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAndamento(), 455, 90, 441,200);
 		painel.add(aberto2.getLista());
 		
-		ListaPedidos aberto3 = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosFinalizados(), 900, 90, 441,200, "fechado");
+		ListaPedidos aberto3 = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosFinalizados(), 900, 90, 441,200);
 		painel.add(aberto3.getLista());
+		
+		ListaPedidos aberto4 = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAguardando(), 455, 310, 441,200);
+		painel.add(aberto4.getLista());
+		
 	}
 
 	@Override

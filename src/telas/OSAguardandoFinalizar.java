@@ -15,7 +15,7 @@ public class OSAguardandoFinalizar extends TelaGenericaListas {
 	public OSAguardandoFinalizar() {
 
 		painel.setBorder(BorderFactory.createTitledBorder("OS's aguardando finalizar"));
-		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAguardando(), 20, 90, 1300,500, "aberto");
+		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAguardando(), 20, 90, 1300,500);
 		painel.add(aberto.getLista());
 
 }
