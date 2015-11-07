@@ -2,13 +2,15 @@ package telas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class ToolBar implements ActionListener{
 
-	private TelaInicio telaInicio = new TelaInicio();
+	private TelaInicio telaInicio;
 	private NovaOS telaNovaOS;
 	private ListaOSAbertas abertas;
 	private ListaOSExecucao exec;
@@ -22,7 +24,7 @@ public class ToolBar implements ActionListener{
 	//itens da toolbar
 	private JMenuItem botaoLOSA[] = new JMenuItem[5],
 			botaoADM[] = new JMenuItem[5], 
-			botaoInicio, botaoSair;
+			botaoInicio, botaoSair, botaoDeslogar;
 	private JMenuBar barra = new JMenuBar();
 	private JMenu iconeOS = new JMenu("Ordens de Servico");
 	private JMenu iconeInicio = new JMenu("Inicio");
@@ -75,9 +77,15 @@ public class ToolBar implements ActionListener{
 		botaoADM[4].addActionListener(this);
 		iconeADM.add(botaoADM[4]);
 		
+		
+		
 		botaoSair = new JMenuItem("Sair");
-		botaoSair.addActionListener(this);;
+		botaoSair.addActionListener(this);
 		iconeSair.add(botaoSair);
+		
+		botaoDeslogar = new JMenuItem("Deslogar");
+		botaoDeslogar.addActionListener(this);
+		iconeSair.add(botaoDeslogar);
 		
 		
 		//adiciona os itens a barra
@@ -97,11 +105,7 @@ public class ToolBar implements ActionListener{
 		
 		if (botao.equals(botaoInicio)){
 			 
-			if (telaInicio == null){
-			telaInicio.dispose();
-			}
-			telaInicio = new TelaInicio();
-			TelaInicial.get().mostraPainel(telaInicio.getPainel());
+			TelaInicial.get().mostraPainel(getTelaInicio().getPainel());
 		}
 		else if (botao.equals(botaoLOSA[0])){
 			if (telaNovaOS != null){
@@ -125,11 +129,8 @@ public class ToolBar implements ActionListener{
 			TelaInicial.get().mostraPainel(exec.getPainel());
 		}
 		else if (botao.equals(botaoLOSA[3])){
-			if (finalizadas != null){
-				finalizadas.dispose();
-			}
-			finalizadas = new ListaOSFinalizadas();
-			TelaInicial.get().mostraPainel(finalizadas.getPainel());
+			
+			TelaInicial.get().mostraPainel(getListaOSFinalizadas().getPainel());
 		}
 		else if (botao.equals(botaoLOSA[4])){
 			if (aguardando != null){
@@ -167,18 +168,28 @@ public class ToolBar implements ActionListener{
 			TelaInicial.get().mostraPainel(telaNovoUsuario.getPainel());
 		}
 		else if (botao.equals(botaoADM[4])){
-			if (telaAlterarUsuario != null){
-				telaAlterarUsuario.dispose();
-			}
-			telaAlterarUsuario = new AlterarUsuario();
-			TelaInicial.get().mostraPainel(telaAlterarUsuario.getPainel());
+			TelaInicial.get().mostraPainel(getAlterarUsuario().getPainel());
+		}
+		else if (botao.equals(botaoDeslogar)){
+			TelaInicial.get().deslogar();
 		}
 		else if (botao.equals(botaoSair)){
 			TelaInicial.get().dispose();
 		}
 	}
 	
+	public ListaOSFinalizadas getListaOSFinalizadas(){
+		if (finalizadas != null){
+			finalizadas.dispose();
+		}
+		return finalizadas = new ListaOSFinalizadas();
+	}
+	
 	public TelaInicio getTelaInicio(){
+		if (telaInicio != null){
+			telaInicio.dispose();
+			}
+			telaInicio = new TelaInicio();
 		return telaInicio;
 	}
 	

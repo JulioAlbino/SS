@@ -11,6 +11,29 @@ public class Pedido {
 	private Usuario usuario;
 	private Local local;
 	private Setor setor;
+	private String resolucao;
+	
+	private LocalDate dataModificacao;
+	private Usuario responsavel;
+	
+	public LocalDate getData() {
+		return data;
+	}
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+	public LocalDate getDataModificacao() {
+		return dataModificacao;
+	}
+	public void setDataModificacao(LocalDate dataModificacao) {
+		this.dataModificacao = dataModificacao;
+	}
+	public Usuario getResponsavel() {
+		return responsavel;
+	}
+	public void setResponsavel(Usuario responsavel) {
+		this.responsavel = responsavel;
+	}
 	public Pedido(){
 		this.situacao = 0;
 	}
@@ -67,5 +90,11 @@ public class Pedido {
 	}
 	public void setSetor(Setor setor) {
 		this.setor = setor;
+	}
+	public String getResolucao() {
+		return resolucao;
+	}
+	public void setResolucao(String resolucao) {
+		this.resolucao = resolucao;
 	}
 }

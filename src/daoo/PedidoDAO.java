@@ -5,10 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import conexao.ConexaoUtil;
 import dao.factory.DaoFactory;
 import model.Local;
@@ -20,22 +20,24 @@ public class PedidoDAO implements GenericDAO<Pedido>{
 
 private Connection con;
 
-	
 	public PedidoDAO(){
 		con = ConexaoUtil.getCon();
 	}
 	
 	@Override
 	public Boolean inserir(Pedido entidade) {
-		String sql = "insert into pedido (datahora, descricao, situacao, usuario_idusuario, local_idlocal, setor_idsetor) values(?, ?, ?, ? ,? ,?)";
+		String sql = "insert into pedido (datahora, descricao, situacao, usuario_idusuario, local_idlocal, setor_idsetor, dataultimamod, responsavel, realizacoes) values(?, ?, ?, ? ,? ,?, ?, ?,?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setDate(1, Date.valueOf(entidade.getDatahora()));
+			pstmt.setDate(1, Date.valueOf(entidade.getData()));
 			pstmt.setString(2, entidade.getDescricao());
 			pstmt.setInt(3, entidade.getSituacao());
 			pstmt.setInt(4, entidade.getUsuario().getIdusuario());
 			pstmt.setInt(5, entidade.getLocal().getId());
 			pstmt.setInt(6, entidade.getSetor().getIdsetor());
+			pstmt.setDate(7, Date.valueOf(entidade.getData()));
+			pstmt.setInt(8, entidade.getUsuario().getIdusuario());
+			pstmt.setString(9, entidade.getResolucao());
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -64,6 +66,25 @@ private Connection con;
 			return false;
 		}	
 	}
+	
+	public Boolean efetuarTrabalho(Pedido pedido){
+		String sql = "update pedido set dataultimamod=? , responsavel=? , realizacoes=?, situacao=?  where idpedido=?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setDate(1, Date.valueOf(pedido.getDataModificacao()));
+			pstmt.setInt(2, pedido.getResponsavel().getIdusuario());
+			pstmt.setString(3, pedido.getResolucao());
+			pstmt.setInt(4, pedido.getSituacao());
+			pstmt.setInt(5, pedido.getIdpedido());
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException e){
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
 
 	@Override
 	public Boolean excluir(Pedido entidade) {
@@ -101,6 +122,12 @@ private Connection con;
 				pedido.setLocal(local);
 				Setor setor = DaoFactory.get().getSetorDAO().buscar(rs.getInt("setor_idsetor"));
 				pedido.setSetor(setor);
+				Usuario responsavel = DaoFactory.get().getUsuarioDAO().buscar(rs.getInt("responsavel"));
+				pedido.setResponsavel(responsavel);
+				
+				pedido.setDataModificacao(rs.getDate("dataultimamod").toLocalDate());
+				
+				pedido.setResolucao(rs.getString("realizacoes"));
 				
 			}
 		} catch (SQLException e) {
@@ -129,6 +156,12 @@ private Connection con;
 				pedido.setLocal(local);
 				Setor setor = DaoFactory.get().getSetorDAO().buscar(rs.getInt("setor_idsetor"));
 				pedido.setSetor(setor);
+				Usuario responsavel = DaoFactory.get().getUsuarioDAO().buscar(rs.getInt("responsavel"));
+				pedido.setResponsavel(responsavel);
+				
+				LocalDate datamod = rs.getDate("dataultimamod").toLocalDate();
+				pedido.setDataModificacao(datamod);
+				pedido.setResolucao(rs.getString("realizacoes"));
 				pedidos.add(pedido);
 			}
 		} catch (SQLException e) {

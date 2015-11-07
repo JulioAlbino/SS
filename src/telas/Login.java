@@ -72,6 +72,7 @@ public class Login extends JFrame implements ActionListener{
 		
 		if (userx != null){
 			TelaInicial.get().logar(userx);
+			this.dispose();
 		}
 		else {
 			erro.setText("Usuario e ou senha nao conferem..");

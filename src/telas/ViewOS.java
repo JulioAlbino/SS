@@ -4,10 +4,14 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.util.List;
+
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+
 import dao.factory.DaoFactory;
 import model.Local;
 import model.Pedido;
@@ -17,7 +21,9 @@ import telasGenericas.TelaGenerica;
 public class ViewOS extends TelaGenerica {
 	
 	private static final long serialVersionUID = 1983L;
-private JLabel jlbDescricao = new JLabel("Defeito apresentado:");
+	
+	private Pedido pedidoAberto;
+private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 	
 	private JLabel jlbSetor = new JLabel("Setor: ");
 	private List<Setor> setores = DaoFactory.get().getSetorDAO().todos();
@@ -31,19 +37,30 @@ private JLabel jlbDescricao = new JLabel("Defeito apresentado:");
 	private JLabel jlbDataValor;
 	private JLabel jlbData = new JLabel("Data:");
 	
-	private JLabel resultado = new JLabel();
-	
 	//---------
 	
-	private JLabel jlbEfetuar = new JLabel("");
+	private JButton jbtIniciar = new JButton("Iniciar Resolução");
+	private JButton jbtDeletar = new JButton("Deletar OS");
+	private JButton jbtFinalizar = new JButton("Setar como Finalizado");
+	private JButton jbtAlterar = new JButton("Alterar OS");
+	
+	
+	private JLabel jlbEfetuar = new JLabel("Serviço Efetuado");
 	private JTextArea jtxaEfetuar = new JTextArea();
-
+	private JButton jbtEfetuar = new JButton("Salvar Informações de Serviço atualmente Realizado");
+	private JButton jbtEnviarAutorizador = new JButton("Finalizar serviço");
+	
+	private JLabel jlbDataModificacao = new JLabel("Data da Ultima Modificação:");
+	private JLabel jlbDataModificacaoValor = new JLabel();
+	private JLabel jlbUsuarioResponsavel = new JLabel("Usuario Responsavel:");
+	
+	private JLabel jlbUsuarioResponsavelValor = new JLabel();
+	
 	public ViewOS(Pedido pedido){
+		this.pedidoAberto = pedido;
 		painel.setBorder(BorderFactory.createTitledBorder("Ordem de Serviço codigo: " + pedido.getIdpedido()));
 		
-		resultado.setBounds(15, 330, 450,25);
-		painel.add(resultado);
-		
+		//Setor
 		jlbSetor.setBounds(15, 50, 110, 25);
 		painel.add(jlbSetor);
 
@@ -56,19 +73,20 @@ private JLabel jlbDescricao = new JLabel("Defeito apresentado:");
 			}
 		});
 		comboboxSetor.setBounds(70, 50, 150, 25);
-		
+		comboboxSetor.setEnabled(false);
 		painel.add(comboboxSetor);
 		
-		
+		//Descricao
 		jlbDescricao.setBounds(15, 100, 200, 25);
 		painel.add(jlbDescricao);
 		
-		jtxaDescricao.setBounds(15, 140, 650, 170);
+		jtxaDescricao.setBounds(15, 140, 1000, 170);
 		jtxaDescricao.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		jtxaDescricao.setEditable(false);
 		jtxaDescricao.setText(pedido.getDescricao());
+		jtxaDescricao.setEditable(false);
 		painel.add(jtxaDescricao);
 
+		//Local
 		jlbLocal.setBounds(330, 50, 200, 25);
 		painel.add(jlbLocal);
 		locais.forEach((Local l) -> {
@@ -81,8 +99,10 @@ private JLabel jlbDescricao = new JLabel("Defeito apresentado:");
 			}
 		});
 		comboboxLocal.setBounds(380,50,200,25);
+		comboboxLocal.setEnabled(false);
 		painel.add(comboboxLocal);
 
+		//Data
 		jlbData.setBounds(20,10,200,25);
 		painel.add(jlbData);
 		
@@ -93,15 +113,96 @@ private JLabel jlbDescricao = new JLabel("Defeito apresentado:");
 		
 		//--------------------------------------------------------
 		
+		//botoes
+		jbtIniciar.setBounds(15, 335, 200, 25);
+		jbtIniciar.addActionListener(this);
+		painel.add(jbtIniciar);
+		
+		jbtDeletar.setBounds(230, 335, 200, 25);
+		jbtDeletar.addActionListener(this);
+		painel.add(jbtDeletar);
+		
+		jbtFinalizar.setBounds(445, 335, 200, 25);
+		jbtFinalizar.addActionListener(this);
+		painel.add(jbtFinalizar);
+		
+		jbtAlterar.setBounds(660, 335, 200, 25);
+		jbtAlterar.addActionListener(this);
+		painel.add(jbtAlterar);
+		
+		jlbEfetuar.setBounds(15, 400, 200, 25);
+		painel.add(jlbEfetuar);
+		
+		//dados
+		//dataMod
+		jlbDataModificacao.setBounds(15, 425, 300, 25);
+		painel.add(jlbDataModificacao);
+		jlbDataModificacaoValor.setBounds(230, 425, 200,25);
+		jlbDataModificacaoValor.setText(pedido.getDataModificacao().toString());
+		painel.add(jlbDataModificacaoValor);
+		
+		//usuarioResponsavel
+		jlbUsuarioResponsavel.setBounds(430, 425, 200,25);
+		painel.add(jlbUsuarioResponsavel);
+		jlbUsuarioResponsavelValor.setBounds(600, 425, 200, 25);
+		jlbUsuarioResponsavelValor.setText(pedidoAberto.getResponsavel().getNome());
+		painel.add(jlbUsuarioResponsavelValor);
 		
 		
+		jtxaEfetuar.setBounds(15, 450, 1000, 170);
+		jtxaEfetuar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		jtxaEfetuar.setText(pedido.getResolucao());
+		painel.add(jtxaEfetuar);
 		
+		jbtEfetuar.setBounds(15,650, 450, 25);
+		jbtEfetuar.addActionListener(this);
+		painel.add(jbtEfetuar);
 		
+		jbtEnviarAutorizador.setBounds(500, 650, 300, 25);
+		painel.add(jbtEnviarAutorizador);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		Object botao = e.getSource();
+		
+		if (botao == jbtEfetuar){
+			pedidoAberto.setDataModificacao(LocalDate.now());
+			pedidoAberto.setResolucao(jtxaEfetuar.getText());
+			pedidoAberto.setResponsavel(TelaInicial.get().getUsuario());
+			if(DaoFactory.get().getPedidoDAO().efetuarTrabalho(pedidoAberto)){
+				JOptionPane.showMessageDialog(this, "Alterações Salvas com Sucesso");
+				
+				
+				
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "Ocorreu algum problema com o salvamento no Banco de Dados");
+			}
+		}
+		
+		else if (botao == jbtIniciar){
+			pedidoAberto.setSituacao(2);
+			pedidoAberto.setResponsavel(TelaInicial.get().getUsuario());
+			if (DaoFactory.get().getPedidoDAO().efetuarTrabalho(pedidoAberto)){
+				JOptionPane.showMessageDialog(this, "Você assumiu essa OS, status modificado para Em Andamento");
+			}
+		}
+		
+		else if (botao == jbtDeletar){
+			if(DaoFactory.get().getPedidoDAO().excluir(pedidoAberto)){
+				JOptionPane.showMessageDialog(this, "OS removida com Sucesso");
+				TelaInicial.get().mostraPainel(TelaInicial.get().getToolbar().getTelaInicio().getPainel());
+			}
+		}
+		else if (botao == jbtFinalizar){
+			pedidoAberto.setSituacao(4);
+			if (DaoFactory.get().getPedidoDAO().alterar(pedidoAberto)){
+				JOptionPane.showMessageDialog(this, "OS Finalizada com Sucesso");
+				TelaInicial.get().mostraPainel(TelaInicial.get().getToolbar().getListaOSFinalizadas().getPainel());
+			}
+			
+		}
 		
 	}
 

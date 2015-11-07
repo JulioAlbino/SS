@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import telasGenericas.TelaGenerica;
@@ -66,8 +67,6 @@ public class NovoUsuario extends TelaGenerica {
 	combobox.setBounds(75, 140, 200, 28);
 	painel.add(combobox);
 	
-	
-	
 	add = new JButton("Adicionar");
 	add.setBounds(15,200,200,25);
 	add.addActionListener(this);
@@ -80,18 +79,21 @@ public class NovoUsuario extends TelaGenerica {
 		if (e.getSource() == add){
 			Usuario newUser = new Usuario();
 			newUser.setNome(nome.getText());
-			newUser.setLogin(textUssuario.getText());
+			newUser.setLogin(Ussuario.getText());
 			newUser.setSenha(senha.getText());
 			
 			Cargo cargo = (Cargo) combobox.getSelectedItem();
 			newUser.setCargo(cargo);
 			
 			if(DaoFactory.get().getUsuarioDAO().inserir(newUser)){
-				System.out.println("Inserido com Sucesso");
+				JOptionPane.showMessageDialog(this, "Usuario Criado com Sucesso");
 			}
 			else {
-				System.out.println("Nao foi");
+				System.out.println("Problemas ao Salvar o Usuario verificar banco de Dados");
 			}
+			nome.setText(" ");
+			Ussuario.setText("");
+			senha.setText("");
 		}
 	}//final do actionPerformed	
 	}//final da classe

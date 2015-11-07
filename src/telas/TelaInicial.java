@@ -2,14 +2,17 @@ package telas;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import telas.ToolBar;
 import model.Usuario;
 
 public class TelaInicial extends JFrame {
 
-	private static final long serialVersionUID = 4L;
+	private static final long serialVersionUID = 412312L;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private static TelaInicial telainicial;
 	private Usuario usuario;
@@ -53,6 +56,18 @@ public void logar(Usuario usuarioLogado){
 	TelaInicial.get().setJMenuBar(toolbar.getBarra());
 	mostraPainel(toolbar.getTelaInicio().getPainel());
 }//final do metodo logar
+
+public void deslogar(){
+    Object[] options = { "Sim", "Voltar ao Programa" };  
+    Integer resposta = JOptionPane.showOptionDialog(null, "Tem certeza que deseja deslogar?", "Deseja realmente Fazer Logoff?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);  
+	if (resposta.equals(0)){
+		this.usuario = null;
+		getContentPane().removeAll();
+		TelaInicial.get().setJMenuBar(null);
+		Login login = new Login();
+		TelaInicial.get().mostraPainel(login.getPainelLogin());
+	}
+}
 
 public Usuario getUsuario() {
 	return usuario;

@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+
 import telasGenericas.TelaGenerica;
 import dao.factory.DaoFactory;
 import model.Local;
@@ -34,14 +37,9 @@ public class NovaOS extends TelaGenerica{
 	
 	private JButton jbtCriar = new JButton("Abrir OS");
 	
-	private JLabel resultado = new JLabel();
-	
 	public NovaOS() {
 		
 		painel.setBorder(BorderFactory.createTitledBorder("Nova OS"));
-
-		resultado.setBounds(15, 330, 450,25);
-		painel.add(resultado);
 		
 		jlbSetor.setBounds(15, 50, 110, 25);
 		painel.add(jlbSetor);
@@ -78,7 +76,6 @@ public class NovaOS extends TelaGenerica{
 		jbtCriar.setBounds(15, 350, 200, 25);
 		jbtCriar.addActionListener(this);
 		painel.add(jbtCriar);
-		
 }
 
 	@Override
@@ -91,7 +88,7 @@ public class NovaOS extends TelaGenerica{
 			Pedido novaOS = new Pedido(date, jtxaDescricao.getText(), 1,  TelaInicial.get().getUsuario(), local, novoSetor);
 			
 			if(DaoFactory.get().getPedidoDAO().inserir(novaOS)){
-				resultado.setText("Nova ordem de servico criada com Sucesso!");
+				JOptionPane.showMessageDialog(this, "Nova Ordem de Servico criada com Sucesso");
 				jtxaDescricao.setText("");
 				
 				

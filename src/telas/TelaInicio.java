@@ -1,35 +1,34 @@
 package telas;
 
 import java.awt.event.ActionEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-
 import recursosParaTelas.ListaPedidos;
 import telasGenericas.TelaGenerica;
 import dao.factory.DaoFactory;
 
 public class TelaInicio extends TelaGenerica {
 	
-	private JLabel TituloLista, TituloLista1, TituloLista2;
+	private JLabel TituloLista = new JLabel("Em aberto"),
+	TituloLista1 = new JLabel("Em andamento"), 
+	TituloLista2 = new JLabel("Ja Finalizadas");
 
 	private static final long serialVersionUID = 5L;
 
 	public TelaInicio() {
 		painel.setBorder(BorderFactory.createTitledBorder("TelaInicio"));
 		
-		TituloLista = new JLabel("Em aberto");
+		
+		
+		
+		
+		
 		TituloLista.setBounds(50, 60, 400, 30);
-		
-		TituloLista1 = new JLabel("Em andamento");
-		TituloLista1.setBounds(450, 60, 500, 30);
-		
-		TituloLista2 = new JLabel("Ja terminadas");
-		TituloLista2.setBounds(950, 60, 400,30);
-		
-		painel.add(TituloLista2);
-		painel.add(TituloLista1);
 		painel.add(TituloLista);
+		TituloLista1.setBounds(450, 60, 500, 30);
+		painel.add(TituloLista1);
+		TituloLista2.setBounds(950, 60, 400,30);
+		painel.add(TituloLista2);
 		mostraListas();
 		
 	}
