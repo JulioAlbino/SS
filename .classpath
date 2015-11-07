@@ -85,5 +85,6 @@
 	<classpathentry kind="lib" path="lib/org.w3c.dom.smil_1.0.0.v200806040011.jar"/>
 	<classpathentry kind="lib" path="lib/org.w3c.dom.svg_1.1.0.v201011041433.jar"/>
 	<classpathentry kind="lib" path="lib/Tidy.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
