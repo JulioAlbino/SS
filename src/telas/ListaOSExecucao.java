@@ -17,7 +17,7 @@ public class ListaOSExecucao extends TelaGenericaListas{
 	public ListaOSExecucao() {
 
 		painel.setBorder(BorderFactory.createTitledBorder("Lista de OS em Execucao"));
-		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todos(), 20, 90, 1300,500, "andamento");
+		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAndamento(), 20, 90, 1300,500, "andamento");
 		painel.add(aberto.getLista());
 
 }

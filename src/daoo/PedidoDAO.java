@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import conexao.ConexaoUtil;
@@ -18,6 +19,7 @@ import model.Usuario;
 public class PedidoDAO implements GenericDAO<Pedido>{
 
 private Connection con;
+
 	
 	public PedidoDAO(){
 		con = ConexaoUtil.getCon();
@@ -134,5 +136,43 @@ private Connection con;
 		}
 		return pedidos;
 	}
+	
+	
+	//filtra as listas
+	private static final Integer abertas = 1;
+	private static final Integer andamento = 2;
+	private static final Integer aguardando = 3;
+	private static final Integer finalizadas = 4;
+	
+	public List<Pedido> filtraSituacao(Integer situacao){
+		List<Pedido> pedidosIT = todos();
+		Iterator<Pedido> iterator = pedidosIT.iterator();
+		
+		while(iterator.hasNext()){
+			Pedido p = iterator.next();
+			if (!p.getSituacao().equals(situacao)){
+				iterator.remove();
+			}
+		}
+		return pedidosIT;
+	}
+	
+	public List<Pedido> todosAbertos(){
+		return filtraSituacao(abertas);
+	}
+	
+	public List<Pedido> todosAndamento(){
+		return filtraSituacao(andamento);
+	}
+	
+	public List<Pedido> todosAguardando(){
+		return filtraSituacao(aguardando);
+	}
+	
+	public List<Pedido> todosFinalizados(){
+		return filtraSituacao(finalizadas);
+	}
+	
+	
 
 }

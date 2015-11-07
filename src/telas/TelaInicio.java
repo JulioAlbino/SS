@@ -35,13 +35,13 @@ public class TelaInicio extends TelaGenerica {
 	}
 	
 	public void mostraListas(){
-		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todos(), 10, 90, 441,200, "aberto");
+		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAbertos(), 10, 90, 441,200, "aberto");
 		painel.add(aberto.getLista());
 		
-		ListaPedidos aberto2 = new ListaPedidos(DaoFactory.get().getPedidoDAO().todos(), 455, 90, 441,200, "andamento");
+		ListaPedidos aberto2 = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAndamento(), 455, 90, 441,200, "andamento");
 		painel.add(aberto2.getLista());
 		
-		ListaPedidos aberto3 = new ListaPedidos(DaoFactory.get().getPedidoDAO().todos(), 900, 90, 441,200, "fechado");
+		ListaPedidos aberto3 = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosFinalizados(), 900, 90, 441,200, "fechado");
 		painel.add(aberto3.getLista());
 	}
 

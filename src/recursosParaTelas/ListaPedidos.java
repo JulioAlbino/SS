@@ -25,7 +25,9 @@ public class ListaPedidos extends ListaGenerica{
 					
 
 					
-			} 
+			}
+
+	
 		
 		
 		

@@ -83,7 +83,7 @@ public class NovoUsuario extends TelaGenerica {
 			newUser.setLogin(textUssuario.getText());
 			newUser.setSenha(senha.getText());
 			
-			Cargo cargo = cargos.get(combobox.getSelectedIndex());
+			Cargo cargo = (Cargo) combobox.getSelectedItem();
 			newUser.setCargo(cargo);
 			
 			if(DaoFactory.get().getUsuarioDAO().inserir(newUser)){

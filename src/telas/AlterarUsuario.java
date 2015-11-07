@@ -37,7 +37,7 @@ public class AlterarUsuario extends TelaGenerica implements KeyListener{
 	private JTextField jtxSenha = new JTextField();
 	
 	private JLabel jlbCodigo = new JLabel("Codigo do Usuário:");
-	private JLabel jlbCodigo2 = new JLabel("XX");
+	private JLabel jlbCodigo2 = new JLabel(" ");
 	
 	private JComboBox<Cargo> combobox = new JComboBox<Cargo>();
 	private JLabel jlbCombobox = new JLabel("Cargo");
@@ -75,16 +75,19 @@ jtxBusca.addKeyListener(this);
 	painel.add(jlbUsuario);
 	
 	jtxUsuario.setBounds(posJTX,140,200,25);
+	jtxUsuario.setEnabled(false);
 	painel.add(jtxUsuario);
 	
 	jlbNome.setBounds(posJLB,170,160,25);
 	painel.add(jlbNome);
 	jtxNome.setBounds(posJTX, 170,200, 25);
+	jtxNome.setEnabled(false);
 	painel.add(jtxNome);
 	
 	jlbSenha.setBounds(posJLB,200,160,25);
 	painel.add(jlbSenha);
 	jtxSenha.setBounds(posJTX, 200,200, 25);
+	jtxSenha.setEnabled(false);
 	painel.add(jtxSenha);
 	
 	
@@ -93,7 +96,9 @@ jtxBusca.addKeyListener(this);
 	});
 	
 	combobox.setBounds(posJTX, 230, 200, 25);
+	combobox.setEnabled(false);
 	painel.add(combobox);
+	
 	jlbCombobox.setBounds(posJLB, 230, 200,25);
 	painel.add(jlbCombobox);
 	
@@ -118,9 +123,17 @@ jtxBusca.addKeyListener(this);
 	public void setaUsuarioSelecionado(Usuario user){
 		this.usuarioSelecionado = user;
 		jlbCodigo2.setText(user.getIdusuario().toString());
+		
+		jtxUsuario.setEnabled(true);
 		jtxUsuario.setText(user.getLogin());
+		
+		jtxNome.setEnabled(true);
 		jtxNome.setText(user.getNome());
+		
+		jtxSenha.setEnabled(true);
 		jtxSenha.setText(user.getSenha());
+		
+		combobox.setEnabled(true);
 		combobox.setSelectedIndex(user.getCargo().getIdcargo()-1);
 		
 	}
@@ -130,10 +143,8 @@ jtxBusca.addKeyListener(this);
 		usuarioSelecionado.setNome(jtxNome.getText());
 		usuarioSelecionado.setSenha(jtxSenha.getText());
 		usuarioSelecionado.setLogin(jtxUsuario.getText());
-		usuarioSelecionado.setCargo(cargos.get(combobox.getSelectedIndex()));
-		
+		usuarioSelecionado.setCargo((Cargo)combobox.getSelectedItem());
 		return (DaoFactory.get().getUsuarioDAO().alterar(usuarioSelecionado));
-		
 	}
 	
 	

@@ -56,7 +56,7 @@ public class AdicionarNovoCargo extends TelaGenerica {
 if (e.getSource() == add){
 	Cargo cargo = new Cargo();
 	cargo.setNome(Cargo.getText());
-	Setor novoSetor = setores.get(combobox.getSelectedIndex());
+	Setor novoSetor = (Setor)combobox.getSelectedItem();
 	cargo.setSetor(novoSetor);
 	DaoFactory.get().getCargoDAO().inserir(cargo);
 	

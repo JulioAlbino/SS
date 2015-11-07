@@ -22,6 +22,7 @@ public abstract class TelaGenericaListas extends TelaGenerica {
 		
 		jbtSelecionar.setBounds(20, 600,200,30);
 		painel.add(jbtSelecionar);
+		
 	}
 	
 
