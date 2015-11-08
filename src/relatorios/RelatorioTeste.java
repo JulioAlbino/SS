@@ -18,7 +18,7 @@ public class RelatorioTeste {
 	 
 	    try {
 	        config = new EngineConfig();          
-	        config.setBIRTHome("/home/rafael/Downloads/birt-runtime-4_4_2/ReportEngine");
+	        config.setBIRTHome("src/relatorios/engine");
 	        config.setLogConfig("/home/rafael", Level.FINEST);
 	        Platform.startup(config);
 	        final IReportEngineFactory FACTORY = (IReportEngineFactory) Platform
@@ -27,11 +27,17 @@ public class RelatorioTeste {
 	 
 	        // Open the report design
 	        IReportRunnable design = null;
-	        design = engine.openReportDesign("/home/rafael/Downloads/birt-runtime-2_2_0/ReportEngine/samples/hello_world.rptdesign"); 
+	        
+	        String ReportDesign = "src/relatorios/teste.rptdesign"; 
+	        
+	        design = engine.openReportDesign(ReportDesign); 
 	        IRunAndRenderTask task = engine.createRunAndRenderTask(design);        
 	 
 	        PDFRenderOption PDF_OPTIONS = new PDFRenderOption();
-	        PDF_OPTIONS.setOutputFileName("/home/rafael/rel.pdf");
+	        
+	        String OutputFile = "/home/rafael/rel.pdf";
+	        
+	        PDF_OPTIONS.setOutputFileName(OutputFile);
 	        PDF_OPTIONS.setOutputFormat("pdf");
 	 
 	        task.setRenderOption(PDF_OPTIONS);
