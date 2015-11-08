@@ -308,5 +308,17 @@ usuario]]></xml-property>
             </list-property>
             <property name="resultSetColumn">nome</property>
         </data>
+        <data id="14">
+            <property name="dataSet">testeData Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">senha</property>
+                    <text-property name="displayName">senha</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["senha"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="resultSetColumn">senha</property>
+        </data>
     </body>
 </report>

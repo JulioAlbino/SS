@@ -48,9 +48,11 @@ public class RelatorioTeste {
 	        EX.printStackTrace();
 	    } finally {
 	       Platform.shutdown();
+	       System.out.println("Relatorio terminado");
 	    }
 	}
- public static void main(String[] args) {
+ 
+	/*public static void main(String[] args) {
   // TODO Auto-generated method stub
     try
     {
@@ -60,5 +62,5 @@ public class RelatorioTeste {
     {
      e.printStackTrace();
     }
- }
+ }*/
 }

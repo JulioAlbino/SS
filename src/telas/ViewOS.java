@@ -142,6 +142,7 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 		
 		jbtAlterar.setBounds(660, 335, 200, 25);
 		jbtAlterar.addActionListener(this);
+		jbtAlterar.setActionCommand("Alterar");
 		painel.add(jbtAlterar);
 		
 		jlbEfetuar.setBounds(15, 400, 200, 25);
@@ -180,7 +181,7 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 	public void actionPerformed(ActionEvent e) {
 		Object botao = e.getSource();
 		
-		if (botao == jbtEfetuar){
+		if (botao.equals(jbtEfetuar)){
 			pedidoAberto.setDataModificacao(LocalDate.now());
 			pedidoAberto.setResolucao(jtxaEfetuar.getText());
 			pedidoAberto.setResponsavel(TelaInicial.get().getUsuario());
@@ -192,7 +193,7 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 			}
 		}
 		
-		else if (botao == jbtIniciar){
+		else if (botao.equals(jbtIniciar)){
 			pedidoAberto.setSituacao(2);
 			pedidoAberto.setResponsavel(TelaInicial.get().getUsuario());
 			if (DaoFactory.get().getPedidoDAO().efetuarTrabalho(pedidoAberto)){
@@ -200,18 +201,46 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 			}
 		}
 		
-		else if (botao == jbtDeletar){
+		else if (botao.equals(jbtDeletar)){
 			if(DaoFactory.get().getPedidoDAO().excluir(pedidoAberto)){
 				JOptionPane.showMessageDialog(this, "OS removida com Sucesso");
 				TelaInicial.get().mostraPainel(TelaInicial.get().getToolbar().getTelaInicio().getPainel());
 			}
 		}
-		else if (botao == jbtFinalizar){
+		else if (botao.equals(jbtFinalizar)){
 			pedidoAberto.setSituacao(4);
 			if (DaoFactory.get().getPedidoDAO().alterar(pedidoAberto)){
 				JOptionPane.showMessageDialog(this, "OS Finalizada com Sucesso");
 				TelaInicial.get().mostraPainel(TelaInicial.get().getToolbar().getListaOSFinalizadas().getPainel());
 			}
+		}
+		
+		else if (e.getActionCommand().equals("Alterar")){
+				if(!comboboxSetor.isEnabled()){
+				comboboxSetor.setEnabled(true);
+				comboboxLocal.setEnabled(true);
+				jtxaDescricao.setEditable(true);
+				jbtAlterar.setText("Efetuar Alteração");
+				JOptionPane.showMessageDialog(this, "Alteracoes liberadas");
+				}
+				else {
+					jbtAlterar.setText("Alterar");
+					comboboxSetor.setEnabled(false);
+					comboboxLocal.setEnabled(false);
+					jtxaDescricao.setEditable(false);
+					
+					pedidoAberto.setSetor((Setor) comboboxSetor.getSelectedItem());
+					pedidoAberto.setLocal((Local) comboboxLocal.getSelectedItem());
+					pedidoAberto.setDescricao(jtxaDescricao.getText());
+					if (DaoFactory.get().getPedidoDAO().alterar(pedidoAberto)){
+						JOptionPane.showMessageDialog(this, "Alteracoes Salvas com Sucesso");
+					}else {
+						JOptionPane.showMessageDialog(this, "Erro, revise seu banco de dados");
+					}
+					
+				}
+			
+			
 		}
 	}
 }
