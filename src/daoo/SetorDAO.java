@@ -48,6 +48,7 @@ public class SetorDAO implements GenericDAO<Setor>{
 
 	@Override
 	public Boolean excluir(Setor entidade) {
+		
 		String sql = "delete from setor where idsetor = ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);

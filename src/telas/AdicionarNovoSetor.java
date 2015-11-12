@@ -1,12 +1,10 @@
 package telas;
 
 import java.awt.event.ActionEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import recursosParaTelas.ListaSetores;
 import telasGenericas.TelaGenerica;
 import dao.factory.DaoFactory;
@@ -88,21 +86,21 @@ public class AdicionarNovoSetor extends TelaGenerica{
 				atualizaLista();
 		}
 		else if (botao.equals(remover)){
-			
+			Setor opa = new Setor(jtxtSetorNome.getText(), Integer.valueOf(jlbSetorIdValor.getText()));
+			DaoFactory.get().getSetorDAO().excluir(opa);
 			atualizaLista();
 			}
 	}
 	
+	//metodos
 	public void setSetor(Setor setor){
 		jlbSetorIdValor.setText(setor.getIdsetor().toString());
 		jtxtSetorNome.setText(setor.getNome());
 	}
-	
 	public void atualizaLista(){
 		painel.remove(this.listaSetor.getLista());
 		this.listaSetor.setLista(DaoFactory.get().getSetorDAO().todos());
 		painel.add(this.listaSetor.getLista());
 		painel.updateUI();
 	}
-	
 }
