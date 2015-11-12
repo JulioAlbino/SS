@@ -48,21 +48,26 @@ public class AdicionarNovoSetor extends TelaGenerica{
 		painel.add(listaSetor.getLista());
 		
 		jlbSetorId.setBounds(500,300,200,25);
+		jlbSetorId.setVisible(false);
 		painel.add(jlbSetorId);
 		
 		jlbSetorIdValor.setBounds(600,300,200,25);
 		painel.add(jlbSetorIdValor);
 		
 		jlbSetorNome.setBounds(500, 330, 200, 25);
+		jlbSetorNome.setVisible(false);
 		painel.add(jlbSetorNome);
 		jtxtSetorNome.setBounds(600,330,400,25);
+		jtxtSetorNome.setVisible(false);
 		painel.add(jtxtSetorNome);
 		
 		alterar.setBounds(500, 360, 350, 25);
+		alterar.setVisible(false);
 		alterar.addActionListener(this);
 		painel.add(alterar);
 		
 		remover.setBounds(860, 360, 250, 25);
+		remover.setVisible(false);
 		remover.addActionListener(this);
 		painel.add(remover);		
 		
@@ -90,6 +95,15 @@ public class AdicionarNovoSetor extends TelaGenerica{
 			DaoFactory.get().getSetorDAO().excluir(opa);
 			atualizaLista();
 			}
+	}
+	
+	public void mostraValor(){
+		remover.setVisible(true);
+		alterar.setVisible(true);
+		jtxtSetorNome.setVisible(true);
+		jlbSetorNome.setVisible(true);
+		jlbSetorId.setVisible(true);
+		
 	}
 	
 	//metodos

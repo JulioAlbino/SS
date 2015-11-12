@@ -139,6 +139,11 @@ public class ToolBar implements ActionListener{
 		return this.novoSetor;
 	}
 	
+	public AdicionarNovoLocal getAdicionarNovoLocal(){
+		return this.novoLocal;
+	}
+	
+	
 	public AlterarUsuario getAlterarUsuario(){
 		return this.telaAlterarUsuario;
 	}	
