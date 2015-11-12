@@ -4,16 +4,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.Vector;
-
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import telas.TelaInicial;
-import telas.ViewOS;
-import model.Pedido;
 
 public abstract class ListaGenerica implements ListSelectionListener, MouseListener {
 	
@@ -59,15 +54,6 @@ public abstract class ListaGenerica implements ListSelectionListener, MouseListe
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getClickCount() >= 2){
-			
-			
-			Pedido p = (Pedido) lista.get(jltDados.getSelectedIndex());
-			ViewOS view = new ViewOS(p);
-			TelaInicial.get().mostraPainel(view.getPainel());
-		}
-		
-		
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {

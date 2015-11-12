@@ -29,15 +29,16 @@ public class SetorDAO implements GenericDAO<Setor>{
 			return false;
 		}
 	}
-
+	
 	@Override
 	public Boolean alterar(Setor entidade) {
-		String sql = "update setor set nome=? where idsetor = ?";
+		
+		String sql = "update setor set nome=? where idsetor=?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
-			pstmt.setInt(1, entidade.getIdsetor());
-			pstmt.executeUpdate();
+			pstmt.setInt(2, entidade.getIdsetor());
+			System.out.println(pstmt.executeUpdate());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -57,8 +58,6 @@ public class SetorDAO implements GenericDAO<Setor>{
 			e.printStackTrace();
 			return false;
 		}
-		
-		
 	}
 
 	@Override
