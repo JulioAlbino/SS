@@ -1,16 +1,18 @@
 package telas;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import recursosParaTelas.ListaLocais;
-import telasGenericas.TelaGenerica;
+import telasGenericas.TelaGenericaAdicionar;
 import dao.factory.DaoFactory;
 import model.Local;
 
-public class AdicionarNovoLocal extends TelaGenerica{
+public class AdicionarNovoLocal extends TelaGenericaAdicionar {
 	/**
 	 * 
 	 */
@@ -18,6 +20,8 @@ public class AdicionarNovoLocal extends TelaGenerica{
 	private JTextField Local;
 	private JLabel textlocal, textResultado;
 	private JButton add;
+	
+	private ListaLocais listaLocais ;
 
 	//----
 
@@ -43,34 +47,19 @@ public class AdicionarNovoLocal extends TelaGenerica{
 		textResultado.setBounds(15, 140, 800, 20);
 		painel.add(textResultado);
 		
-		//-------		
+		
+		//-----
+
 		listaLocais = new ListaLocais(DaoFactory.get().getLocalDAO().todos(), 500, 90, 600, 200);
 		painel.add(listaLocais.getLista());
-		
-		jlbID.setBounds(500,300,200,25);
-		painel.add(jlbID);
-		
-		jlbIDValor.setBounds(600,300,200,25);
-		painel.add(jlbIDValor);
-		
-		jlbNome.setBounds(500, 330, 200, 25);
-		painel.add(jlbNome);
-		
-		jtxtCampo.setBounds(600,330,400,25);
-		painel.add(jtxtCampo);
-		
-		
-		alterar.setBounds(500, 360, 350, 25);
-		alterar.addActionListener(this);
-		painel.add(alterar);
-		
-		remover.setBounds(860, 360, 250, 25);
-		remover.addActionListener(this);
-		painel.add(remover);
 		visualizarLista(false);
+	}
 
-}
-
+	public void setarValor(Local local){
+		visualizarLista(true);
+		jlbIDValor.setText(local.getId().toString());
+		jtxtCampo.setText(local.getNome());
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -82,8 +71,33 @@ public class AdicionarNovoLocal extends TelaGenerica{
 				Local.setText(" ");
 			}
 		}
+		else if (e.getSource().equals(alterar)){
+			
+		}
 		
 	}
+
+	@Override
+	public void efetuarAlteracao() {
+Local localx = new Local();
+localx.setId(Integer.valueOf(jlbIDValor.getText()));
+localx.setNome(jtxtCampo.getName());
+DaoFactory.get().getLocalDAO().alterar(localx);
+	}
+
+	@Override
+	public void removerSelecionado() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	
+
+
+
+	
 	
 	
 }

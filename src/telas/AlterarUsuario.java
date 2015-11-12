@@ -109,7 +109,6 @@ jtxBusca.addKeyListener(this);
 	jbtAlterar.addActionListener(this);
 	painel.add(jbtAlterar);
 	
-	
 }
 	
 	public void efetuaBusca(){

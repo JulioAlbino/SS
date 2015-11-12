@@ -33,5 +33,7 @@ public abstract class TelaGenerica extends JFrame implements ActionListener{
 	public JPanel getPainel(){
 		return painel;
 	}
+	
+
 
 }

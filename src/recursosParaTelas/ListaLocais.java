@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
 
-import model.Setor;
+import model.Local;
 import telas.TelaInicial;
 import telasGenericas.ListaGenerica;
 
-public class ListaLocais extends ListaGenerica implements FuncoesListas{
+public class ListaLocais extends ListaGenerica{
 
 	public ListaLocais(List<?> lista, int x, int y, int width, int height) {
 		super(lista, x, y, width, height);
@@ -18,9 +18,9 @@ public class ListaLocais extends ListaGenerica implements FuncoesListas{
 	@Override
 	public void valueChanged(ListSelectionEvent e){
 
+		Local local = (Local) jltDados.getSelectedValue();
 		
-		
-		TelaInicial.get().getToolbar().getAdicionarNovoCargo().mostraValor();
+		TelaInicial.get().getToolbar().getAdicionarNovoLocal().setarValor(local);
 	}
 	
 
