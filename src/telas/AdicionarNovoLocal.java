@@ -24,7 +24,7 @@ public class AdicionarNovoLocal extends TelaGenerica{
 
 	public AdicionarNovoLocal() {
 
-		painel.setBorder(BorderFactory.createTitledBorder("Adicionar Novo Local"));	
+		painel.setBorder(BorderFactory.createTitledBorder("Adicionar Novo Local"));	 
 		
 		textlocal = new JLabel("Local:");
 		textlocal.setBounds(15, 50, 150, 20);
