@@ -20,7 +20,6 @@ public class AdicionarNovoSetor extends TelaGenerica{
 	private JLabel textsetor;
 	private JButton add = new JButton("Adicionar");
 	private ListaSetores listaSetor;
-	private Setor setorSelecionado;
 	
 	// ----
 	
@@ -30,7 +29,7 @@ public class AdicionarNovoSetor extends TelaGenerica{
 	private JTextField jtxtSetorNome = new JTextField();
 	private JButton alterar = new JButton("Efetuar Alteração no Setor Selecionado");
 	private JButton remover = new JButton("Remover Setor Selecionado");
-
+	
 	public AdicionarNovoSetor() {
 
 		painel.setBorder(BorderFactory.createTitledBorder("Adicionar Novo Setor"));	
@@ -73,24 +72,28 @@ public class AdicionarNovoSetor extends TelaGenerica{
 		}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == add){
+		Object botao = e.getSource();
+		
+		if (botao.equals(add)){
 			Setor novoSetor = new Setor();
 			novoSetor.setNome(LocalSetor.getText());
 			if (DaoFactory.get().getSetorDAO().inserir(novoSetor)){
 				LocalSetor.setText(" ");
 				atualizaLista();
 			}
-		}else if (e.getSource().equals(alterar)){
-			DaoFactory.get().getSetorDAO().alterar(this.setorSelecionado);
+		}
+		else if (botao.equals(alterar)){
+				Setor opa = new Setor(jtxtSetorNome.getText(), Integer.valueOf(jlbSetorIdValor.getText()));
+				DaoFactory.get().getSetorDAO().alterar(opa);
 				atualizaLista();
-		}else if (e.getSource().equals(remover)){
-			DaoFactory.get().getSetorDAO().excluir(this.setorSelecionado);
+		}
+		else if (botao.equals(remover)){
+			
 			atualizaLista();
 			}
 	}
 	
 	public void setSetor(Setor setor){
-		this.setorSelecionado = setor;
 		jlbSetorIdValor.setText(setor.getIdsetor().toString());
 		jtxtSetorNome.setText(setor.getNome());
 	}

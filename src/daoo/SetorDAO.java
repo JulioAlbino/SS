@@ -37,8 +37,8 @@ public class SetorDAO implements GenericDAO<Setor>{
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
-			pstmt.setInt(2, entidade.getIdsetor());
-			System.out.println(pstmt.executeUpdate());
+			pstmt.setLong(2, entidade.getIdsetor());
+			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

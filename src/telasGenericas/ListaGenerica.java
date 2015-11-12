@@ -25,8 +25,6 @@ public abstract class ListaGenerica implements ListSelectionListener, MouseListe
 		this.height = height;
 		this.lista = lista;
 		
-		listaVector = new Vector<>(lista);
-		
 		setLista(lista);
 	}
 
@@ -57,21 +55,21 @@ public abstract class ListaGenerica implements ListSelectionListener, MouseListe
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 	}
 
 }
