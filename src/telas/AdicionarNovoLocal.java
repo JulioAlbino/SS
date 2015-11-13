@@ -63,16 +63,21 @@ public class AdicionarNovoLocal extends TelaGenericaAdicionar {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == add){
+		if (e.getSource().equals(add)){
 			Local local = new Local();
 			local.setNome(Local.getText());
 			if (DaoFactory.get().getLocalDAO().inserir(local)){
 				textResultado.setText("Local "+Local.getText()+ " Cadastrado com Sucesso.");
 				Local.setText(" ");
 			}
+			atualizaLista();
 		}
 		else if (e.getSource().equals(alterar)){
+			efetuarAlteracao();
 			
+		}
+		else if (e.getSource().equals(remover)){
+			removerSelecionado();
 		}
 		
 	}
@@ -81,14 +86,28 @@ public class AdicionarNovoLocal extends TelaGenericaAdicionar {
 	public void efetuarAlteracao() {
 Local localx = new Local();
 localx.setId(Integer.valueOf(jlbIDValor.getText()));
-localx.setNome(jtxtCampo.getName());
+localx.setNome(jtxtCampo.getText());
 DaoFactory.get().getLocalDAO().alterar(localx);
+atualizaLista();
+	
 	}
 
 	@Override
 	public void removerSelecionado() {
-		// TODO Auto-generated method stub
+		Local localx = new Local();
+		localx.setId(Integer.valueOf(jlbIDValor.getText()));
 		
+		
+		DaoFactory.get().getLocalDAO().excluir(localx);
+		atualizaLista();
+		
+	}
+	@Override
+	public void atualizaLista(){
+		painel.remove(this.listaLocais.getLista());
+		this.listaLocais.setLista(DaoFactory.get().getLocalDAO().todos());
+		painel.add(this.listaLocais.getLista());
+		painel.updateUI();
 	}
 
 

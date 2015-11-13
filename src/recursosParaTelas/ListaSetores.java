@@ -17,8 +17,8 @@ public class ListaSetores extends ListaGenerica{
 	@Override
 	public void valueChanged(ListSelectionEvent e){
 
-		TelaInicial.get().getToolbar().getAdicionarNovoCargo().setSetor((Setor)jltDados.getSelectedValue());
-		TelaInicial.get().getToolbar().getAdicionarNovoCargo().mostraValor();
+		TelaInicial.get().getToolbar().getAdicionarNovoSetor().setSetor((Setor)jltDados.getSelectedValue());
+		TelaInicial.get().getToolbar().getAdicionarNovoSetor().mostraValor();
 	}
 
 }

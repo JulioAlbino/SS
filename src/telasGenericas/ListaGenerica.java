@@ -40,9 +40,11 @@ public abstract class ListaGenerica implements ListSelectionListener, MouseListe
 		jspRolagem = null;
 		listaVector = new Vector<>(lista);
 		jltDados = new JList<>(listaVector);
+		
 		jltDados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jltDados.addListSelectionListener(this);
 		jltDados.addMouseListener(this);
+		
 		jspRolagem = new JScrollPane(jltDados);
 		jspRolagem.setBounds(this.x,this.y,this.width,this.height);
 		

@@ -9,19 +9,22 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import telasGenericas.TelaGenerica;
+import recursosParaTelas.ListaCargos;
+import telasGenericas.TelaGenericaAdicionar;
 import dao.factory.DaoFactory;
 import model.Setor;
 import model.Cargo;
-public class AdicionarNovoCargo extends TelaGenerica {
+public class AdicionarNovoCargo extends TelaGenericaAdicionar {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField Cargo;
 	private JLabel textCargo;
 	private JButton add;
 	private JButton del;
-	private JComboBox<Setor> combobox = new JComboBox<Setor>();
+	private JComboBox<Setor> combobox = new JComboBox<Setor>(),
+			combobox2 = new JComboBox<Setor>();
 	private List<Setor> setores = DaoFactory.get().getSetorDAO().todos();
+	private ListaCargos listaCargos;
 
 	public AdicionarNovoCargo() {
 		painel.setBorder(BorderFactory.createTitledBorder("Adicionar Novo Cargo"));	
@@ -49,6 +52,17 @@ public class AdicionarNovoCargo extends TelaGenerica {
 		del = new JButton("Excluir");
 		del.setBounds(220,110,200,25);
 		painel.add(del);
+		
+		//--------
+		
+		listaCargos = new ListaCargos(DaoFactory.get().getCargoDAO().todos(), 500, 90, 600, 200);
+		painel.add(listaCargos.getLista());
+		visualizarLista(false);
+		
+		
+		
+		
+		
 }
 
 	@Override
@@ -61,6 +75,63 @@ if (e.getSource() == add){
 	DaoFactory.get().getCargoDAO().inserir(cargo);
 	
 }
+else if (e.getSource().equals(alterar)){
+efetuarAlteracao();
+	atualizaLista();
+	
+}
+else if (e.getSource().equals(remover)){
+	
+}
+		
+	}
+	
+
+	public void setarValor(Cargo cargoS){
+		visualizarLista(true);
+		jlbIDValor.setText(cargoS.getIdcargo().toString());
+		jtxtCampo.setText(cargoS.getNome());
+		
+		painel.remove(combobox2);
+		painel.updateUI();
+		
+		
+		combobox2 = new JComboBox<Setor>();
+		combobox2.setBounds(700, 300, 250, 28);
+		setores = null;
+		setores = DaoFactory.get().getSetorDAO().todos();
+		setores.forEach((Setor setor) -> {
+			if (!setor.equals(cargoS.getSetor())){
+				combobox2.addItem(setor);	
+			}
+		});
+		combobox2.addItem(cargoS.getSetor());
+		combobox2.setSelectedItem(cargoS.getSetor());
+		
+		
+		painel.add(combobox2);
+		painel.updateUI();
+	}
+
+	@Override
+	public void efetuarAlteracao() {
+		Cargo cargox = new Cargo(Integer.valueOf(jlbIDValor.getText()), jtxtCampo.getText(), (Setor)combobox2.getSelectedItem() );
+		DaoFactory.get().getCargoDAO().alterar(cargox);
+		
+	}
+
+	@Override
+	public void removerSelecionado() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void atualizaLista() {
+		painel.remove(this.listaCargos.getLista());
+		this.listaCargos.setLista(DaoFactory.get().getCargoDAO().todos());
+		painel.add(this.listaCargos.getLista());
+		painel.updateUI();
 		
 	}
 }

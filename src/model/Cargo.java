@@ -6,6 +6,12 @@ public class Cargo {
 	private String nome;
 	private Setor setor;
 	
+	public Cargo(Integer idcargo, String nome, Setor setor) {
+		Idcargo = idcargo;
+		this.nome = nome;
+		this.setor = setor;
+	}
+
 	public Cargo(){
 		
 	}
@@ -30,7 +36,7 @@ public class Cargo {
 	}
 
 	public String toString() {  
-	    return getNome();  
+	    return nome;  
 	}  
 
 

@@ -34,11 +34,11 @@ public class LocalDao implements GenericDAO<Local>{
 
 	@Override
 	public Boolean alterar(Local entidade) {
-		String sql = "update local set nome=? where idlocal = ?";
+		String sql = "update local set nome = ? where idlocal = ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
-			pstmt.setInt(1, entidade.getId());
+			pstmt.setInt(2, entidade.getId());
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {

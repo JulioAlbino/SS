@@ -55,11 +55,16 @@ public abstract class TelaGenericaAdicionar extends TelaGenerica {
 		jtxtCampo.setVisible(b);
 		alterar.setVisible(b);
 		remover.setVisible(b);
+		
+		
+		
 	}
 	
 	public abstract void efetuarAlteracao();
 	
 	public abstract void removerSelecionado();
+	
+	public abstract void atualizaLista();
 	
 
 }

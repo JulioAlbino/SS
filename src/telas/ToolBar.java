@@ -135,12 +135,16 @@ public class ToolBar implements ActionListener{
 		this.telaInicio = new TelaInicio();
 		return this.telaInicio;
 	}
-	public AdicionarNovoSetor getAdicionarNovoCargo(){
+	public AdicionarNovoSetor getAdicionarNovoSetor(){
 		return this.novoSetor;
 	}
 	
 	public AdicionarNovoLocal getAdicionarNovoLocal(){
 		return this.novoLocal;
+	}
+	
+	public AdicionarNovoCargo getAdicionarNovoCargo(){
+		return this.novoCargo;
 	}
 	
 	
