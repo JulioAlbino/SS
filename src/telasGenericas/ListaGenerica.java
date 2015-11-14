@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.Vector;
+
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -49,6 +50,11 @@ public abstract class ListaGenerica implements ListSelectionListener, MouseListe
 		jspRolagem.setBounds(this.x,this.y,this.width,this.height);
 		
 	}
+	
+	public void LimparLista(){
+		listaVector.removeAllElements();
+	}
+	
 	@Override
 	public void valueChanged(ListSelectionEvent e){
 	}

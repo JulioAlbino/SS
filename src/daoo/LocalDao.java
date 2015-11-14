@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import conexao.ConexaoUtil;
 import model.Local;
 
@@ -17,9 +16,25 @@ public class LocalDao implements GenericDAO<Local>{
 		con = ConexaoUtil.getCon();
 	}
 	
+	public Boolean desativar(Local entidade){
+		
+		String sql = "update local set ativo = 0 where idlocal = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, entidade.getId());
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	
+	
 	@Override
 	public Boolean inserir(Local entidade) {
-		String sql = "insert into local (nome) values(?)";
+		String sql = "insert into local (nome,ativo) values(?,1)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
@@ -86,7 +101,7 @@ public class LocalDao implements GenericDAO<Local>{
 	@Override
 	public List<Local> todos() {
 		List<Local> locais = new ArrayList<>();
-		String sql = "select * from local";
+		String sql = "select * from local where ativo = 1";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();

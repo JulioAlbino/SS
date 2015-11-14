@@ -1,7 +1,6 @@
 package recursosParaTelas;
 
 import java.util.List;
-
 import javax.swing.event.ListSelectionEvent;
 import model.Setor;
 import telas.TelaInicial;
@@ -17,8 +16,11 @@ public class ListaSetores extends ListaGenerica{
 	@Override
 	public void valueChanged(ListSelectionEvent e){
 
-		TelaInicial.get().getToolbar().getAdicionarNovoSetor().setSetor((Setor)jltDados.getSelectedValue());
-		TelaInicial.get().getToolbar().getAdicionarNovoSetor().mostraValor();
+Setor setor = (Setor) jltDados.getSelectedValue();
+		
+		TelaInicial.get().getToolbar().getAdicionarNovoSetor().setarValor(setor);
+		
+		
 	}
 
 }

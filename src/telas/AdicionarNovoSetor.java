@@ -6,27 +6,18 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import recursosParaTelas.ListaSetores;
-import telasGenericas.TelaGenerica;
+import telasGenericas.TelaGenericaAdicionar;
 import dao.factory.DaoFactory;
 import model.Setor;
 
 
-public class AdicionarNovoSetor extends TelaGenerica{
+public class AdicionarNovoSetor extends TelaGenericaAdicionar{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1231312L;
 	private JTextField LocalSetor;
 	private JLabel textsetor;
 	private JButton add = new JButton("Adicionar");
 	private ListaSetores listaSetor;
-	
-	// ----
-	
-	private JLabel jlbSetorId = new JLabel("Setor ID: "),
-					jlbSetorIdValor = new JLabel();
-	private JLabel jlbSetorNome = new JLabel("Setor Nome: ");
-	private JTextField jtxtSetorNome = new JTextField();
-	private JButton alterar = new JButton("Efetuar Alteração no Setor Selecionado");
-	private JButton remover = new JButton("Remover Setor Selecionado");
 	
 	public AdicionarNovoSetor() {
 
@@ -47,31 +38,7 @@ public class AdicionarNovoSetor extends TelaGenerica{
 		listaSetor = new ListaSetores(DaoFactory.get().getSetorDAO().todos(), 500, 90, 600, 200);
 		painel.add(listaSetor.getLista());
 		
-		jlbSetorId.setBounds(500,300,200,25);
-		jlbSetorId.setVisible(false);
-		painel.add(jlbSetorId);
-		
-		jlbSetorIdValor.setBounds(600,300,200,25);
-		painel.add(jlbSetorIdValor);
-		
-		jlbSetorNome.setBounds(500, 330, 200, 25);
-		jlbSetorNome.setVisible(false);
-		painel.add(jlbSetorNome);
-		jtxtSetorNome.setBounds(600,330,400,25);
-		jtxtSetorNome.setVisible(false);
-		painel.add(jtxtSetorNome);
-		
-		alterar.setBounds(500, 360, 350, 25);
-		alterar.setVisible(false);
-		alterar.addActionListener(this);
-		painel.add(alterar);
-		
-		remover.setBounds(860, 360, 250, 25);
-		remover.setVisible(false);
-		remover.addActionListener(this);
-		painel.add(remover);		
-		
-		
+		visualizarLista(false);
 		}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -86,35 +53,43 @@ public class AdicionarNovoSetor extends TelaGenerica{
 			}
 		}
 		else if (botao.equals(alterar)){
-				Setor opa = new Setor(jtxtSetorNome.getText(), Integer.valueOf(jlbSetorIdValor.getText()));
-				DaoFactory.get().getSetorDAO().alterar(opa);
-				atualizaLista();
+			efetuarAlteracao();
+	
 		}
 		else if (botao.equals(remover)){
-			Setor opa = new Setor(jtxtSetorNome.getText(), Integer.valueOf(jlbSetorIdValor.getText()));
-			DaoFactory.get().getSetorDAO().excluir(opa);
-			atualizaLista();
+			removerSelecionado();
 			}
 	}
 	
-	public void mostraValor(){
-		remover.setVisible(true);
-		alterar.setVisible(true);
-		jtxtSetorNome.setVisible(true);
-		jlbSetorNome.setVisible(true);
-		jlbSetorId.setVisible(true);
-		
+
+	//metodos
+	public void setarValor(Setor setor){
+		visualizarLista(true);
+		jlbIDValor.setText(setor.getIdsetor().toString());
+		jtxtCampo.setText(setor.getNome());
 	}
 	
-	//metodos
-	public void setSetor(Setor setor){
-		jlbSetorIdValor.setText(setor.getIdsetor().toString());
-		jtxtSetorNome.setText(setor.getNome());
-	}
+	
 	public void atualizaLista(){
 		painel.remove(this.listaSetor.getLista());
 		this.listaSetor.setLista(DaoFactory.get().getSetorDAO().todos());
 		painel.add(this.listaSetor.getLista());
 		painel.updateUI();
+	}
+	@Override
+	public void efetuarAlteracao() {
+		Setor setor = new Setor();
+		setor.setIdsetor(Integer.valueOf(jlbIDValor.getText()));
+		setor.setNome(jtxtCampo.getText());
+		DaoFactory.get().getSetorDAO().alterar(setor);
+		atualizaLista();
+	}
+	@Override
+	public void removerSelecionado() {
+		Setor setor = new Setor(Integer.valueOf(jlbIDValor.getText()));
+		DaoFactory.get().getSetorDAO().desativar(setor);
+		atualizaLista();
+		visualizarLista(false);
+		
 	}
 }

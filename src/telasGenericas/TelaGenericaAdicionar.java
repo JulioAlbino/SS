@@ -9,10 +9,10 @@ public abstract class TelaGenericaAdicionar extends TelaGenerica {
 	private static final long serialVersionUID = 10L;
 	
 
-	protected JLabel jlbID = new JLabel("Local ID:");
+	protected JLabel jlbID = new JLabel("ID:");
 	protected JLabel jlbIDValor = new JLabel("X");
 	
-	protected JLabel jlbNome = new JLabel("Local Nome:");
+	protected JLabel jlbNome = new JLabel("Nome:");
 	
 	 protected JTextField jtxtCampo = new JTextField();
 	 
@@ -65,6 +65,8 @@ public abstract class TelaGenericaAdicionar extends TelaGenerica {
 	public abstract void removerSelecionado();
 	
 	public abstract void atualizaLista();
+	
+//	public abstract void setarValor();
 	
 
 }

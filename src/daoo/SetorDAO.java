@@ -9,6 +9,7 @@ import java.util.List;
 import conexao.ConexaoUtil;
 import model.Setor;
 
+
 public class SetorDAO implements GenericDAO<Setor>{
 	private Connection con;
 	
@@ -16,9 +17,24 @@ public class SetorDAO implements GenericDAO<Setor>{
 		con = ConexaoUtil.getCon();
 	}
 
+public Boolean desativar(Setor entidade){
+		
+		String sql = "update setor set ativo = 0 where idsetor = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, entidade.getIdsetor());
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	
 	@Override
 	public Boolean inserir(Setor entidade) {
-		String sql = "insert into setor (nome) values(?)";
+		String sql = "insert into setor (nome, ativo) values(?, 1)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
@@ -61,6 +77,29 @@ public class SetorDAO implements GenericDAO<Setor>{
 		}
 	}
 
+	public List<Setor> buscarSetor(String campo){
+		List<Setor> setores = new ArrayList<>();
+		String sql = "select * from setor where idsetor like ? or nome like ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+campo+"%");
+			pstmt.setString(2, "%"+campo+"%");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()){
+				Setor setor = new Setor(rs.getInt("idsetor"));
+				setores.add(setor);
+			}
+			
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		
+		return setores;
+		
+	}
+	
 	@Override
 	public Setor buscar(Integer id) {
 		Setor setor = null;
@@ -85,7 +124,7 @@ public class SetorDAO implements GenericDAO<Setor>{
 	@Override
 	public List<Setor> todos() {
 		List<Setor> setores = new ArrayList<>();
-		String sql = "select * from setor";
+		String sql = "select * from setor where ativo = 1";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();

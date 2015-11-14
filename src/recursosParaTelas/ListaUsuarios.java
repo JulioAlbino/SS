@@ -13,7 +13,9 @@ public class ListaUsuarios extends ListaGenerica{
 	}
 @Override
 	public void valueChanged(ListSelectionEvent e){
-	Usuario user = (Usuario) this.lista.get(this.jltDados.getSelectedIndex());
+	
+	Usuario user = (Usuario) jltDados.getSelectedValue();
+	
 		TelaInicial.get().getToolbar().getAlterarUsuario().setaUsuarioSelecionado(user);
 	}
 	

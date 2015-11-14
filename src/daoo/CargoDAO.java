@@ -21,7 +21,7 @@ public class CargoDAO implements GenericDAO<Cargo>{
 
 	@Override
 	public Boolean inserir(Cargo entidade) {
-		String sql = "insert into cargo (nome, setor_idsetor) values(?,?)";
+		String sql = "insert into cargo (nome, setor_idsetor, ativo) values(?,?,1)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
@@ -49,6 +49,20 @@ public class CargoDAO implements GenericDAO<Cargo>{
 			e.printStackTrace();
 			return false;
 		}		
+	}
+	
+	public Boolean desativar(Cargo entidade){
+		
+		String sql = "update cargo set ativo = 0 where idcargo = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, entidade.getIdcargo());
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
@@ -91,7 +105,7 @@ public class CargoDAO implements GenericDAO<Cargo>{
 	@Override
 	public List<Cargo> todos() {
 		List<Cargo> cargos = new ArrayList<>();
-		String sql = "select * from cargo";
+		String sql = "select * from cargo where ativo = 1";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();

@@ -7,6 +7,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import recursosParaTelas.ListaCargos;
@@ -20,7 +21,6 @@ public class AdicionarNovoCargo extends TelaGenericaAdicionar {
 	private JTextField Cargo;
 	private JLabel textCargo;
 	private JButton add;
-	private JButton del;
 	private JComboBox<Setor> combobox = new JComboBox<Setor>(),
 			combobox2 = new JComboBox<Setor>();
 	private List<Setor> setores = DaoFactory.get().getSetorDAO().todos();
@@ -30,11 +30,11 @@ public class AdicionarNovoCargo extends TelaGenericaAdicionar {
 		painel.setBorder(BorderFactory.createTitledBorder("Adicionar Novo Cargo"));	
 		
 		textCargo = new JLabel("Nome do Cargo:");
-		textCargo.setBounds(15, 50, 150, 20);
+		textCargo.setBounds(15, 50, 230, 20);
 		painel.add(textCargo);
 		
 		Cargo = new JTextField();
-		Cargo.setBounds(55, 50, 150, 28);
+		Cargo.setBounds(150, 50, 150, 28);
 		painel.add(Cargo);
 		
 		setores.forEach((Setor setor) -> {
@@ -48,10 +48,7 @@ public class AdicionarNovoCargo extends TelaGenericaAdicionar {
 		add.setBounds(15,110,200,25);
 		add.addActionListener(this);
 		painel.add(add);
-		
-		del = new JButton("Excluir");
-		del.setBounds(220,110,200,25);
-		painel.add(del);
+	
 		
 		//--------
 		
@@ -72,7 +69,13 @@ if (e.getSource() == add){
 	cargo.setNome(Cargo.getText());
 	Setor novoSetor = (Setor)combobox.getSelectedItem();
 	cargo.setSetor(novoSetor);
-	DaoFactory.get().getCargoDAO().inserir(cargo);
+	if (DaoFactory.get().getCargoDAO().inserir(cargo)){
+		atualizaLista();	
+	}
+	else {
+		JOptionPane.showMessageDialog(this, "Problemas Com o Banco de Dados favor Verificar");
+	}
+	
 	
 }
 else if (e.getSource().equals(alterar)){
@@ -81,7 +84,8 @@ efetuarAlteracao();
 	
 }
 else if (e.getSource().equals(remover)){
-	
+	removerSelecionado();
+	atualizaLista();
 }
 		
 	}
@@ -115,15 +119,18 @@ else if (e.getSource().equals(remover)){
 
 	@Override
 	public void efetuarAlteracao() {
-		Cargo cargox = new Cargo(Integer.valueOf(jlbIDValor.getText()), jtxtCampo.getText(), (Setor)combobox2.getSelectedItem() );
+		Cargo cargox = new Cargo(Integer.valueOf(jlbIDValor.getText()), jtxtCampo.getText(), (Setor)combobox2.getSelectedItem(), true );
 		DaoFactory.get().getCargoDAO().alterar(cargox);
 		
 	}
 
 	@Override
 	public void removerSelecionado() {
-		// TODO Auto-generated method stub
-		
+		Cargo cargox = new Cargo(Integer.valueOf(jlbIDValor.getText()), jtxtCampo.getText(), (Setor)combobox2.getSelectedItem(), true );
+		if(DaoFactory.get().getCargoDAO().desativar(cargox)){
+			JOptionPane.showMessageDialog(this, "Cargo removido com Sucesso");
+		}
+		visualizarLista(false);
 	}
 
 	@Override

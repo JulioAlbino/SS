@@ -24,7 +24,7 @@ public class ViewOS extends TelaGenerica {
 	private static final long serialVersionUID = 1983L;
 	
 	private Pedido pedidoAberto;
-private JLabel jlbDescricao = new JLabel("Defeito relatado:");
+	private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 	
 	private JLabel jlbSetor = new JLabel("Setor: ");
 	private List<Setor> setores = DaoFactory.get().getSetorDAO().todos();
@@ -174,12 +174,14 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 		painel.add(jbtEfetuar);
 		
 		jbtEnviarAutorizador.setBounds(500, 650, 300, 25);
+		jbtEnviarAutorizador.addActionListener(this);
 		painel.add(jbtEnviarAutorizador);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object botao = e.getSource();
+		
 		
 		if (botao.equals(jbtEfetuar)){
 			pedidoAberto.setDataModificacao(LocalDate.now());
@@ -207,6 +209,7 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 				TelaInicial.get().mostraPainel(TelaInicial.get().getToolbar().getTelaInicio().getPainel());
 			}
 		}
+		
 		else if (botao.equals(jbtFinalizar)){
 			pedidoAberto.setSituacao(4);
 			if (DaoFactory.get().getPedidoDAO().alterar(pedidoAberto)){
@@ -242,5 +245,19 @@ private JLabel jlbDescricao = new JLabel("Defeito relatado:");
 			
 			
 		}
+		//
+		else if (botao.equals(jbtEnviarAutorizador)){
+			if (DaoFactory.get().getPedidoDAO().finalizarParaAutorizar(pedidoAberto)){
+				pedidoAberto.setSituacao(3);
+				jlbSituacaoValor.setText("Aguardando Finalização");
+				JOptionPane.showMessageDialog(this, "Finalizada com Sucesso, aguardando autorizador para fechar");	
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "Problemas na hora de Finalizar");
+			}
+			
+			
+		}
+		
 	}
 }

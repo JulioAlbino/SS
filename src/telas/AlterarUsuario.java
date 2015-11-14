@@ -4,14 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
 import recursosParaTelas.ListaUsuarios;
 import telasGenericas.TelaGenerica;
 import dao.factory.DaoFactory;
@@ -38,19 +36,21 @@ public class AlterarUsuario extends TelaGenerica implements KeyListener{
 	
 	private JLabel jlbCodigo = new JLabel("Codigo do Usuário:");
 	private JLabel jlbCodigo2 = new JLabel(" ");
-	
-	private JComboBox<Cargo> combobox = new JComboBox<Cargo>();
+
 	private JLabel jlbCombobox = new JLabel("Cargo");
 	private ListaUsuarios listaUser;
 	
+	private JComboBox<Cargo> combobox = new JComboBox<Cargo>();
+	
 	private JButton jbtAlterar = new JButton("Efetuar Alterarações");
 	private List<Cargo> cargos = DaoFactory.get().getCargoDAO().todos();
+	
+	private int posJTX = 160;
 	
 	//---------
 		
 	public AlterarUsuario() {
 
-		int posJTX = 160;
 		int posJLB = 15;
 	painel.setBorder(BorderFactory.createTitledBorder("Painel Alterar Usuário"));	
 	
@@ -89,15 +89,11 @@ jtxBusca.addKeyListener(this);
 	jtxSenha.setBounds(posJTX, 200,200, 25);
 	jtxSenha.setEnabled(false);
 	painel.add(jtxSenha);
+		
+
 	
 	
-	cargos.forEach((Cargo cargo) -> {
-		combobox.addItem(cargo);
-	});
-	
-	combobox.setBounds(posJTX, 230, 200, 25);
-	combobox.setEnabled(false);
-	painel.add(combobox);
+
 	
 	jlbCombobox.setBounds(posJLB, 230, 200,25);
 	painel.add(jlbCombobox);
@@ -132,8 +128,19 @@ jtxBusca.addKeyListener(this);
 		jtxSenha.setEnabled(true);
 		jtxSenha.setText(user.getSenha());
 		
-		combobox.setEnabled(true);
-		combobox.setSelectedIndex(user.getCargo().getIdcargo()-1);
+		painel.remove(combobox);
+		combobox = new JComboBox<Cargo>();
+		combobox.setBounds(posJTX, 230, 200, 25);
+		
+		cargos.clear();
+		DaoFactory.get().getCargoDAO().todos().forEach((Cargo cargod) -> {
+				combobox.addItem(cargod);
+		});
+		combobox.addItem(user.getCargo());
+		combobox.setSelectedItem(user.getCargo());
+		painel.remove(combobox);
+		painel.add(combobox);
+		painel.updateUI();
 		
 	}
 	

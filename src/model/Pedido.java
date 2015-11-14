@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDate;
 
+import dao.factory.DaoFactory;
+
 public class Pedido {
 	
 	private Integer idpedido;
@@ -56,6 +58,23 @@ public class Pedido {
 	public Pedido(){
 		this.situacao = 0;
 	}
+	
+	public Pedido(Integer id){
+		Pedido pedido = DaoFactory.get().getPedidoDAO().buscar(id);
+		this.idpedido = pedido.getIdpedido();
+		this.data = pedido.getData();
+		this.descricao = pedido.getDescricao();
+		this.situacao = pedido.getSituacao();
+		this.usuario = pedido.getUsuario();
+		this.local = pedido.getLocal();
+		this.setor = pedido.getSetor();
+		this.resolucao = pedido.getResolucao();
+		this.dataModificacao = pedido.dataModificacao;
+		this.responsavel = pedido.getResponsavel();
+		this.dsSituacao = pedido.getDsSituacao();
+	}
+	
+	
 	public Pedido(LocalDate data, String descricao, Integer situacao, Usuario usuario, Local local, Setor setor){
 	this.data = data;
 	this.descricao = descricao;

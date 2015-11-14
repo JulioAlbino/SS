@@ -1,9 +1,12 @@
 package model;
 
+import dao.factory.DaoFactory;
+
 public class Setor {
 
 	private String nome;
 	private Integer idsetor;
+	private Boolean ativo = true;
 	
 	public String getNome() {
 		return nome;
@@ -21,17 +24,28 @@ public class Setor {
 		this.idsetor = idsetor;
 	}
 
+	
 	public Setor(){
 		
 	}
 	
-	public Setor (String nome, Integer id){
+	public Setor (Integer id){
+		Setor setorPego = DaoFactory.get().getSetorDAO().buscar(id);
 		this.idsetor = id;
-		this.nome = nome;
+		this.nome = setorPego.getNome();
+		this.ativo = setorPego.getAtivo();
 	}
 	
 	public String toString() {  
 	    return getNome();  
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}  
 	
 }

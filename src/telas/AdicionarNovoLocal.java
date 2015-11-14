@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import recursosParaTelas.ListaLocais;
@@ -13,18 +14,12 @@ import dao.factory.DaoFactory;
 import model.Local;
 
 public class AdicionarNovoLocal extends TelaGenericaAdicionar {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JTextField Local;
-	private JLabel textlocal, textResultado;
-	private JButton add;
-	
+	private JLabel textlocal;
+	private JButton add = new JButton("Adicionar");
 	private ListaLocais listaLocais ;
-
-	//----
-
 
 	public AdicionarNovoLocal() {
 
@@ -38,15 +33,9 @@ public class AdicionarNovoLocal extends TelaGenericaAdicionar {
 		Local.setBounds(55, 50, 150, 28);
 		painel.add(Local);
 		
-		add = new JButton("Adicionar");
 		add.setBounds(15,110,200,25);
 		add.addActionListener(this);
 		painel.add(add);
-		
-		textResultado = new JLabel("");
-		textResultado.setBounds(15, 140, 800, 20);
-		painel.add(textResultado);
-		
 		
 		//-----
 
@@ -55,6 +44,7 @@ public class AdicionarNovoLocal extends TelaGenericaAdicionar {
 		visualizarLista(false);
 	}
 
+	
 	public void setarValor(Local local){
 		visualizarLista(true);
 		jlbIDValor.setText(local.getId().toString());
@@ -67,7 +57,7 @@ public class AdicionarNovoLocal extends TelaGenericaAdicionar {
 			Local local = new Local();
 			local.setNome(Local.getText());
 			if (DaoFactory.get().getLocalDAO().inserir(local)){
-				textResultado.setText("Local "+Local.getText()+ " Cadastrado com Sucesso.");
+				JOptionPane.showMessageDialog(this, "Local inserido com Sucesso");
 				Local.setText(" ");
 			}
 			atualizaLista();
@@ -94,12 +84,11 @@ atualizaLista();
 
 	@Override
 	public void removerSelecionado() {
-		Local localx = new Local();
-		localx.setId(Integer.valueOf(jlbIDValor.getText()));
 		
 		
-		DaoFactory.get().getLocalDAO().excluir(localx);
+		DaoFactory.get().getLocalDAO().desativar(DaoFactory.get().getLocalDAO().buscar(Integer.valueOf(jlbIDValor.getText())));
 		atualizaLista();
+		visualizarLista(false);
 		
 	}
 	@Override

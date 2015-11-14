@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import conexao.ConexaoUtil;
 import dao.factory.DaoFactory;
 import model.Local;
@@ -19,10 +20,30 @@ import model.Usuario;
 public class PedidoDAO implements GenericDAO<Pedido>{
 
 private Connection con;
+private static final Integer abertas = 1;
+private static final Integer andamento = 2;
+private static final Integer aguardando = 3;
+private static final Integer finalizadas = 4;
 
 	public PedidoDAO(){
 		con = ConexaoUtil.getCon();
 	}
+	
+	
+	public Boolean finalizarParaAutorizar(Pedido entidade){
+		String sql = "update pedido set situacao=? where idpedido=?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, aguardando);
+			pstmt.setInt(2, entidade.getIdpedido());
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}	
+	}
+	
 	
 	@Override
 	public Boolean inserir(Pedido entidade) {
@@ -172,13 +193,10 @@ private Connection con;
 	
 	
 	//filtra as listas
-	private static final Integer abertas = 1;
-	private static final Integer andamento = 2;
-	private static final Integer aguardando = 3;
-	private static final Integer finalizadas = 4;
+
 	
-	public List<Pedido> filtraSituacao(Integer situacao){
-		List<Pedido> pedidosIT = todos();
+	public List<Pedido> filtraSituacao(List<Pedido> lista , Integer situacao){
+		List<Pedido> pedidosIT = lista;
 		Iterator<Pedido> iterator = pedidosIT.iterator();
 		
 		while(iterator.hasNext()){
@@ -190,22 +208,75 @@ private Connection con;
 		return pedidosIT;
 	}
 	
+	
+	
+	
+public List<Pedido> todosNoSetor(Setor setor){
+	List<Pedido> pedidosIT = todos();
+	Iterator<Pedido> iterator = pedidosIT.iterator();
+	
+	while(iterator.hasNext()){
+		Pedido p = iterator.next();
+		if(!p.getSetor().equals(setor)){
+			iterator.remove();
+		}
+		
+	}
+	return pedidosIT;
+}
+
+public List<Pedido> buscarPedido(String campo){
+	List<Pedido> pedidos = new ArrayList<>();
+	String sql = "select * from pedido where descricao like ? or realizacoes like ?";
+	try {
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, "%"+campo+"%");
+		pstmt.setString(2, "%"+campo+"%");
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+			Pedido pedido = new Pedido(rs.getInt("idpedido"));
+			pedidos.add(pedido);
+			
+		}
+	}
+	catch(SQLException e){
+		e.printStackTrace();
+	}
+	return pedidos;	
+}
+
+public List<Pedido> buscarPedidosAbertos(String campo){
+	return filtraSituacao(buscarPedido(campo), abertas);
+}
+
+public List<Pedido> buscarPedidosEmAndamento(String campo){
+	return filtraSituacao(buscarPedido(campo), andamento);
+}
+
+public List<Pedido> buscarPedidosAguardando(String campo){
+	return filtraSituacao(buscarPedido(campo), aguardando);
+}
+
+public List<Pedido> buscarPedidosFinalizados(String campo){
+	return filtraSituacao(buscarPedido(campo), finalizadas);
+}
+
+
+
 	public List<Pedido> todosAbertos(){
-		return filtraSituacao(abertas);
+		return filtraSituacao(todos(),abertas);
 	}
 	
 	public List<Pedido> todosAndamento(){
-		return filtraSituacao(andamento);
+		return filtraSituacao(todos(), andamento);
 	}
 	
 	public List<Pedido> todosAguardando(){
-		return filtraSituacao(aguardando);
+		return filtraSituacao(todos(), aguardando);
 	}
 	
 	public List<Pedido> todosFinalizados(){
-		return filtraSituacao(finalizadas);
+		return filtraSituacao(todos(), finalizadas);
 	}
 	
-	
-
 }
