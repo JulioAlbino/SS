@@ -1,6 +1,6 @@
 package telas;
 
-import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 
@@ -15,14 +15,14 @@ public class OSAguardandoFinalizar extends TelaGenericaListas {
 	public OSAguardandoFinalizar() {
 
 		painel.setBorder(BorderFactory.createTitledBorder("OS's aguardando finalizar"));
-		ListaPedidos aberto = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAguardando(), 20, 90, 1300,500);
-		painel.add(aberto.getLista());
+		listaPedidos = new ListaPedidos(DaoFactory.get().getPedidoDAO().todosAguardando(), 20, 90, 1300,500);
+		painel.add(listaPedidos.getLista());
 
 }
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	public void keyReleased(KeyEvent e) {
+		Buscar(DaoFactory.get().getPedidoDAO().buscarPedidosAguardando(jtfBusca.getText()));
 		
 	}
 

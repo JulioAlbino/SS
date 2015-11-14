@@ -26,7 +26,6 @@ public class AlterarUsuario extends TelaGenerica implements KeyListener{
 	private JLabel jlbUsuario = new JLabel("Usuário:");
 	private JTextField jtxBusca = new JTextField();
 	private JLabel jlbBusca = new JLabel("Buscar Usuário:");
-	private JButton jbtBusca = new JButton("Buscar");
 	
 	private JLabel jlbNome = new JLabel("Nome:");
 	private JTextField jtxNome = new JTextField();
@@ -61,10 +60,6 @@ jtxBusca.setBounds(posJTX,25,200,25);
 jtxBusca.addKeyListener(this);
 
 	painel.add(jtxBusca);
-	
-	jbtBusca.setBounds(360,25,200,25);
-	jbtBusca.addActionListener(this);
-	painel.add(jbtBusca);
 	
 	jlbCodigo.setBounds(posJLB,100,160,25);
 	painel.add(jlbCodigo);
@@ -163,11 +158,7 @@ jtxBusca.addKeyListener(this);
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Object botao = e.getSource();
-		if (botao == jbtBusca){
-			efetuaBusca();
-		}
-		else if (botao == jbtAlterar){
+		if (e.getSource().equals(jbtAlterar)){
 			if (salvaAlteracaoNoBanco()){
 				JOptionPane.showMessageDialog(this, "Usuario Alterado com Sucesso");
 				efetuaBusca();
