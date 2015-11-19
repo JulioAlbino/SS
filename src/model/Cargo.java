@@ -6,12 +6,14 @@ public class Cargo {
 	private String nome;
 	private Setor setor;
 	private Boolean ativo = true;
+	private Integer permissao;
 	
-	public Cargo(Integer idcargo, String nome, Setor setor, Boolean ativo) {
+	public Cargo(Integer idcargo, String nome, Setor setor, Boolean ativo, Integer permissao) {
 		Idcargo = idcargo;
 		this.nome = nome;
 		this.setor = setor;
 		this.ativo = ativo;
+		this.setPermissao(permissao);
 	}
 
 	public Cargo(){
@@ -47,6 +49,14 @@ public class Cargo {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Integer getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(Integer permissao) {
+		this.permissao = permissao;
 	}  
 
 

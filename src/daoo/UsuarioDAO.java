@@ -20,8 +20,8 @@ private Connection con;
 	}
 	
 	public Boolean inserir(Usuario usuario) {
-		String sql = "insert into usuario (nome, senha, login, cargo_idcargo)"
-				+ "values(?,?,?,?)";
+		String sql = "insert into usuario (nome, senha, login, cargo_idcargo, ativo)"
+				+ "values(?,?,?,?,1)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, usuario.getNome());
@@ -65,10 +65,23 @@ private Connection con;
 			return false;
 		}
 	}
+	public Boolean desativar(Usuario usuario){
+		String sql = "update usuario set ativo=0 where idusuario = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, usuario.getIdusuario());
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}	
+	}
+	
 
 	public Usuario buscar(Integer id) {
 		Usuario usuario = null;
-		String sql = "select * from usuario where idusuario = ?";
+		String sql = "select * from usuario where idusuario=?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, id);
@@ -80,6 +93,9 @@ private Connection con;
 				usuario.setNome(rs.getString("nome"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setLogin(rs.getString("login"));
+				
+					usuario.setAtivo(true);
+				
 				Cargo cargo = DaoFactory.get().getCargoDAO().buscar(rs.getInt("cargo_idcargo"));
 				usuario.setCargo(cargo);
 			}
@@ -91,7 +107,7 @@ private Connection con;
 
 	public List<Usuario> todos() {
 		List<Usuario> usuarios = new ArrayList<>();
-		String sql = "select * from usuario";
+		String sql = "select * from usuario where ativo=1";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
@@ -108,7 +124,7 @@ private Connection con;
 	
 	public Usuario logarUsuario(String login, String senha) {
 		Usuario usuario = null;
-		String sql = "select * from usuario where login=? and senha=?";
+		String sql = "select * from usuario where login=? and senha=? and ativo=1";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, login);
@@ -127,7 +143,7 @@ private Connection con;
 	
 	public List<Usuario> buscarUsuario(String campo){
 		List<Usuario> usuarios = new ArrayList<>();
-		String sql = "select * from usuario where login like ? or nome like ? or idusuario like ?";
+		String sql = "select * from usuario where (login like ? or nome like ? or idusuario like ?) and ativo=1";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+campo+"%");

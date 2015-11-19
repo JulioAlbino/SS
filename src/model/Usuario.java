@@ -7,6 +7,7 @@ public class Usuario{
 	private String nome, senha, login;
 	private Integer idusuario;
 	private Cargo cargo;
+	private Boolean ativo;
 	
 	
 	public Cargo getCargo() {
@@ -26,6 +27,7 @@ public class Usuario{
 		this.senha = retornado.getSenha();
 		this.login = retornado.getLogin();
 		this.cargo = retornado.getCargo();
+		this.ativo = retornado.getAtivo();
 	}
 	
 	public Usuario() {
@@ -65,6 +67,14 @@ public class Usuario{
 	
 	public String toString(){
 		return "Id: "+ this.idusuario + " | Nome: " + this.nome;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 }

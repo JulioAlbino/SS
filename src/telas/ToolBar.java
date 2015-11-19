@@ -2,10 +2,16 @@ package telas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.filechooser.FileFilter;
+import org.eclipse.birt.report.engine.api.EngineException;
+
+import relatorios.RelatorioTeste;
 
 public class ToolBar implements ActionListener{
 
@@ -25,12 +31,14 @@ public class ToolBar implements ActionListener{
 			botaoADM[] = new JMenuItem[5], 
 			botaoInicio = new JMenuItem("Inicio"),
 			botaoSair = new JMenuItem("Sair"),
+			botaoRel = new JMenuItem("Relatorio Todos Pedidos"),
 			botaoDeslogar = new JMenuItem("Deslogar");
 	private JMenuBar barra = new JMenuBar();
 	private JMenu iconeOS = new JMenu("Ordens de Servico");
 	private JMenu iconeInicio = new JMenu("Inicio");
 	private JMenu iconeADM = new JMenu("ADM");
 	private JMenu iconeSair = new JMenu("Sair");
+	private JMenu iconeRelatorio = new JMenu("Relatorio");
 	public ToolBar() {
 
 		botaoInicio.addActionListener(this);
@@ -55,17 +63,42 @@ public class ToolBar implements ActionListener{
 			iconeADM.add(botaoADM[i]);
 		}
 		
+		botaoRel.addActionListener(this);
+		iconeRelatorio.add(botaoRel);
+		
+		
 		botaoSair.addActionListener(this);
 		iconeSair.add(botaoSair);
 		botaoDeslogar.addActionListener(this);
 		iconeSair.add(botaoDeslogar);
 		
 		//adiciona os itens a barra
-		barra.add(iconeInicio);
-		barra.add(iconeOS);
-		barra.add(iconeADM);
-		barra.add(iconeSair);
+		
+		verificaPermissoes();
+		
+		
+
 	}
+	public void verificaPermissoes(){
+		barra.add(iconeInicio);
+		switch(TelaInicial.get().getUsuario().getCargo().getPermissao()){
+		case 1:
+			barra.add(iconeOS);
+			barra.add(iconeADM);
+			barra.add(iconeRelatorio);
+			break;
+		case 2:
+			break;
+		case 3:
+			barra.add(iconeOS);
+			barra.add(iconeRelatorio);
+			break;
+		}
+		barra.add(iconeSair);
+
+	}
+	
+	
 	public JMenuBar getBarra() {
 		return barra;
 	}
@@ -124,7 +157,35 @@ public class ToolBar implements ActionListener{
 		else if (botao.equals(botaoSair)){
 			TelaInicial.get().dispose();
 		}
-	}
+		else if (botao.equals(botaoRel)){
+		    JFileChooser fc = new JFileChooser();
+		    fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	        fc.setAcceptAllFileFilterUsed(false);
+	        
+	        fc.setFileFilter(new FileFilter() {
+	            @Override
+	            public String getDescription() {
+	                return "Extensão PDF";
+	            }
+	            @Override
+	            public boolean accept(File f) {
+	                return f.getName().toLowerCase().endsWith("pdf");
+	            }
+	        });
+            int returnVal = fc.showSaveDialog(TelaInicial.get());
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+                try {
+					RelatorioTeste.executeReport(file);
+					} 
+                catch (EngineException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            } 
+        }//Else if botaoRel
+    }//final do ActionPerformed
+			
 	//Funcoes da TOOLBAR
 	public ListaOSFinalizadas getListaOSFinalizadas(){
 		this.finalizadas = new ListaOSFinalizadas();

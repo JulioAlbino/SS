@@ -42,6 +42,7 @@ public class AlterarUsuario extends TelaGenerica implements KeyListener{
 	private JComboBox<Cargo> combobox = new JComboBox<Cargo>();
 	
 	private JButton jbtAlterar = new JButton("Efetuar Alterarações");
+	private JButton jbtRemover = new JButton("Remover Selecionado");
 	private List<Cargo> cargos = DaoFactory.get().getCargoDAO().todos();
 	
 	private int posJTX = 160;
@@ -99,6 +100,10 @@ jtxBusca.addKeyListener(this);
 	jbtAlterar.setBounds(100, 270, 200, 25);
 	jbtAlterar.addActionListener(this);
 	painel.add(jbtAlterar);
+	
+	jbtRemover.setBounds(100,310,200,25);
+	jbtRemover.addActionListener(this);
+	painel.add(jbtRemover);
 	
 }
 	
@@ -167,6 +172,15 @@ jtxBusca.addKeyListener(this);
 				JOptionPane.showMessageDialog(this, "Problemas na hora de alterar o Usuario");
 			}
 			
+		}
+		else if (e.getSource().equals(jbtRemover)){
+			if (DaoFactory.get().getUsuarioDAO().desativar(usuarioSelecionado)){
+				JOptionPane.showMessageDialog(this, "Usuario Alterado com Sucesso");
+				efetuaBusca();
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "Problemas na hora de remover o Usuario");
+			}
 		}
 	}
 	

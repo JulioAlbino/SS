@@ -9,9 +9,15 @@ import org.eclipse.birt.report.engine.api.IReportEngineFactory;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
 import org.eclipse.birt.report.engine.api.PDFRenderOption;
+
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 public class RelatorioTeste {
-	public static void executeReport() throws EngineException {
+	
+	
+	public static void executeReport(File file) throws EngineException {
 		 
 	    IReportEngine engine = null;
 	    EngineConfig config = null;
@@ -28,14 +34,14 @@ public class RelatorioTeste {
 	        // Open the report design
 	        IReportRunnable design = null;
 	        
-	        String ReportDesign = "src/relatorios/teste.rptdesign"; 
+	        String ReportDesign = "src/relatorios/relAbertos.rptdesign"; 
 	        
 	        design = engine.openReportDesign(ReportDesign); 
 	        IRunAndRenderTask task = engine.createRunAndRenderTask(design);        
 	 
 	        PDFRenderOption PDF_OPTIONS = new PDFRenderOption();
 	        
-	        String OutputFile = "/home/rafael/rel.pdf";
+	        String OutputFile = file.getAbsolutePath();
 	        
 	        PDF_OPTIONS.setOutputFileName(OutputFile);
 	        PDF_OPTIONS.setOutputFormat("pdf");
@@ -48,19 +54,13 @@ public class RelatorioTeste {
 	        EX.printStackTrace();
 	    } finally {
 	       Platform.shutdown();
-	       System.out.println("Relatorio terminado");
+	       try {
+			Desktop.getDesktop().open(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    }
 	}
  
-	public static void main(String[] args) {
-  // TODO Auto-generated method stub
-    try
-    {
-     executeReport();
-    }
-    catch(Exception e)
-    {
-     e.printStackTrace();
-    }
- }
 }

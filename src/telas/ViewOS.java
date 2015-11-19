@@ -38,6 +38,9 @@ public class ViewOS extends TelaGenerica {
 	private JLabel jlbDataValor;
 	private JLabel jlbData = new JLabel("Data:");
 	
+	private JLabel jlbUsuarioAbriu = new JLabel("Usuario que Abriu o Pedido:");
+	private JLabel jlbUsuarioAbriuValor = new JLabel();
+	
 	//---------
 	
 	private JButton jbtIniciar = new JButton("Iniciar Resolução");
@@ -67,7 +70,14 @@ public class ViewOS extends TelaGenerica {
 		//Setor
 		jlbSetor.setBounds(15, 50, 110, 25);
 		painel.add(jlbSetor);
-
+		
+		jlbUsuarioAbriu.setBounds(15, 80, 220, 25);
+		painel.add(jlbUsuarioAbriu);
+		
+		jlbUsuarioAbriuValor.setBounds(230,80,300,25);
+		jlbUsuarioAbriuValor.setText(pedido.getUsuario().getNome());
+		painel.add(jlbUsuarioAbriuValor);
+		
 		setores.forEach((Setor setor) -> {
 			if (setor.getIdsetor() == pedido.getSetor().getIdsetor()){
 				comboboxSetor.addItem(setor);
@@ -128,22 +138,30 @@ public class ViewOS extends TelaGenerica {
 		painel.add(jlbSituacaoValor);
 		
 		//botoes
-		jbtIniciar.setBounds(15, 335, 200, 25);
-		jbtIniciar.addActionListener(this);
-		painel.add(jbtIniciar);
 		
-		jbtDeletar.setBounds(230, 335, 200, 25);
-		jbtDeletar.addActionListener(this);
-		painel.add(jbtDeletar);
+		if (pedido.getSituacao() == 1){
+			jbtIniciar.setBounds(15, 335, 200, 25);
+			jbtIniciar.addActionListener(this);
+			painel.add(jbtIniciar);	
+		}
 		
-		jbtFinalizar.setBounds(445, 335, 200, 25);
-		jbtFinalizar.addActionListener(this);
-		painel.add(jbtFinalizar);
+		if (TelaInicial.get().getUsuario().getCargo().getPermissao() != 2 && pedido.getSituacao()  < 4){
+			jbtFinalizar.setBounds(445, 335, 200, 25);
+			jbtFinalizar.addActionListener(this);
+			painel.add(jbtFinalizar);
+			jbtAlterar.setBounds(660, 335, 200, 25);
+			jbtAlterar.addActionListener(this);
+			jbtAlterar.setActionCommand("Alterar");
+			painel.add(jbtAlterar);
+		}
+		if (TelaInicial.get().getUsuario().getCargo().getPermissao() != 2){
+			adicionarBotaoDeletar();
+		}
 		
-		jbtAlterar.setBounds(660, 335, 200, 25);
-		jbtAlterar.addActionListener(this);
-		jbtAlterar.setActionCommand("Alterar");
-		painel.add(jbtAlterar);
+		
+	
+		
+		
 		
 		jlbEfetuar.setBounds(15, 400, 200, 25);
 		painel.add(jlbEfetuar);
@@ -167,15 +185,31 @@ public class ViewOS extends TelaGenerica {
 		jtxaEfetuar.setBounds(15, 450, 1000, 170);
 		jtxaEfetuar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		jtxaEfetuar.setText(pedido.getResolucao());
+if (pedido.getSituacao() > 2){
+		jtxaEfetuar.setEditable(false);	
+		}
 		painel.add(jtxaEfetuar);
 		
-		jbtEfetuar.setBounds(15,650, 450, 25);
-		jbtEfetuar.addActionListener(this);
-		painel.add(jbtEfetuar);
+		if (pedido.getSituacao() == 2){
+			
+			if (pedido.getResponsavel().getIdusuario() == TelaInicial.get().getUsuario().getIdusuario()){
+				jbtEfetuar.setBounds(15,650, 450, 25);
+				jbtEfetuar.addActionListener(this);
+				painel.add(jbtEfetuar);	
+				jbtEnviarAutorizador.setBounds(500, 650, 300, 25);
+				jbtEnviarAutorizador.addActionListener(this);
+				painel.add(jbtEnviarAutorizador);
+			}
+			
+		}
 		
-		jbtEnviarAutorizador.setBounds(500, 650, 300, 25);
-		jbtEnviarAutorizador.addActionListener(this);
-		painel.add(jbtEnviarAutorizador);
+		
+	}
+	
+	public void adicionarBotaoDeletar(){
+		jbtDeletar.setBounds(230, 335, 200, 25);
+		jbtDeletar.addActionListener(this);
+		painel.add(jbtDeletar);	
 	}
 	
 	@Override
@@ -201,6 +235,9 @@ public class ViewOS extends TelaGenerica {
 			if (DaoFactory.get().getPedidoDAO().efetuarTrabalho(pedidoAberto)){
 				JOptionPane.showMessageDialog(this, "Você assumiu essa OS, status modificado para Em Andamento");
 			}
+			
+			ViewOS view = new ViewOS(pedidoAberto);
+			TelaInicial.get().mostraPainel(view.getPainel());
 		}
 		
 		else if (botao.equals(jbtDeletar)){

@@ -36,15 +36,15 @@ public abstract class TelaGenericaAdicionar extends TelaGenerica {
 		painel.add(jtxtCampo);
 		
 		
-		alterar.setBounds(500, 360, 350, 25);
+		alterar.setBounds(500, 390, 350, 25);
 		alterar.addActionListener(this);
 		painel.add(alterar);
 		
-		remover.setBounds(860, 360, 250, 25);
+		remover.setBounds(860, 390, 250, 25);
 		remover.addActionListener(this);
 		painel.add(remover);
 	
-		visualizarLista(true);
+		
 		
 	}
 	
@@ -55,9 +55,6 @@ public abstract class TelaGenericaAdicionar extends TelaGenerica {
 		jtxtCampo.setVisible(b);
 		alterar.setVisible(b);
 		remover.setVisible(b);
-		
-		
-		
 	}
 	
 	public abstract void efetuarAlteracao();

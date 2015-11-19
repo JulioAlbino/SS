@@ -16,7 +16,7 @@ public class TelaInicial extends JFrame {
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private static TelaInicial telainicial;
 	private Usuario usuario;
-	private static ToolBar toolbar = new ToolBar();
+	private static ToolBar toolbar;
 	
 	public static TelaInicial get(){
 		if(telainicial == null){
@@ -53,6 +53,7 @@ public static void main(String[] args) {
 
 public void logar(Usuario usuarioLogado){
 	this.usuario = usuarioLogado;
+	toolbar = new ToolBar();
 	TelaInicial.get().setJMenuBar(toolbar.getBarra());
 	mostraPainel(toolbar.getTelaInicio().getPainel());
 }//final do metodo logar

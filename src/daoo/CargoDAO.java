@@ -21,11 +21,12 @@ public class CargoDAO implements GenericDAO<Cargo>{
 
 	@Override
 	public Boolean inserir(Cargo entidade) {
-		String sql = "insert into cargo (nome, setor_idsetor, ativo) values(?,?,1)";
+		String sql = "insert into cargo (nome, setor_idsetor, ativo, permissoes) values(?,?,1,?)";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
 			pstmt.setInt(2, entidade.getSetor().getIdsetor());
+			pstmt.setInt(3, entidade.getPermissao());
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -37,12 +38,13 @@ public class CargoDAO implements GenericDAO<Cargo>{
 
 	@Override
 	public Boolean alterar(Cargo entidade) {
-		String sql = "update cargo set nome=?,setor_idsetor=?  where idcargo=?";
+		String sql = "update cargo set nome=?,setor_idsetor=?, permissoes=?  where idcargo=?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, entidade.getNome());
 			pstmt.setInt(2, entidade.getSetor().getIdsetor());
-			pstmt.setInt(3, entidade.getIdcargo());
+			pstmt.setInt(3, entidade.getPermissao());
+			pstmt.setInt(4, entidade.getIdcargo());
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -95,6 +97,7 @@ public class CargoDAO implements GenericDAO<Cargo>{
 				cargo.setNome(rs.getString("nome"));
 				Setor setor = DaoFactory.get().getSetorDAO().buscar(rs.getInt("setor_idsetor"));
 				cargo.setSetor(setor);
+				cargo.setPermissao(rs.getInt("permissoes"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -116,6 +119,7 @@ public class CargoDAO implements GenericDAO<Cargo>{
 				cargo.setNome(rs.getString("nome"));
 				Setor setor = DaoFactory.get().getSetorDAO().buscar(rs.getInt("setor_idsetor"));
 				cargo.setSetor(setor);
+				cargo.setPermissao(rs.getInt("permissoes"));
 				cargos.add(cargo);
 			}
 		} catch (SQLException e) {
