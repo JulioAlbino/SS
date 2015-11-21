@@ -13,7 +13,6 @@ import org.eclipse.birt.report.engine.api.PDFRenderOption;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 public class RelatorioTeste {
 	
 	
@@ -25,7 +24,7 @@ public class RelatorioTeste {
 	    try {
 	        config = new EngineConfig();          
 	        config.setBIRTHome("src/relatorios/engine");
-	        config.setLogConfig("/home/rafael", Level.FINEST);
+	        
 	        Platform.startup(config);
 	        final IReportEngineFactory FACTORY = (IReportEngineFactory) Platform
 	            .createFactoryObject(IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY);
