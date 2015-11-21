@@ -66,7 +66,6 @@ public class ToolBar implements ActionListener{
 		botaoRel.addActionListener(this);
 		iconeRelatorio.add(botaoRel);
 		
-		
 		botaoSair.addActionListener(this);
 		iconeSair.add(botaoSair);
 		botaoDeslogar.addActionListener(this);
@@ -75,9 +74,6 @@ public class ToolBar implements ActionListener{
 		//adiciona os itens a barra
 		
 		verificaPermissoes();
-		
-		
-
 	}
 	public void verificaPermissoes(){
 		barra.add(iconeInicio);
@@ -95,9 +91,7 @@ public class ToolBar implements ActionListener{
 			break;
 		}
 		barra.add(iconeSair);
-
 	}
-	
 	
 	public JMenuBar getBarra() {
 		return barra;
@@ -207,8 +201,6 @@ public class ToolBar implements ActionListener{
 	public AdicionarNovoCargo getAdicionarNovoCargo(){
 		return this.novoCargo;
 	}
-	
-	
 	public AlterarUsuario getAlterarUsuario(){
 		return this.telaAlterarUsuario;
 	}	

@@ -7,16 +7,13 @@ public class Local {
 	private String nome;
 	private Boolean ativo = true;
 	
-	public Local(){
-		
-	}
+	public Local(){}
 	
 	public Local(Integer id){
 		 Local local = DaoFactory.get().getLocalDAO().buscar(id);
 		 this.id = local.getId();
 		 this.nome = local.getNome();
 		 this.ativo = local.getAtivo();
-		 
 	}
 	
 	public Integer getId() {

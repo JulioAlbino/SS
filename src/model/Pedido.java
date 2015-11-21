@@ -19,21 +19,21 @@ public class Pedido {
 	private Usuario responsavel;
 	private String dsSituacao;
 	
-	
-	
-	
 	public String getDsSituacao() {
-		if (this.situacao == 1){
-			this.dsSituacao = "Aberta";
-		}
-		else if (this.situacao == 2){
-			this.dsSituacao = "Em Andamento";
-		}
-		else if (this.situacao == 3){
-			this.dsSituacao = "Aguardando Finalizar";
-		}
-		else if (this.situacao == 4) {
-			this.dsSituacao = "Finalizada";
+		
+		switch(this.situacao){
+		case 1:
+			this.dsSituacao="Aberta";
+			break;
+		case 2:
+			this.dsSituacao="Em Andamento";
+			break;
+		case 3:
+			this.dsSituacao="Aguardando Finalizar";
+			break;
+		case 4:
+			this.dsSituacao="Finalizada";
+			break;
 		}
 		return this.dsSituacao;
 	}

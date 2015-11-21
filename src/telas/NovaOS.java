@@ -4,14 +4,12 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-
 import telasGenericas.TelaGenerica;
 import dao.factory.DaoFactory;
 import model.Local;

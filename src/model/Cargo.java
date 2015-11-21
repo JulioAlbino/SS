@@ -9,7 +9,7 @@ public class Cargo {
 	private Integer permissao;
 	
 	public Cargo(Integer idcargo, String nome, Setor setor, Boolean ativo, Integer permissao) {
-		Idcargo = idcargo;
+		this.Idcargo = idcargo;
 		this.nome = nome;
 		this.setor = setor;
 		this.ativo = ativo;
