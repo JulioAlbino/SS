@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1deb3
+-- version 4.5.2deb1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 21, 2015 at 03:25 PM
+-- Generation Time: Nov 28, 2015 at 06:40 PM
 -- Server version: 5.6.27-2
 -- PHP Version: 5.6.15-1
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `ss`
 --
-CREATE DATABASE IF NOT EXISTS `ss` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `ss`;
 
 -- --------------------------------------------------------
 
@@ -42,21 +40,9 @@ CREATE TABLE `cargo` (
 --
 
 INSERT INTO `cargo` (`idcargo`, `nome`, `setor_idsetor`, `ativo`, `permissoes`) VALUES
-(1, 'Cargo1 - Setor 11', 11, 0, 1),
-(2, 'Cargo2 - Setor8', 8, 0, 1),
-(3, 'Cargo3 - Setor11', 11, 0, 1),
-(4, 'cargo4 - setor20', 20, 0, 1),
-(5, 'Cargo5 - setor 21', 21, 0, 1),
-(6, 'TESTE', 22, 0, 1),
-(7, 'EAEW', 21, 0, 1),
-(8, 'eaew', 21, 0, 2),
-(9, 'EncarregadoTeste', 21, 0, 3),
-(10, 'FuncionarioTeste', 22, 0, 2),
-(11, 'AdministradorTeste', 22, 0, 1),
-(12, 'Administrador', 22, 0, 1),
-(13, 'Funcionario', 23, 1, 2),
-(14, 'Encarregado', 23, 1, 3),
-(15, 'Administrador', 24, 1, 1);
+(13, 'Funcionario', 25, 1, 2),
+(14, 'Encarregado', 25, 1, 3),
+(15, 'Administrador', 25, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -108,7 +94,11 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`idpedido`, `datahora`, `descricao`, `situacao`, `usuario_idusuario`, `local_idlocal`, `setor_idsetor`, `dataultimamod`, `responsavel`, `realizacoes`) VALUES
-(18, '2015-11-06', 'UEPAAA 123', 0, 1, 6, 4, '2015-11-06', 13, '');
+(26, '2015-11-21', 'Ordem Finalizada', 4, 14, 9, 26, '2015-11-21', 14, 'Finalizada'),
+(27, '2015-11-21', 'Ordem em Andamento', 2, 14, 8, 25, '2015-11-21', 14, NULL),
+(28, '2015-11-21', 'Ordem Aguardando Encarregado setar como Finalizada', 3, 14, 8, 25, '2015-11-21', 14, 'Aguardando Finalizacao'),
+(29, '2015-11-21', 'Ordem em Aberto', 1, 14, 8, 25, '2015-11-21', 14, NULL),
+(30, '2015-11-21', 'Ordem de Teste', 4, 14, 8, 25, '2015-11-21', 16, 'Problema Resolvido');
 
 -- --------------------------------------------------------
 
@@ -128,28 +118,9 @@ CREATE TABLE `setor` (
 --
 
 INSERT INTO `setor` (`idsetor`, `nome`, `ativo`) VALUES
-(1, 'SETOR1', 0),
-(3, 'SETOR2', 0),
-(4, 'SETOR3', 0),
-(6, 'SETOR6', 0),
-(7, 'SETOR7', 0),
-(8, 'SETOR8', 0),
-(9, 'SETOR9', 0),
-(10, 'SETOR10', 0),
-(11, 'SETOR11', 0),
-(12, 'Setor12', 0),
-(13, 'Setor13', 0),
-(14, 'Setor14', 0),
-(15, 'Setor15', 0),
-(16, 'SETOR16', 0),
-(17, 'sadffads', 0),
-(18, 'SETORNOVOXXX', 0),
-(19, 'SETOR19 - Editado', 0),
-(20, 'SETOR20 - Editado', 0),
-(21, 'SETOR 21', 0),
-(22, 'Setor 22', 1),
-(23, 'SETOR23', 1),
-(24, 'Setor24', 1);
+(25, 'Setor 1', 1),
+(26, ' Setor 2', 1),
+(27, ' Setor 3', 1);
 
 -- --------------------------------------------------------
 
@@ -172,19 +143,6 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `nome`, `senha`, `login`, `cargo_idcargo`, `ativo`) VALUES
-(1, 'Usuario Teste', 'teste', 'teste', 2, 0),
-(2, '1234', 'teset', 'Usuario:', 4, 0),
-(3, '1234', 'teset', 'Usuario:', 2, 0),
-(4, 'MEU AMIGO1234', 'teset', 'Usuario:', 3, 0),
-(5, '1234', 'teset', 'Usuario:', 2, 0),
-(6, '12312', 'eaew', 'Usuario:', 2, 0),
-(7, 'Rafael', '123', 'Usuario:', 4, 0),
-(8, 'ovoMaltine', '123', 'ovo', 5, 0),
-(9, '12345', '123', 'lindo', 3, 0),
-(10, 'EAEW', '1', '1', 2, 0),
-(11, '123456', '123', 'VIOLINO', 2, 0),
-(12, 'Usuario FODAL', '12345', 'etaa', 2, 0),
-(13, 'EVARISTO', '2', '2', 13, 0),
 (14, '1', '1', '1', 15, 1),
 (15, ' 2', '2', '2', 14, 1),
 (16, ' 3', '3', '3', 13, 1);
@@ -256,12 +214,12 @@ ALTER TABLE `local`
 -- AUTO_INCREMENT for table `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idpedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idpedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `setor`
 --
 ALTER TABLE `setor`
-  MODIFY `idsetor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idsetor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
