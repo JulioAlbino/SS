@@ -47,7 +47,7 @@ public class ViewOS extends TelaGenerica {
 	private JButton jbtDeletar = new JButton("Deletar OS");
 	private JButton jbtFinalizar = new JButton("Setar como Finalizado");
 	private JButton jbtAlterar = new JButton("Alterar OS");
-	
+	private JButton jbtReabrir = new JButton("Reabrir OS");
 	
 	private JLabel jlbEfetuar = new JLabel("Serviço Efetuado");
 	private JTextArea jtxaEfetuar = new JTextArea();
@@ -137,6 +137,13 @@ public class ViewOS extends TelaGenerica {
 		jlbSituacaoValor.setFont(FONTE_NORMAL);
 		painel.add(jlbSituacaoValor);
 		
+		jbtReabrir.setBounds(875, 335, 200, 25);
+		jbtReabrir.addActionListener(this);
+		
+		if (TelaInicial.get().getUsuario().getCargo().getPermissao() != 2 && (pedido.getSituacao() == 3 || pedido.getSituacao() == 2)){
+			painel.add(jbtReabrir);
+		}
+		
 		//botoes
 		
 		if (pedido.getSituacao() == 1){
@@ -157,11 +164,6 @@ public class ViewOS extends TelaGenerica {
 		if (TelaInicial.get().getUsuario().getCargo().getPermissao() != 2){
 			adicionarBotaoDeletar();
 		}
-		
-		
-	
-		
-		
 		
 		jlbEfetuar.setBounds(15, 400, 200, 25);
 		painel.add(jlbEfetuar);
@@ -202,8 +204,6 @@ if (pedido.getSituacao() > 2){
 			}
 			
 		}
-		
-		
 	}
 	
 	public void adicionarBotaoDeletar(){
@@ -217,16 +217,21 @@ if (pedido.getSituacao() > 2){
 		Object botao = e.getSource();
 		
 		
+		
+		
 		if (botao.equals(jbtEfetuar)){
-			pedidoAberto.setDataModificacao(LocalDate.now());
-			pedidoAberto.setResolucao(jtxaEfetuar.getText());
-			pedidoAberto.setResponsavel(TelaInicial.get().getUsuario());
-			if(DaoFactory.get().getPedidoDAO().efetuarTrabalho(pedidoAberto)){
+			if (EfetuarAlteracao()){
 				JOptionPane.showMessageDialog(this, "Alterações Salvas com Sucesso");
 			}
 			else {
-				JOptionPane.showMessageDialog(this, "Ocorreu algum problema com o salvamento no Banco de Dados");
+				JOptionPane.showMessageDialog(this, "Erro ao salvar no Banco as Alteracoes");
 			}
+		}
+		else if (botao.equals(jbtReabrir)){
+			pedidoAberto.setSituacao(pedidoAberto.getSituacao()-1);
+			DaoFactory.get().getPedidoDAO().alterar(pedidoAberto);
+			ViewOS view = new ViewOS(pedidoAberto);
+			TelaInicial.get().mostraPainel(view.getPainel());
 		}
 		
 		else if (botao.equals(jbtIniciar)){
@@ -248,7 +253,10 @@ if (pedido.getSituacao() > 2){
 		}
 		
 		else if (botao.equals(jbtFinalizar)){
+			pedidoAberto.setDataModificacao(LocalDate.now());
+			pedidoAberto.setResolucao(jtxaEfetuar.getText());
 			pedidoAberto.setSituacao(4);
+			DaoFactory.get().getPedidoDAO().efetuarTrabalho(pedidoAberto);
 			if (DaoFactory.get().getPedidoDAO().alterar(pedidoAberto)){
 				JOptionPane.showMessageDialog(this, "OS Finalizada com Sucesso");
 				TelaInicial.get().mostraPainel(TelaInicial.get().getToolbar().getListaOSFinalizadas().getPainel());
@@ -284,10 +292,13 @@ if (pedido.getSituacao() > 2){
 		}
 		//
 		else if (botao.equals(jbtEnviarAutorizador)){
+			EfetuarAlteracao();
 			if (DaoFactory.get().getPedidoDAO().finalizarParaAutorizar(pedidoAberto)){
 				pedidoAberto.setSituacao(3);
 				jlbSituacaoValor.setText("Aguardando Finalização");
 				JOptionPane.showMessageDialog(this, "Finalizada com Sucesso, aguardando autorizador para fechar");	
+				ViewOS view = new ViewOS(pedidoAberto);
+				TelaInicial.get().mostraPainel(view.getPainel());
 			}
 			else {
 				JOptionPane.showMessageDialog(this, "Problemas na hora de Finalizar");
@@ -297,4 +308,11 @@ if (pedido.getSituacao() > 2){
 		}
 		
 	}
+	public Boolean EfetuarAlteracao(){
+		pedidoAberto.setDataModificacao(LocalDate.now());
+		pedidoAberto.setResolucao(jtxaEfetuar.getText());
+		pedidoAberto.setResponsavel(TelaInicial.get().getUsuario());
+		return DaoFactory.get().getPedidoDAO().efetuarTrabalho(pedidoAberto);
+	}
+	
 }
