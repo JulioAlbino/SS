@@ -216,9 +216,6 @@ if (pedido.getSituacao() > 2){
 	public void actionPerformed(ActionEvent e) {
 		Object botao = e.getSource();
 		
-		
-		
-		
 		if (botao.equals(jbtEfetuar)){
 			if (EfetuarAlteracao()){
 				JOptionPane.showMessageDialog(this, "Alterações Salvas com Sucesso");
